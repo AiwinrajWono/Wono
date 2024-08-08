@@ -8,7 +8,6 @@ const AppStruct = () => {
     <div>
       <AppHeader />
       <AppBody />
-      <br></br>
       <AppFooter/>
     </div>
   )

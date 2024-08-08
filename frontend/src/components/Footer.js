@@ -5,8 +5,8 @@ const Footer = () => {
   return (
    <>
    <footer className="bg-dark text-light py-4">
-      <Container>
-        <Row>
+      {/* <Container> */}
+        {/* <Row>
           <Col md={4}>
             <h5>About Us</h5>
             <p>
@@ -20,8 +20,8 @@ const Footer = () => {
               Email: info@example.com <br />
               Phone: +123 456 7890
             </p>
-          </Col>
-          <Col md={4}>
+          </Col> */}
+          {/* <Col md={4}>
             <h5>Follow Us</h5>
             <p>
               <a href="#" className="text-light">Facebook</a> <br />
@@ -29,13 +29,13 @@ const Footer = () => {
               <a href="#" className="text-light">Instagram</a>
             </p>
           </Col>
-        </Row>
-        <Row className="mt-3">
+        </Row> */}
+        {/* <Row className="mt-3">
           <Col className="text-center">
             <p>&copy; 2024 Your Company. All Rights Reserved.</p>
           </Col>
-        </Row>
-      </Container>
+        </Row> */}
+      {/* </Container> */}
     </footer>
    </>
   )

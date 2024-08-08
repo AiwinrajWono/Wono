@@ -1,10 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 .container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-
     margin: 0;
 }
 
@@ -14,19 +17,38 @@
     justify-content: center;
     background-color: rgb(224, 216, 216);
 }
-.grid2-form{
-    
-}
+
 .form-section{
+    display: grid;
+    gap: 10px;
+    margin-top: 4rem;
+    padding: 1rem;
+}
+
+@media (min-width : 60em) {
+    .form-section{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+.grid1-form{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    margin-top: 4rem;
+    justify-content: center;
+}
+.grid2-form{
+    display: grid;
+    gap: 1rem;
+}
+@media (min-width : 40em) {
+    .grid2-form{
+        grid-template-columns: repeat(2,1fr);
+    }
 }
 .button_space{
     display: flex;
     align-items: center;
     justify-content: center ;
+    
 }
 .submit-button{
     width: 100%;
@@ -43,4 +65,29 @@
     justify-content: center;
     width: 100%;
     margin-top: 4rem;
+}
+
+/* world map */
+
+.world-map{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    
+}
+.world-title{
+    text-align: center;
+    padding: 1rem;
+
+}
+.image-space{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image-world{
+    background-color: black;
+    width: 60%;
+    border-radius: 1rem;
 }

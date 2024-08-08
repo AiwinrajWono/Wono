@@ -1,0 +1,72 @@
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
+
+
+function Example() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [showA, setShowA] = useState(false);
+  const [showB, setShowB] = useState(true);
+
+  const toggleShowA = () => setShowA(!showA);
+  const toggleShowB = () => setShowB(!showB);
+
+  return (
+    <div style={{padding:'4rem', gap:'1rem',display:'grid'}}>
+
+        <h1>Modal</h1>
+      <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button>
+
+    {/* Modal config */}
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+{/* Toast config */}
+
+<Row>
+      <Col md={6} className="mb-2">
+      <h1>Popvers</h1>
+        <Button onClick={toggleShowA} className="mb-2">
+          Toggle popover <strong>with</strong> Animation
+        </Button>
+        <Toast show={showA} onClose={toggleShowA}>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+          </Toast.Header>
+          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+        </Toast>
+      </Col>
+      </Row>
+    </div>
+  );
+}
+
+export default Example;

@@ -1,13 +1,12 @@
 import React from 'react'
-import './header.css'
+import NavBar from '../components/Nav'
+
 const AppHeader = () => {
   return (
-    <div>
-        <div className='header-style'>
-        <h1>Sample header</h1>
-
-        </div>
-    </div>
+      <>
+      <NavBar/>
+    
+    </>
   )
 }
 
