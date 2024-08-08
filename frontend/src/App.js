@@ -1,4 +1,3 @@
-import './App.css';
 import AppStruct from './structure/AppStruct';
 
 function App() {

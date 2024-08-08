@@ -1,9 +1,12 @@
 import React from 'react'
-
+import './header.css'
 const AppHeader = () => {
   return (
     <div>
-      <h1>Sample header</h1>
+        <div className='header-style'>
+        <h1>Sample header</h1>
+
+        </div>
     </div>
   )
 }
