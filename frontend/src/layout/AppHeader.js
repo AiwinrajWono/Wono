@@ -1,10 +1,9 @@
 import React from 'react'
+import NavBar from '../components/Nav'
 
 const AppHeader = () => {
   return (
-    <div>
-      <h1>Sample header</h1>
-    </div>
+    <NavBar/>
   )
 }
 
