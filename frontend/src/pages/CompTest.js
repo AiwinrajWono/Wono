@@ -4,9 +4,9 @@ import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
-import Toasts from '../components/Toasts';
-import CompOffCanvas from '../components/CompOffCanvas';
-
+import Jobrole from '../components/Jobrole';
+import Users from './Users';
+import Alertbutton from '../components/Alertbutton';
 
 
 function Example() {
@@ -71,21 +71,13 @@ function Example() {
         </Toast>
       </Col>
       </Row>
-</div>
 
-<div className='RealToast' style={{borderStyle:'solid', borderColor:'black'}}>
-<h2>Toasts</h2>
-<Toasts toastMessage={'it is working'} position={'top-end'} />
-</div>
+      <Jobrole/>
+      <Users/>
+      <Alertbutton/>
 
-      <div className="off-canvas">
-
-      <h2>OffCanvas</h2>
-        <CompOffCanvas />
-  
-      </div>
     </div>
-
+    </div>
   );
 }
 
