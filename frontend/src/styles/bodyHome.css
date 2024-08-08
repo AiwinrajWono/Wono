@@ -21,8 +21,8 @@
 .form-section{
     display: grid;
     gap: 10px;
-    margin-top: 4rem;
-    padding: 1rem;
+    padding: 4rem;
+    background-color:white;
 }
 
 @media (min-width : 60em) {
@@ -91,3 +91,4 @@
     width: 60%;
     border-radius: 1rem;
 }
+
