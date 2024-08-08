@@ -1,8 +1,13 @@
 import React from 'react'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
+import Batman from '../assets/batman.png'
+import Spiderman from '../assets/spiderman.png'
+import Carousels from '../components/Carousels'
 import { useNavigate } from 'react-router-dom'
 const Homepage = () => {
+    
+
 
   const navigate = useNavigate();
 
@@ -26,15 +31,12 @@ const Homepage = () => {
                 <div>
 
                     <div className="row" style={{ gap: '1rem', marginBottom: '1rem' }}>
-                        <div className='world-map' style={{borderRadius:'1rem'}} >
-                            <div className="world-title">
-                                <h3>Existing customers</h3>
-                            </div>
-                            <div className='image-space' >
-                                <img className="image-world"
-                                    src={World_map} style={{objectFit:'contain'}}  />
-                            </div>
-                        </div>
+
+                        {/*Test carousel*/}
+
+                        <Carousels image1={World_map} image2={Batman} image3={Spiderman} />
+
+                        {/*Test carousel*/}
                         <div className='grid2-form'>
                             <div className="col">
                                 <input type="text" className="form-control" placeholder="Name" aria-label="name" />
@@ -66,7 +68,7 @@ const Homepage = () => {
 
                     </div>
                     <div className="button_space">
-                        <button className='submit-button'>Submit</button>
+                        <button  className='submit-button'>Submit</button>
                     </div>
 
                 </div>

@@ -4,6 +4,9 @@ import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
+import Toasts from '../components/Toasts';
+import CompOffCanvas from '../components/CompOffCanvas';
+
 import Jobrole from '../components/Jobrole';
 import Users from './Users';
 import Alertbutton from '../components/Alertbutton';
@@ -22,8 +25,8 @@ function Example() {
   const toggleShowB = () => setShowB(!showB);
 
   return (
-    <div style={{padding:'4rem', gap:'1rem',display:'grid'}}>
-
+    <div style={{padding:'4rem', gap:'1rem',display:'grid', gridTemplateColumns:'1fr 1fr 1fr'}}>
+        <div className='modaltest'>
         <h1>Modal</h1>
       <Button variant="primary" onClick={handleShow}>
         Launch demo modal
@@ -45,9 +48,12 @@ function Example() {
           </Button>
         </Modal.Footer>
       </Modal>
+        </div>
+
+      
 
 {/* Toast config */}
-
+<div className='toasttest'>
 <Row>
       <Col md={6} className="mb-2">
       <h1>Popvers</h1>
@@ -68,11 +74,7 @@ function Example() {
         </Toast>
       </Col>
       </Row>
-
-      <Jobrole/>
-      <Users/>
-      <Alertbutton/>
-
+    </div>
     </div>
   );
 }
