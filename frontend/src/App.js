@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import AppStruct from './structure/AppStruct';
 
 function App() {
   return (
     <div className="App">
-     <p>Hello</p>
-     <p>change done</p>
+     <AppStruct />
     </div>
   );
 }
