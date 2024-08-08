@@ -1,7 +1,15 @@
 import React from 'react'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
+import { useNavigate } from 'react-router-dom'
 const Homepage = () => {
+
+  const navigate = useNavigate();
+
+  const linkToUserList=()=>{
+    navigate('/users');
+
+  }
     return (
         <>
             <div className='home-section'>
@@ -85,7 +93,7 @@ const Homepage = () => {
                             </div>
                         </div>
                         <div className="col">
-                            <div className="card text-center">
+                            <div className="card text-center" onClick={linkToUserList}>
                                 <div className="card-body">
                                     <h5 className="card-title">Active Users</h5>
                                     <p className="card-text">890</p>

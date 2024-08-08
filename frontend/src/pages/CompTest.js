@@ -4,6 +4,9 @@ import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
+import Jobrole from '../components/Jobrole';
+import Users from './Users';
+import Alertbutton from '../components/Alertbutton';
 
 
 function Example() {
@@ -65,6 +68,11 @@ function Example() {
         </Toast>
       </Col>
       </Row>
+
+      <Jobrole/>
+      <Users/>
+      <Alertbutton/>
+
     </div>
   );
 }
