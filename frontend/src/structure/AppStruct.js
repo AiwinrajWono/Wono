@@ -6,9 +6,7 @@ import AppFooter from '../layout/AppFooter'
 const AppStruct = () => {
   return (
     <div>
-      <AppHeader />
       <AppBody />
-      <AppFooter/>
     </div>
   )
 }

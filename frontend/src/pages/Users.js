@@ -9,6 +9,8 @@ const Users = () => {
     <div className='users'>
             <h1>Users</h1>
         </div>
+        <div>
+
     <Table striped="columns">
       <thead>
         <tr>
@@ -82,9 +84,10 @@ const Users = () => {
         </tr>
       </tbody>
     </Table>
-    <div className='pagination'>
-    <PaginationS/>
+    <PaginationS style={{width:'100%'}}/>
+    <div className='pagination' >
     </div>
+        </div>
 
     </>
   )

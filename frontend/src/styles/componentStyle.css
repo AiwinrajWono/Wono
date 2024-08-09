@@ -1,0 +1,29 @@
+.component-grid{
+    padding: 4rem;
+    gap: 4rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 4rem
+    /* grid-template-columns: repeat(50%); */
+}
+
+@media (min-width : 40em) {
+    .component-grid{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+.component-grid  > div {
+    /* Apply styles to all direct children of .component-grid */
+    padding: 10px;
+    margin-bottom: 0px;
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .component-grid  > div >h2{
+    text-align: center;
+  }
