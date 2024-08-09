@@ -1,13 +1,12 @@
 import React from 'react'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
+import { useNavigate } from 'react-router-dom'
 import Batman from '../assets/batman.png'
 import Spiderman from '../assets/spiderman.png'
 import Carousels from '../components/Carousels'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 const Homepage = () => {
-    
-
 
   const navigate = useNavigate();
 
@@ -15,6 +14,8 @@ const Homepage = () => {
     navigate('/users');
 
   }
+    
+
     return (
         <>
             <div className='home-section'>

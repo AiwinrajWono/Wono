@@ -74,6 +74,11 @@ function Example() {
         </Toast>
       </Col>
       </Row>
+
+      <Jobrole/>
+      <Users/>
+      <Alertbutton/>
+
     </div>
     </div>
   );
