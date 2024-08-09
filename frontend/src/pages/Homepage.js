@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
 import Batman from '../assets/batman.png'
 import Spiderman from '../assets/spiderman.png'
 import Carousels from '../components/Carousels'
+import Toasts from '../components/Toasts'
 const Homepage = () => {
-    
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Your form submission logic here
+        // Set the message and show the Toast
+        setToastMessage('Form submitted successfully!');
+        setShowToast(true);
+    };
+
 
     return (
         <>
@@ -60,8 +71,14 @@ const Homepage = () => {
 
                     </div>
                     <div className="button_space">
-                        <button  className='submit-button'>Submit</button>
+                        <button onClick={handleSubmit} className='submit-button'>Submit</button>
                     </div>
+                    <Toasts
+                        position="top-end"
+                        toastMessage={toastMessage}
+                        show={showToast}
+                        onClose={() => setShowToast(false)}
+                    />
 
                 </div>
             </div>
