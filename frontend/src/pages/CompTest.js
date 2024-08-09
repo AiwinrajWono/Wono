@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 import Toasts from '../components/Toasts';
 import CompOffCanvas from '../components/CompOffCanvas';
+import Modals from '../components/Modals';
 
 
 
@@ -22,16 +23,16 @@ function Example() {
   const toggleShowB = () => setShowB(!showB);
 
   return (
-    <div style={{padding:'4rem', gap:'1rem',display:'grid', gridTemplateColumns:'1fr 1fr 1fr'}}>
-        <div className='modaltest'>
+    <div style={{ padding: '4rem', gap: '1rem', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+      {/* <div className='modaltest'>
         <h1>Modal</h1>
       <Button variant="primary" onClick={handleShow}>
         Launch demo modal
-      </Button>
+      </Button> */}
 
-    {/* Modal config */}
+      {/* Modal config */}
 
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
@@ -45,44 +46,45 @@ function Example() {
           </Button>
         </Modal.Footer>
       </Modal>
-        </div>
+        </div> */}
+      <Modals />
 
-      
 
-{/* Toast config */}
-<div className='toasttest'>
-<Row>
-      <Col md={6} className="mb-2">
-      <h1>Popvers</h1>
-        <Button onClick={toggleShowA} className="mb-2">
-          Toggle popover <strong>with</strong> Animation
-        </Button>
-        <Toast show={showA} onClose={toggleShowA}>
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-          </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-        </Toast>
-      </Col>
-      </Row>
-</div>
+      {/* Toast config */}
+      <div className='toasttest'>
+        <Row>
+          <Col md={6} className="mb-2">
+            <h1>Popvers</h1>
+            <Button onClick={toggleShowA} className="mb-2">
+              Toggle popover <strong>with</strong> Animation
+            </Button>
+            <Toast show={showA} onClose={toggleShowA}>
+              <Toast.Header>
+                <img
+                  src="holder.js/20x20?text=%20"
+                  className="rounded me-2"
+                  alt=""
+                />
+                <strong className="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+              </Toast.Header>
+              <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+            </Toast>
+          </Col>
+        </Row>
+      </div>
 
-<div className='RealToast' style={{borderStyle:'solid', borderColor:'black'}}>
-<h2>Toasts</h2>
-<Toasts toastMessage={'it is working'} position={'top-end'} />
-</div>
+      <div className='RealToast' style={{ borderStyle: 'solid', borderColor: 'black' }}>
+        <h2>Toasts</h2>
+        <Toasts toastMessage={'it is working'} position={'top-end'} show={show} onClose={()=>{setShow(false)}} />
+        <button onClick={handleShow}>Toast Test</button>
+      </div>
 
       <div className="off-canvas">
 
-      <h2>OffCanvas</h2>
+        <h2>OffCanvas</h2>
         <CompOffCanvas />
-  
+
       </div>
     </div>
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'react-bootstrap/Image';
 
 const Carousels = ({image1, image2, image3}) => {
     return (
@@ -11,10 +12,11 @@ const Carousels = ({image1, image2, image3}) => {
                 </div>
                 <div className="carousel-inner" style={{ backgroundColor: 'black', borderRadius: '1rem' }}>
                     <div className="carousel-item active" >
-                        <img src={image1} className="d-block w-100" alt="..." />
+                        <Image src={image1} fluid />
                     </div>
                     <div className="carousel-item">
-                        <img src={image2} className="d-block w-100" alt="..." />
+                        {/* <img src={image2} className="d-block w-100" alt="..." /> */}
+                        <Image src={image2} fluid />
                     </div>
                     <div className="carousel-item">
                         <img src={image3} className="d-block w-100" alt="..." />
