@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Batman from '../assets/batman.png'
+import Spiderman from '../assets/spiderman.png'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
@@ -21,6 +22,8 @@ import Spinner2 from '../components/spinners/Spinner2';
 import Spinners from '../components/spinners/Spinners';
 import Card from 'react-bootstrap/Card';
 import Placeholder from 'react-bootstrap/Placeholder';
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+import { InputMask } from 'primereact/inputmask';
 
 
 
@@ -57,8 +60,8 @@ function Example() {
 
   return (
     <>
-      <h1 style={{textAlign:'center'}}>Component's page</h1>
-      <div className='component-grid common-children'>
+      <h1 style={{ textAlign: 'center' }}>Component's page</h1>
+      <div className='component-grid common-children'>{/* parent component */}
         <div className='modals'>
           <Modals />
         </div>
@@ -170,7 +173,7 @@ function Example() {
 
         <div className='Tooltip'>
           <h2>ToolTips</h2>
-          <ToolTips placement={'right'} variant={'primary'} tipMessage={'Tooltip is working'} />
+          <ToolTips placement={'top'} variant={'primary'} tipMessage={'Tooltip is working'} />
         </div>
         <div className='Progress-bar'>
           <h2>Progress-bar</h2>
@@ -219,6 +222,23 @@ function Example() {
               </Card.Body>
             </Card>
           </div>
+        </div>
+
+        <div className="avatar-groups">
+          <h2>Avatar-group</h2>
+          <div className="profile-container">
+          <div class="avatars">
+            <span class="avatar"><img src="https://picsum.photos/70" /></span>
+            <span class="avatar"><img src="https://picsum.photos/80" /></span>
+            <span class="avatar"><img src="https://picsum.photos/90" /></span>
+          </div>
+          </div>
+        </div>
+
+        <div className="input-masks">
+          <h2>Input-Mask</h2>
+        <label htmlFor="phone" className="font-bold block mb-2">Phone</label>
+        <InputMask id="phone" mask="(999) 999-9999" placeholder="(999) 999-9999"></InputMask>
         </div>
       </div>
     </>

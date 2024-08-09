@@ -1,20 +1,20 @@
-.component-grid{
+.component-grid {
     padding: 4rem;
     gap: 4rem;
     display: flex;
     flex-direction: column;
     flex: 1 1 4rem
-    /* grid-template-columns: repeat(50%); */
+        /* grid-template-columns: repeat(50%); */
 }
 
 @media (min-width : 40em) {
-    .component-grid{
+    .component-grid {
         display: grid;
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-.component-grid  > div {
+.component-grid>div {
     /* Apply styles to all direct children of .component-grid */
     padding: 10px;
     margin-bottom: 0px;
@@ -22,8 +22,51 @@
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
-  }
-  
-  .component-grid  > div >h2{
+}
+
+.component-grid>div>h2 {
     text-align: center;
-  }
+}
+
+
+.profile-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatars {
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    transition: transform 0.3s ease, z-index 0s; /* Smooth transition for hover effect and immediate z-index change */
+    position: relative; 
+    z-index: 1; 
+}
+
+.avatar:not(:first-child) {
+    margin-left: -30px;
+}
+
+.avatar img {
+    width: 100%;
+    display: block;
+    transition: transform 0.3s ease; /* Smooth transition for image hover effect */
+}
+
+.avatar:hover {
+    transform: scale(1.1); /* Slightly increase the size of the avatar on hover */
+    z-index: 10; /* Bring the hovered avatar to the front */
+}
+
+.avatar img:hover {
+    transform: scale(1.1); /* Ensure image scales up as well */
+}

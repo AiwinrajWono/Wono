@@ -14,7 +14,7 @@ const Breadcrumbs = () => {
           <Link to="/">Home</Link>
         </li>
         {pathnames.map((value, index) => {
-          const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+          const to = `/${pathnames.slice(0, index + 1).join(' / ')}`;
           return (
             <li
               key={to}
