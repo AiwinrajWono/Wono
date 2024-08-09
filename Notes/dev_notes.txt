@@ -1,0 +1,5 @@
+Toast issue : 
+
+When you take the component form react-bootstrap, the <ToastContainer> is not in the higher order, what happens here is that when the toast is triggered from bottom of a particular screen, the toast will appear at the top-end of the page and not in the viewport.
+
+Fix : Make the <ToastContainer> in the higher order, wrap the whole component in <ToastContainer>
