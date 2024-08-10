@@ -4,6 +4,7 @@ import CompTest from './pages/CompTest';
 import Users from './pages/Users';
 import AppHeader from './layout/AppHeader';
 import AppFooter from './layout/AppFooter';
+import Form from './pages/Form';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/" element={<AppStruct />} />
       <Route path="/test" element={<CompTest />} />
       <Route path='/users' element={<Users/>}/>
+      <Route path='/form' element={<Form />}/>
      </Routes>
     <AppFooter />
     </div>

@@ -24,20 +24,36 @@ import Card from 'react-bootstrap/Card';
 import Placeholder from 'react-bootstrap/Placeholder';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { InputMask } from 'primereact/inputmask';
+import Ratings from '../components/Ratings';
+import TextBoxes from '../components/TextBoxes';
+import VerifyOTP from '../components/VerifyOTP';
 
 
 
 function Example() {
   const customSVG = "M25 5 L30 20 H20 Z";
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false); //toast
+  const handleShow = () => setShow(true); //toast handleShow
 
-  const handleShow = () => setShow(true);
+  const [showModal, setShowModal] = useState(false); //for generic modals
+  const handleModal = () => setShowModal(true)//for generic modals
 
-  const [showA, setShowA] = useState(false);
-  const [showB, setShowB] = useState(true);
+  const [signUpModal, setSignUpModal] = useState(false);
+  const [showRating, setShowRating] = useState(false);
+
+  const handleSignUpModal = () => setSignUpModal(true);
+  const handleSignUpClose = () => {
+    setSignUpModal(false);
+    setShowRating(true); // Open the rating modal
+  };
+
+  const handleRatingClose = () => setShowRating(false);
+
+  const [showA, setShowA] = useState(false); //popover
+
 
   const toggleShowA = () => setShowA(!showA);
-  const toggleShowB = () => setShowB(!showB);
+
 
   const [index, setIndex] = useState(0);
 
@@ -46,6 +62,10 @@ function Example() {
   };
 
   const [showContent, setShowContent] = useState(false);
+  const [otp,setOTP] = useState(false)
+  const handleOTP = ()=>{
+    setOTP(true)
+  }
 
   useEffect(() => {
     // Set a delay of 3 seconds before showing the content
@@ -63,7 +83,12 @@ function Example() {
       <h1 style={{ textAlign: 'center' }}>Component's page</h1>
       <div className='component-grid common-children'>{/* parent component */}
         <div className='modals'>
-          <Modals />
+          <Button variant="primary" onClick={handleModal}>
+            Open Modal
+          </Button>
+          <Modals title='Demo Modal' show={showModal} handleClose={() => { setShowModal(false) }}>
+            <p>This is a demo modal</p>
+          </Modals>
         </div>
         {/* Toast config */}
         <div className='toasttest'>
@@ -227,18 +252,63 @@ function Example() {
         <div className="avatar-groups">
           <h2>Avatar-group</h2>
           <div className="profile-container">
-          <div class="avatars">
-            <span class="avatar"><img src="https://picsum.photos/70" /></span>
-            <span class="avatar"><img src="https://picsum.photos/80" /></span>
-            <span class="avatar"><img src="https://picsum.photos/90" /></span>
-          </div>
+            <div class="avatars">
+              <span class="avatar"><img src="https://picsum.photos/70" /></span>
+              <span class="avatar"><img src="https://picsum.photos/80" /></span>
+              <span class="avatar"><img src="https://picsum.photos/90" /></span>
+            </div>
           </div>
         </div>
 
         <div className="input-masks">
           <h2>Input-Mask</h2>
-        <label htmlFor="phone" className="font-bold block mb-2">Phone</label>
-        <InputMask id="phone" mask="(999) 999-9999" placeholder="(999) 999-9999"></InputMask>
+          <label htmlFor="phone" className="font-bold block mb-2">Phone</label>
+          <InputMask id="phone" mask="(999) 999-9999" placeholder="(999) 999-9999"></InputMask>
+        </div>
+        <div className='new-form'>
+          <h2>Sign-up with Modal</h2>
+          <div className='grid2-form'>
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Name" aria-label="name" />
+            </div>
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Email" aria-label="email" />
+            </div>
+          </div>
+          <div className="button_space">
+            <button className='submit-button'>Submit</button>
+          </div>
+          <Button variant="primary" onClick={handleSignUpModal}>
+            New user?
+          </Button>
+          <Modals
+            show={signUpModal}
+            handleClose={handleSignUpClose}
+            title="Sign-up Form"
+          >
+            <form>
+              <input type="email" className="form-control" placeholder="Email" aria-label="email" />
+              <input type="password" className="form-control" placeholder="Password" aria-label="password" />
+              <input type="password" className="form-control" placeholder="Confirm Password" aria-label="confirm-password" />
+              <span onClick={handleOTP} style={{cursor:'pointer'}}>Verify-email</span>
+              {otp&& 
+              (
+                <div className="otp-container">
+                  <VerifyOTP />
+                </div>
+              )
+              }
+              <Button variant="primary" onClick={handleSignUpClose}>Sign-up</Button>
+            </form>
+          </Modals>
+          <Modals
+            show={showRating}
+            handleClose={handleRatingClose}
+            title='Rate our experience'
+          >
+            <Ratings />
+            <TextBoxes />
+          </Modals>
         </div>
       </div>
     </>
