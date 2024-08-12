@@ -70,3 +70,6 @@
 .avatar img:hover {
     transform: scale(1.1); /* Ensure image scales up as well */
 }
+.new-form > div{
+    padding: 0.5rem;
+}

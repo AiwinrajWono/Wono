@@ -275,12 +275,15 @@ function Example() {
               <input type="text" className="form-control" placeholder="Email" aria-label="email" />
             </div>
           </div>
-          <div className="button_space">
-            <button className='submit-button'>Submit</button>
+          <div style={{width:'100%', display:'flex', alignItems:'center', justifyContent:'center'}}>
+            <button className='submit-button' style={{width:'50%'}}>Submit</button>
           </div>
-          <Button variant="primary" onClick={handleSignUpModal}>
+          <div style={{width:'100%', display:'flex', alignItems:'center', justifyContent:'center'}}>
+
+          <Button variant="primary" onClick={handleSignUpModal} style={{width:'50%'}} >
             New user?
           </Button>
+          </div>
           <Modals
             show={signUpModal}
             handleClose={handleSignUpClose}
