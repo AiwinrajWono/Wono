@@ -11,6 +11,12 @@ import Modals from '../components/Modals';
 import Jobrole from '../components/Jobrole';
 import Users from './Users';
 import Alertbutton from '../components/Alertbutton';
+import FloatingLabels from '../components/FloatingLabels';
+import UserDetails from '../components/UserDetails';
+import Charts from '../components/Chart';
+import ScrollTops from '../components/ScrollTop';
+import FramerMotion from '../components/FramerMotion';
+import AnimatedCard from '../components/AnimatedCard';
 import Spinner from '../components/spinners/Spinners';
 import '../styles/componentStyle.css'
 import ToolTips from '../components/ToolTip';
@@ -140,6 +146,38 @@ function Example() {
         <div className='alerts'>
           <h2>Alerts</h2>
           <Alertbutton />
+
+      <div className='FloatingLabels'>
+        <h1>Floating Labels</h1>
+      <FloatingLabels/>
+      </div>
+
+      <div className='UserDetails'>
+      <UserDetails/>
+      </div>
+
+      <div className='Chart'>
+        <h1>Chart</h1>
+      <Charts/>
+      </div>
+
+      <div className='ScrollTop'>
+        <h1>ScrollTop</h1>
+       <ScrollTops/>
+      </div>
+
+
+      <div className='FramerMotion'>
+        <h1>FramerMotion</h1>
+        <FramerMotion/>
+      </div>
+
+      <div className='AnimatedCard'>
+        <h1>AnimatedCard</h1>
+        <AnimatedCard/>
+      </div>
+
+      
         </div>
 
         <div className='spinners-carousel' style={{ display: 'flex', backgroundColor: 'black', color: 'white' }}>

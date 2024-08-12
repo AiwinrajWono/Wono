@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import PaginationS from '../components/Pagination';
 import "../layout/users.css"
 
 const Users = () => {
+  const [currentPage,setCurrentPage] = useState(1);
+  const recordsPerpage = 5; 
   return (
     <>
     <div className='users'>
