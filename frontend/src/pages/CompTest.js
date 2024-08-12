@@ -146,6 +146,7 @@ function Example() {
         <div className='alerts'>
           <h2>Alerts</h2>
           <Alertbutton />
+          </div>
 
       <div className='FloatingLabels'>
         <h1>Floating Labels</h1>
@@ -178,7 +179,7 @@ function Example() {
       </div>
 
       
-        </div>
+        
 
         <div className='spinners-carousel' style={{ display: 'flex', backgroundColor: 'black', color: 'white' }}>
           <h2>Spinner Carousel</h2>
