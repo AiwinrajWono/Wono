@@ -12,11 +12,17 @@ const Dashboard = () => {
 
     }
   return (
-    <div className='grid-container'>
+    <>
         <Header openSidebar={openSidebar}/>
+    <div className='dashboard-container'>
+      <div style={{width:'100%'}}>
         <Sidebar openSidebarToggle={openSidebarToggle} openSidebar={openSidebar}/>
+      </div>
+      <div style={{width:'100%', padding:0}}>
         <Home/>
+      </div>
     </div>
+    </>
   )
 }
 
