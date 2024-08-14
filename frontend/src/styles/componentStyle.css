@@ -1,206 +1,268 @@
 /* navbar styles */
 @font-face {
-    font-family: Popins-Regular;
-    src: url('../assets/WONO_images/img/fonts/Poppins-Regular.ttf');
+  font-family: Popins-Regular;
+  src: url('../assets/WONO_images/img/fonts/Poppins-Regular.ttf');
 }
+
 @font-face {
-    font-family: Popins-Black;
-    src: url('../assets/WONO_images/img/fonts/Poppins-Black.ttf');
+  font-family: Popins-Black;
+  src: url('../assets/WONO_images/img/fonts/Poppins-Black.ttf');
 }
 
 .custom-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: black;
-    color: #fff;
-    font-family: Popins-Regular;
-    font-weight: 500;
-  }
-  
-  .custom-navbar-logo a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: black;
+  color: #fff;
+  font-family: Popins-Regular;
+  font-weight: 500;
+}
+
+.custom-navbar-logo a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.custom-navbar-menu {
+  display: flex;
+  align-items: center;
+}
+
+.custom-navbar-menu a {
+  margin: 0 15px;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease, font-family 0.3s ease;
+  /* Smooth transition for color and text-decoration */
+}
+
+.custom-navbar-menu a:hover {
+  font-family: Popins-Black;
+}
+
+.custom-navbar-menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Offcanvas styles */
+.custom-offcanvas {
+  background-color: #333;
+  /* Background color of the Offcanvas */
+  color: #fff;
+  /* Text color */
+}
+
+.custom-offcanvas .offcanvas-header {
+  background-color: black;
+  /* Background color of the Offcanvas header */
+  border-bottom: 1px solid #444;
+  /* Border below the header */
+}
+
+.custom-offcanvas .offcanvas-title {
+  color: white;
+  /* Title color */
+}
+
+.custom-offcanvas .offcanvas-body {
+  padding: 20px;
+  /* Padding inside the body */
+  background-color: black;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-family: Popins-Regular;
+}
+
+.custom-offcanvas-link {
+  display: block;
+  /* Make each link block-level for full width */
+  background-color: black;
+  color: #fff;
+  /* Link color */
+  text-decoration: none;
+  /* Remove underline from links */
+  margin: 10px 0;
+  /* Margin between links */
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+  /* Smooth transition for color and text-decoration */
+}
+
+.custom-offcanvas-link:hover {
+  font-family: Popins-Black;
+  color: white;
+}
+
+.custom-offcanvas .offcanvas-header .btn-close {
+  filter: invert(100%);
+  /* Inverts the color to white */
+  background-color: transparent;
+  /* Ensure the background is transparent */
+  border: none;
+  /* Remove border if any */
+}
+
+.custom-offcanvas .offcanvas-header .btn-close:hover {
+  color: #ddd;
+  /* Optional: Change color on hover */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
   .custom-navbar-menu {
-    display: flex;
-    align-items: center;
-  }
-  
-  .custom-navbar-menu a {
-    margin: 0 15px;
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition for color and text-decoration */
-  }
-  
-  .custom-navbar-menu a:hover {
-font-family: Popins-Black;
-  }
-  
-  .custom-navbar-menu-toggle {
     display: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #fff;
+    /* Hide menu on small screens */
   }
-  
-  /* Offcanvas styles */
+
+  .custom-navbar-menu-toggle {
+    display: block;
+    /* Show hamburger menu on small screens */
+  }
+
   .custom-offcanvas {
-    background-color: #333; /* Background color of the Offcanvas */
-    color: #fff; /* Text color */
+    width: 250px;
+    /* Adjust width as needed */
   }
-  
-  .custom-offcanvas .offcanvas-header {
-    background-color:black; /* Background color of the Offcanvas header */
-    border-bottom: 1px solid #444; /* Border below the header */
-  }
-  
-  .custom-offcanvas .offcanvas-title {
-    color: white; /* Title color */
-  }
-  
-  .custom-offcanvas .offcanvas-body {
-    padding: 20px; /* Padding inside the body */
-    background-color: black;
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
-    flex-direction: column;
-    font-size: 1.5rem;
-    font-family: Popins-Regular;
-  }
-  
-  .custom-offcanvas-link {
-    display: block; /* Make each link block-level for full width */
-    background-color: black;
-    color: #fff; /* Link color */
-    text-decoration: none; /* Remove underline from links */
-    margin: 10px 0; /* Margin between links */
-    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition for color and text-decoration */
-  }
-  
-  .custom-offcanvas-link:hover {
-    font-family: Popins-Black;
-  }
+}
+.profile-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 
-  .custom-offcanvas .offcanvas-header .btn-close {
-    filter: invert(100%); /* Inverts the color to white */
-    background-color: transparent; /* Ensure the background is transparent */
-    border: none; /* Remove border if any */
-  }
-  
-  .custom-offcanvas .offcanvas-header .btn-close:hover {
-    color: #ddd; /* Optional: Change color on hover */
-  }
-  
-  /* Media Queries */
-  @media (max-width: 768px) {
-    .custom-navbar-menu {
-      display: none; /* Hide menu on small screens */
-    }
-  
-    .custom-navbar-menu-toggle {
-      display: block; /* Show hamburger menu on small screens */
-    }
-  
-    .custom-offcanvas {
-      width: 250px; /* Adjust width as needed */
-    }
-  }
+.profile-image {
+  border-radius: 50%;
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+  cursor: pointer;
+  margin-right: 8px;
+}
 
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+  background-color: black;
+  cursor: pointer;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: white;
+}
+
+.dropdown-menu button:hover {
+  background-color: black;
+}
 
 
 .component-grid {
-    padding: 4rem;
-    gap: 4rem;
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 4rem
-        /* grid-template-columns: repeat(50%); */
+  padding: 4rem;
+  gap: 4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 4rem
+    /* grid-template-columns: repeat(50%); */
 }
 
 @media (min-width : 40em) {
-    .component-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .component-grid>div {
-    /* Apply styles to all direct children of .component-grid */
-    padding: 10px;
-    margin-bottom: 0px;
-    border: 1px solid #ddd;
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
+  /* Apply styles to all direct children of .component-grid */
+  padding: 10px;
+  margin-bottom: 0px;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .component-grid>div>h2 {
-    text-align: center;
+  text-align: center;
 }
 
 
 .profile-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .avatars {
-    /* position: relative; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  /* position: relative; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .avatar {
-    display: inline-block;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    transition: transform 0.3s ease, z-index 0s;
-    /* Smooth transition for hover effect and immediate z-index change */
-    position: relative;
-    z-index: 1;
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+  transition: transform 0.3s ease, z-index 0s;
+  /* Smooth transition for hover effect and immediate z-index change */
+  position: relative;
+  z-index: 1;
 }
 
 .avatar:not(:first-child) {
-    margin-left: -30px;
+  margin-left: -30px;
 }
 
 .avatar img {
-    width: 100%;
-    display: block;
-    transition: transform 0.3s ease;
-    /* Smooth transition for image hover effect */
+  width: 100%;
+  display: block;
+  transition: transform 0.3s ease;
+  /* Smooth transition for image hover effect */
 }
 
 .avatar:hover {
-    transform: scale(1.1);
-    /* Slightly increase the size of the avatar on hover */
-    z-index: 10;
-    /* Bring the hovered avatar to the front */
+  transform: scale(1.1);
+  /* Slightly increase the size of the avatar on hover */
+  z-index: 10;
+  /* Bring the hovered avatar to the front */
 }
 
 .avatar img:hover {
-    transform: scale(1.1);
-    /* Ensure image scales up as well */
+  transform: scale(1.1);
+  /* Ensure image scales up as well */
 }
 
 .new-form>div {
-    padding: 0.5rem;
+  padding: 0.5rem;
 }
 
-.login-button{
-    background-color: rgb(13,110,253);
-    padding: 0.5rem 2rem 0.5rem 2rem;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    font-family: Popins-Regular ;
+.login-button {
+  background-color: rgb(13, 110, 253);
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-family: Popins-Regular;
 }
