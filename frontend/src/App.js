@@ -6,6 +6,9 @@ import AppHeader from './layout/AppHeader';
 import AppFooter from './layout/AppFooter';
 import Form from './pages/Form';
 import Dashboard from './components/HomeDashboard/Dashboard';
+import Services from './pages/Services';
+import LoginPage from './pages/LoginPage';
+import Homepage from './pages/Homepage';
 
 function App() {
   return (
@@ -15,7 +18,9 @@ function App() {
       <Route path="/" element={<AppStruct />} />
       <Route path="/test" element={<CompTest />} />
       <Route path='/users' element={<Users/>}/>
-      <Route path='/home' element={<Dashboard/>}/>
+      <Route path='/home' element={<Homepage/>}/>
+      <Route path='/services' element={<Services/>}/>
+      <Route path='/login' element={<LoginPage/>}/>
      </Routes>
     <AppFooter />
     </div>

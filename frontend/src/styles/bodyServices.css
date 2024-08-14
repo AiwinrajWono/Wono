@@ -1,0 +1,177 @@
+@font-face {
+    font-family: Popins-Semibold;
+    src: url('../assets/WONO_images/img/fonts/Poppins-SemiBold.ttf');
+}
+
+.services {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.services > h1{
+   color : rgb(54,77,89)
+}
+
+.businesses {
+    width: 100%;
+}
+.businesses > div > h1{
+    text-align: center;
+    padding: 2rem 0 0 2rem;
+    margin-bottom: 2rem;
+    font-size: 56px;
+    font-weight: 700;
+    text-align: center;
+    font-family: Popins-SemiBold;
+    color : rgb(54,77,89)
+}
+.businesses > div > hr{
+    margin: 0;
+    border: 4px solid #0875e2;
+    opacity: 1;
+    padding: 0;
+    width: 90%;
+}
+
+.business-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 5 columns */
+    gap: 0.5rem; /* Space between grid items */
+    width: 100%;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    padding: 0 4rem 0 4rem;
+}
+
+.business-service > span {
+    font-family: Popins-Regular;
+    font-weight: 700;
+}
+.business-service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.business-service > img {
+    width: 70px;
+}
+@media (max-width: 768px) {
+    .business-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns per row */
+        grid-template-rows: auto; /* Adjust rows based on content */
+    }
+}
+
+
+/* Direct customers  */
+
+.direct-customers {
+    width: 100%;
+}
+.direct-customers > div > h1{
+    text-align: center;
+    padding: 2rem 0 0 2rem;
+    margin-bottom: 2rem;
+    font-size: 56px;
+    font-weight: 700;
+    text-align: center;
+    font-family: Popins-SemiBold;
+    color : rgb(54,77,89)
+}
+.direct-customers > div > hr{
+    margin: 0;
+    border: 4px solid #0875e2;
+    opacity: 1;
+    padding: 0;
+    width: 90%;
+}
+
+.direct-customers-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 5 columns */
+    gap: 0.5rem; /* Space between grid items */
+    width: 100%;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    padding: 0 4rem 0 4rem;
+}
+
+.direct-customers-service > span {
+    font-family: Popins-Regular;
+    font-weight: 700;
+}
+.direct-customers-service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.direct-customers-service > img {
+    width: 70px;
+}
+@media (max-width: 768px) {
+    .direct-customers-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns per row */
+        grid-template-rows: auto; /* Adjust rows based on content */
+    }
+}
+
+
+/* financing  */
+
+.financing {
+    width: 100%;
+}
+.financing > div > h1{
+    text-align: center;
+    padding: 2rem 0 0 2rem;
+    margin-bottom: 2rem;
+    font-size: 56px;
+    font-weight: 700;
+    text-align: center;
+    font-family: Popins-SemiBold;
+    color : rgb(54,77,89)
+}
+.financing > div > hr{
+    margin: 0;
+    border: 4px solid #0875e2;
+    opacity: 1;
+    padding: 0;
+    width: 90%;
+}
+
+.financing-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 5 columns */
+    gap: 0.5rem; /* Space between grid items */
+    width: 100%;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    padding: 0 4rem 0 4rem;
+}
+
+.financing-service > span {
+    font-family: Popins-Regular;
+    font-weight: 700;
+}
+.financing-service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.financing-service > img {
+    width: 70px;
+}
+@media (max-width: 768px) {
+    .financing-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns per row */
+        grid-template-rows: auto; /* Adjust rows based on content */
+    }
+}

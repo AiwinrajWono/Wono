@@ -1,3 +1,119 @@
+/* navbar styles */
+@font-face {
+    font-family: Popins-Regular;
+    src: url('../assets/WONO_images/img/fonts/Poppins-Regular.ttf');
+}
+@font-face {
+    font-family: Popins-Black;
+    src: url('../assets/WONO_images/img/fonts/Poppins-Black.ttf');
+}
+
+.custom-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: black;
+    color: #fff;
+    font-family: Popins-Regular;
+    font-weight: 500;
+  }
+  
+  .custom-navbar-logo a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .custom-navbar-menu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .custom-navbar-menu a {
+    margin: 0 15px;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition for color and text-decoration */
+  }
+  
+  .custom-navbar-menu a:hover {
+font-family: Popins-Black;
+  }
+  
+  .custom-navbar-menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  /* Offcanvas styles */
+  .custom-offcanvas {
+    background-color: #333; /* Background color of the Offcanvas */
+    color: #fff; /* Text color */
+  }
+  
+  .custom-offcanvas .offcanvas-header {
+    background-color:black; /* Background color of the Offcanvas header */
+    border-bottom: 1px solid #444; /* Border below the header */
+  }
+  
+  .custom-offcanvas .offcanvas-title {
+    color: white; /* Title color */
+  }
+  
+  .custom-offcanvas .offcanvas-body {
+    padding: 20px; /* Padding inside the body */
+    background-color: black;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+    font-size: 1.5rem;
+    font-family: Popins-Regular;
+  }
+  
+  .custom-offcanvas-link {
+    display: block; /* Make each link block-level for full width */
+    background-color: black;
+    color: #fff; /* Link color */
+    text-decoration: none; /* Remove underline from links */
+    margin: 10px 0; /* Margin between links */
+    transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition for color and text-decoration */
+  }
+  
+  .custom-offcanvas-link:hover {
+    font-family: Popins-Black;
+  }
+
+  .custom-offcanvas .offcanvas-header .btn-close {
+    filter: invert(100%); /* Inverts the color to white */
+    background-color: transparent; /* Ensure the background is transparent */
+    border: none; /* Remove border if any */
+  }
+  
+  .custom-offcanvas .offcanvas-header .btn-close:hover {
+    color: #ddd; /* Optional: Change color on hover */
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .custom-navbar-menu {
+      display: none; /* Hide menu on small screens */
+    }
+  
+    .custom-navbar-menu-toggle {
+      display: block; /* Show hamburger menu on small screens */
+    }
+  
+    .custom-offcanvas {
+      width: 250px; /* Adjust width as needed */
+    }
+  }
+
+
+
 .component-grid {
     padding: 4rem;
     gap: 4rem;
@@ -29,7 +145,7 @@
 }
 
 
-.profile-container{
+.profile-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,9 +163,10 @@
     border-radius: 50%;
     overflow: hidden;
     width: 100px;
-    transition: transform 0.3s ease, z-index 0s; /* Smooth transition for hover effect and immediate z-index change */
-    position: relative; 
-    z-index: 1; 
+    transition: transform 0.3s ease, z-index 0s;
+    /* Smooth transition for hover effect and immediate z-index change */
+    position: relative;
+    z-index: 1;
 }
 
 .avatar:not(:first-child) {
@@ -59,17 +176,31 @@
 .avatar img {
     width: 100%;
     display: block;
-    transition: transform 0.3s ease; /* Smooth transition for image hover effect */
+    transition: transform 0.3s ease;
+    /* Smooth transition for image hover effect */
 }
 
 .avatar:hover {
-    transform: scale(1.1); /* Slightly increase the size of the avatar on hover */
-    z-index: 10; /* Bring the hovered avatar to the front */
+    transform: scale(1.1);
+    /* Slightly increase the size of the avatar on hover */
+    z-index: 10;
+    /* Bring the hovered avatar to the front */
 }
 
 .avatar img:hover {
-    transform: scale(1.1); /* Ensure image scales up as well */
+    transform: scale(1.1);
+    /* Ensure image scales up as well */
 }
-.new-form > div{
+
+.new-form>div {
     padding: 0.5rem;
+}
+
+.login-button{
+    background-color: rgb(13,110,253);
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-family: Popins-Regular ;
 }

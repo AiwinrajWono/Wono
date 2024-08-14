@@ -1,58 +1,61 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
+import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom'
+import '../styles/componentStyle.css'
+import WonoLogo from '../assets/WONO_images/img/WONOCO-black-bg.png'
 
 const NavBar = () => {
   const navigate = useNavigate()
   const handleTest = ()=>{
     navigate('/test')
   }
+  const handleServiceRoute = ()=>{
+    navigate('/services')
+  }
 
   const navigateToDashboard =()=>{
     navigate('/home')
   }
+  const handleRouteLogin =()=>{
+    navigate('/login')
+  }
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid" >
-          <Link to='/' style={{textDecoration:'none', color:'black'}}>Navbar</Link>
-          <Link to='/form' style={{textDecoration:'none', color:'black'}}>Forms</Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" onClick={navigateToDashboard}>Home</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" onClick={handleTest}>Link</a>
-              </li>
-              
-              <button onClick={handleTest}>Testing</button>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-            
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-              </li>
-            </ul>
-            <form className="d-flex" role="search">
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
+  <nav className="custom-navbar">
+        <div className="custom-navbar-logo">
+          <img src={WonoLogo} alt='logo' />
+        </div>
+        <div className="custom-navbar-menu">
+          <a href="/">Home</a>
+          <a href="/services">Services</a>
+          <a href="/test">Testing</a>
+        </div>
+        <div className="custom-navbar-menu">
+          <span className='login-button' onClick={handleRouteLogin}>LOGIN</span>
+        </div>
+        <div className="custom-navbar-menu-toggle" onClick={handleShow}>
+          &#9776;
         </div>
       </nav>
 
+      {/* Offcanvas for mobile screens */}
+      <Offcanvas show={show} onHide={handleClose} placement="end" backdrop="true" className="custom-offcanvas">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <a href="/" className="custom-offcanvas-link">Home</a>
+          <a href="/services" className="custom-offcanvas-link">Services</a>
+          <a href="/test" className="custom-offcanvas-link">Testing</a>
+          <span className='login-button' onClick={handleRouteLogin}>LOGIN</span>
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   )
 }
