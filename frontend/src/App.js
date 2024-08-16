@@ -14,9 +14,9 @@ import Register from './pages/Register';
 import Career from './pages/Career';
 import Dashboard from './components/HomeDashboard/Dashboard';
 import JobDetails from './pages/JobDetails';
-import Contact from './pages/Contact';
-import Register from './pages/Register';
-import Career from './pages/Career';
+// import Contact from './pages/Contact';
+// import Register from './pages/Register';
+// import Career from './pages/Career';
 
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/dashboard' element={<Dashboard/>}/>
       <Route path='/career' element={<Career/>}/>
+      <Route path='/jobdetails/:id/:title' element={<JobDetails/>}/>
      </Routes>
     <AppFooter />
     </UserProvider>

@@ -59,33 +59,7 @@ const Contact = () => {
         </div>
     </section>
 
-    <section id='contact' className='contact'>
-      <div className='container'>
-        <div className='row gy-4'>
-          <div className='col-lg-6 col-md-12'>
-            <div className='info-item justify-content-center align-items-center'>
-              <div style={{display:"flex",justifyContent:"center"}}>
-                <iframe width="100%" height="380" frameBorder="0" scrolling='no' marginHeight="0" marginWidth="0"></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-       
-    </>
-
-  )
-}
-
-export default Contactimport React from 'react'
-import '../styles/bodyContact.css'
-
-const Contact = () => {
-    return (
-        <div>
-            <h1>Contact</h1>
-            <div className='map-container'>
+    <div className='map-container'>
             <div className="map-grid">
                     <div>
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8288436496055!2d103.8432645747905!3d1.2760650987118065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da191343eb5b27%3A0x1781b571e2363017!2s10%20Anson%20Rd%2C%20Singapore%20079903!5e0!3m2!1sen!2sin!4v1723629468618!5m2!1sen!2sin" width="100%" height="400"  loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -107,8 +81,10 @@ const Contact = () => {
                 </div>
 
             </div>
-        </div>
-    )
+       
+    </>
+
+  )
 }
 
-export default Contact
+export default Contact;
