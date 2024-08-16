@@ -7,3 +7,14 @@
     background-color: aqua;
     height: 4rem;
 }
+.btn-flr:hover{
+font-weight: bold;
+cursor: pointer;
+color: #000;
+font-family: "poppins-regular";
+font-size: 20px;
+}
+.btn-flr{
+    list-style: none;
+    
+}

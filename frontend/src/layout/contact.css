@@ -1,0 +1,23 @@
+section{
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.contact .contact-form{
+    width: 100%;
+    margin-top: 55px;
+}
+.contact .contact-form button[type=submit]{
+    width: 200px;
+}
+
+
+@media (max-width:768px) {
+    .contact .contact-form button[type=submit] {
+        padding: 10px 140px;
+    }
+    .contact .contact-form {
+        padding: 0;
+    }
+    
+}

@@ -194,7 +194,7 @@
   /* Extra Small <= 576px */
   
   @media screen and (max-width: 576px) {
-    .hedaer-left {
+    .header-left {
       display: none;
     }
   }

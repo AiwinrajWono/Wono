@@ -86,18 +86,19 @@ function Example() {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>Component's page</h1>
-      <div className='component-grid common-children'>{/* parent component */}
-        <div className='modals'>
+      {/* <h1 style={{ textAlign: 'center' }}>Component's page</h1> */}
+      <div className='component-grid common-children'> {/* parent component */}
+        {/* <div className='modals'>
           <Button variant="primary" onClick={handleModal}>
             Open Modal
           </Button>
           <Modals title='Demo Modal' show={showModal} handleClose={() => { setShowModal(false) }}>
             <p>This is a demo modal</p>
           </Modals>
-        </div>
+        </div> */}
+
         {/* Toast config */}
-        <div className='toasttest'>
+        {/* <div className='toasttest'>
           <Row>
             <Col md={6} className="mb-2">
               <h2>Popvers</h2>
@@ -118,65 +119,67 @@ function Example() {
               </Toast>
             </Col>
           </Row>
-        </div>
+        </div> */}
 
-        <div className='RealToast'>
+        {/* <div className='RealToast'>
           <h2>Toasts</h2>
           <Toasts toastMessage={'it is working'} position={'top-end'} show={show} onClose={() => { setShow(false) }} />
           <Button title='Click here' onClick={handleShow} >Click</Button>
-        </div>
+        </div> */}
 
-        <div className="off-canvas">
+        {/* <div className="off-canvas">
           <h2>OffCanvas</h2>
           <CompOffCanvas />
-        </div>
+        </div> */}
 
+         <h1 style={{marginBottom:"50px"}}>JOIN OUR TEAM</h1>
         <div className='accrodion'>
-          <h2>Accordion</h2>
+          
+          <h2 style={{fontSize:"30px",fontWeight:"bold", display:"flex",alignItems:"start"}}>OPEN POSITIONS</h2>
           <Jobrole />
         </div>
 
-        <div className='table-pag'>
+        {/* <div className='table-pag'>
           <h2>Table with pagination</h2>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <Users />
           </div>
-        </div>
+        </div> */}
 
-        <div className='alerts'>
+        {/* <div className='alerts'>
           <h2>Alerts</h2>
           <Alertbutton />
-          </div>
+          </div> */}
 
-      <div className='FloatingLabels'>
+      {/* <div className='FloatingLabels'>
         <h1>Floating Labels</h1>
       <FloatingLabels/>
-      </div>
+      </div> */}
 
-      <div className='UserDetails'>
+      {/* <div className='UserDetails'>
       <UserDetails/>
-      </div>
+      </div> */}
 
-      <div className='Chart'>
+      {/* <div className='Chart'>
         <h1>Chart</h1>
       <Charts/>
-      </div>
+      </div> */}
 
-      <div className='ScrollTop'>
+      {/* <div className='ScrollTop'>
         <h1>ScrollTop</h1>
        <ScrollTops/>
-      </div>
+      </div> */}
 
 
-      <div className='FramerMotion'>
+      {/* <div className='FramerMotion'>
         <h1>FramerMotion</h1>
         <FramerMotion/>
-      </div>
+      </div> */}
 
-      <div className='AnimatedCard'>
+      {/* <div className='AnimatedCard'>
         <h1>AnimatedCard</h1>
         <AnimatedCard/>
-      </div>
+      </div> */}
 
       
         
@@ -225,6 +228,7 @@ function Example() {
             </Carousel.Item>
           </Carousel>
         </div>
+
         <div className='spinners' style={{ display: 'flex', alignItems: 'center' }}>
           <h2>Spinner</h2>
           <Spinner

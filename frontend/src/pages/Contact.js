@@ -1,0 +1,81 @@
+import React from 'react'
+import "../layout/contact.css"
+
+const Contact = () => {
+  return (<>
+    <section id='contact' className='contact'>
+        <div className='container'>
+            <div className='row gy-4' >
+                <div className='col-lg-6'>
+                    <h3 style={{color:"#000",fontSize:"30px",textAlign:"left",textTransform:"uppercase",margin:"3rem 0 2rem 0", fontWeight:"bold"}}>
+                        About Us
+                    </h3>
+                    <p style={{fontSize: "17px",color:"#000", textAlign:"left"}}>WoNo's B2B Software As A Service (SaaS) Licensing tools are being developed post in depth discussions with 100's of businesses who are trying to develop and evolve the Nomads &amp; Remote Working Ecosystem via their own niche concepts in the most aspiring destinations of the world. We are currently in our BETA stage and are partnering and listening to everyone who wants to partner with us and we are providing them with our SaaS Tools FREE of Cost in our Testing Phase.</p>
+                    <p style={{fontSize: "17px",color:"#000",textAlign:"left"}}>WoNo's eventual B2B2C is the largest Nomad Community which is being developed and designed exclusively for individuals and companies who intend to work remotely from the various aspiring destinations of the world. We are developing the World's 1st such Platform &amp; Community which will enable you to discover, help in making decisions, provide assistance, provide logistics and let you do everything centrally for single, multiple or year long working from destinations as a true sorted Global Nomad.</p>
+                </div>
+                <div className='col-lg-6'>
+                    <form name='form-p' className='contact-form'>
+                        <h3 style={{marginBottom:"30px",color:"#000",fontWeight:"bold"}}>CONNECT WITH US</h3>
+                        <div className="row gy-3">
+                           <div className="col-md-6">
+                           <input type="text" name="name" class="form-control" placeholder="Name" required=""></input>
+                        </div>
+          
+                          <div className="col-md-6 ">
+                            <input type="email" class="form-control" name="email" placeholder="Email" required=""></input>
+                          </div>
+          
+                          <div className="col-md-6 mt-4">
+                            <input type="text" class="form-control" name="mobile" pattern="[1-9]{1}[0-9]{9}" placeholder="Mobile Number" required=""></input>
+                          </div>
+
+                          <div className="col-md-6 mt-4">
+                            {/* <input type="text" name="name" className="form-control" placeholder="Type of Company" required></input> */}
+                            <select className="form-select select-f" aria-label="Default select example" name="partnerstype">
+                              <option value="" disabled="" selected="">Type of Partnership</option>
+                              <option value="B2B SaaS Technology Licensing ">B2B SaaS Technology Licensing </option>
+                              <option value="B2C Workation/Co-Working Booking ">B2C Workation/Co-Working Booking </option>
+                              <option value="Landlord Partnerships ">Landlord Partnerships </option>
+                              <option value="Investment Related ">Investment Related </option>
+                              <option value="Coffee Meeting to know us better">Coffee Meeting to know us better</option>
+                            </select>
+                          </div>
+          
+                          <div className="col-md-12 mt-4">
+                            <textarea className="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
+                          </div>
+          
+                          <div className="col-md-12 text-center mt-5">
+          
+                            <input type="hidden" name="pagename" value="Contact"></input>
+                            
+          
+                            <button name="submit" type="submit" className="btn-lg btn-block"  style={{borderRadius: "50px",backgroundColor:"black",color:"white", transition:"0.4s",border:0 }}>CONNECT</button>
+                          </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id='contact' className='contact'>
+      <div className='container'>
+        <div className='row gy-4'>
+          <div className='col-lg-6 col-md-12'>
+            <div className='info-item justify-content-center align-items-center'>
+              <div style={{display:"flex",justifyContent:"center"}}>
+                <iframe width="100%" height="380" frameBorder="0" scrolling='no' marginHeight="0" marginWidth="0"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+       
+    </>
+
+  )
+}
+
+export default Contact

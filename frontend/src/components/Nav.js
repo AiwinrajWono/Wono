@@ -1,3 +1,4 @@
+import { color } from 'framer-motion'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
@@ -10,6 +11,10 @@ const NavBar = () => {
 
   const navigateToDashboard =()=>{
     navigate('/home')
+  }
+
+  const navigateToRegister = ()=>{
+    navigate('/register')
   }
   return (
     <>
@@ -47,7 +52,7 @@ const NavBar = () => {
             </ul>
             <form className="d-flex" role="search">
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button className="btn btn-outline-success" type="submit">Search</button>
+              <button type="button" className="btn btn-flr" style={{margin:"10px",fontFamily: "Poppins-Regular", backgroundColor:"#f4ed50",color:"#000"}} onClick={navigateToRegister}>REGISTER</button>
             </form>
           </div>
         </div>
