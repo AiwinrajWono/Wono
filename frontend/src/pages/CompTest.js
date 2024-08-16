@@ -33,6 +33,7 @@ import { InputMask } from 'primereact/inputmask';
 import Ratings from '../components/Ratings';
 import TextBoxes from '../components/TextBoxes';
 import VerifyOTP from '../components/VerifyOTP';
+import Steppers from '../components/Steppers';
 
 
 
@@ -355,6 +356,13 @@ function Example() {
             <Ratings />
             <TextBoxes />
           </Modals>
+        </div>
+
+        <div className="steps" style={{backgroundColor:'white'}}>
+          <h2>Steppers</h2>
+          <Steppers children1={<UserDetails formTitle={'Step_1'}/>} children2={<UserDetails formTitle={'Step_2'} />} children3={<Jobrole />}>
+            
+          </Steppers>
         </div>
       </div>
     </>

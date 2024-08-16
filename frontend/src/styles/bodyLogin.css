@@ -1,0 +1,35 @@
+@font-face {
+    font-family: Popins-Semibold;
+    src: url('../assets/WONO_images/img/fonts/Poppins-SemiBold.ttf');
+}
+@font-face {
+    font-family: Popins-Regular;
+    src: url('../assets/WONO_images/img/fonts/Poppins-Regular.ttf');
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8rem 0 8rem;
+    width: 100%;
+    font-family: Popins-Semibold;
+}
+.login-page-button{
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.50rem;
+    font-family: Popins-Semibold;
+}
+
+@media (max-width:768px) {
+    .login-container {
+        padding: 6rem 1rem 6rem 1rem;
+    }
+}
+
+h2 {
+    font-family: Popins-SemiBold;
+}

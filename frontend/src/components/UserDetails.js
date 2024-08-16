@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import * as formik from 'formik'
 import * as yup from 'yup';
 
-const UserDetails = () => {
+const UserDetails = ({formTitle}) => {
     const { Formik } = formik;
 
     const schema = yup.object().shape({
@@ -22,7 +22,7 @@ const UserDetails = () => {
     
   return (
     <>
-    <h3 style={{'alignItems':'center','justifyContent':'center','display':'flex','margin-top':'20px'}}>User Details</h3>
+    <h3 style={{'alignItems':'center','justifyContent':'center','display':'flex','margin-top':'20px'}}>{formTitle}</h3>
     <Formik
       validationSchema={schema}
       onSubmit={console.log}

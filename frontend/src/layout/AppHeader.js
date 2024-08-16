@@ -5,7 +5,7 @@ const AppHeader = () => {
   return (
       <>
       <NavBar/>
-      <Breadcrumbs />
+      {/* <Breadcrumbs /> */}
     </>
   )
 }

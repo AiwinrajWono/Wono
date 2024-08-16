@@ -19,7 +19,7 @@ const Carousels = ({image1, image2, image3}) => {
                         <Image src={image2} fluid />
                     </div>
                     <div className="carousel-item">
-                        <img src={image3} className="d-block w-100" alt="..." />
+                        <Image src={image3} fluid />
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

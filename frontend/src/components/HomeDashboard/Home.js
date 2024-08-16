@@ -53,8 +53,8 @@ const Home = () => {
         },
       ];
   return (
-    <main className='main-container'>
-        <div className='main-title'>
+    <main className='main-graph-container'>
+        <div className='main-graph-title'>
             <h3>DASHBOARD</h3>
         </div>
 
@@ -139,4 +139,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Home
