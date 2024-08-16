@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import '../styles/componentStyle.css';
-import WonoLogo from '../assets/WONO_images/img/WONOCO-black-bg.png';
+import WonoLogo from '../assets/WONO_images/img/WONOCO-black-bg-removed.png';
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -15,6 +15,10 @@ const NavBar = () => {
   const handleLogout = () => {
     setUser(null); // Clear the user state
     navigate('/home')
+  };
+  const handleRegister = () => {
+    navigate('/register'); // Clear the user state
+    setShow(false)
   };
 
   const [show, setShow] = React.useState(false);
@@ -33,6 +37,10 @@ const NavBar = () => {
           <Link to='/services'>Services</Link>
           <Link to='/test'>Test</Link>
           <Link to='/contact'>Contact</Link>
+          <Link to='/career'>Career</Link>
+          {user ? (
+            <Link to={'/dashboard'}>Dashboard</Link>
+          ) : (null)}
         </div>
         <div className="custom-navbar-menu">
           {user ? (
@@ -46,7 +54,10 @@ const NavBar = () => {
               </div>
             </div>
           ) : (
-            <span className='login-button' onClick={() => navigate('/login')}>LOGIN</span>
+            <>
+            <Link to ='/login'  className ='login-button'>LOGIN</Link>
+            <button className='register-button' onClick={handleRegister}>REGISTER</button>
+            </>
           )}
         </div>
         <div className="custom-navbar-menu-toggle" onClick={handleShow}>
@@ -60,10 +71,14 @@ const NavBar = () => {
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <a href="/" className="custom-offcanvas-link">Home</a>
-          <a href="/services" className="custom-offcanvas-link">Services</a>
-          <a href="/test" className="custom-offcanvas-link">Testing</a>
-          <Link to='/contact'>Contact</Link>
+          <Link className="custom-offcanvas-link" to='/' onClick={handleClose}>Home</Link>
+          <Link className="custom-offcanvas-link" to='/services' onClick={handleClose}>Services</Link>
+          <Link className="custom-offcanvas-link" to='/test' onClick={handleClose}>Testing</Link>
+          <Link className="custom-offcanvas-link" to='/contact' onClick={handleClose}>Contact</Link>
+          <Link className="custom-offcanvas-link" to='/career' onClick={handleClose}>Career</Link>
+          {user ? (
+            <Link className="custom-offcanvas-link" to={'/dashboard'}>Dashboard</Link>
+          ) : (null)}
           {user ? (
             <div className="user-profile">
               <div className="profile-container" onClick={() => setDropdownOpen(!dropdownOpen)}>
@@ -74,8 +89,12 @@ const NavBar = () => {
                 </div>
               </div>
             </div>
-          ) : (
-            <a className='login-button' href='/login'>LOGIN</a>
+          ) : 
+          (
+            <>
+            <Link to ='/login' onClick={handleClose}  className ='login-button'>LOGIN</Link>
+            <button className='register-button' onClick={handleRegister}>REGISTER</button>
+            </>
           )}
         </Offcanvas.Body>
       </Offcanvas>

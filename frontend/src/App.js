@@ -4,18 +4,19 @@ import CompTest from './pages/CompTest';
 import Users from './pages/Users';
 import AppHeader from './layout/AppHeader';
 import AppFooter from './layout/AppFooter';
-import Form from './pages/Form';
-import Dashboard from './components/HomeDashboard/Dashboard';
 import Services from './pages/Services';
 import LoginPage from './pages/LoginPage';
 import Homepage from './pages/Homepage';
 import Contact from './pages/Contact';
 import { UserProvider } from './components/UserContext';
 import Home from './components/HomeDashboard/Home';
+import Register from './pages/Register';
+import Career from './pages/Career';
+import Dashboard from './components/HomeDashboard/Dashboard';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <UserProvider>
     <AppHeader />
      <Routes> 
@@ -25,8 +26,10 @@ function App() {
       <Route path='/home' element={<Homepage/>}/>
       <Route path='/services' element={<Services/>}/>
       <Route path='/login' element={<LoginPage/>}/>
+      <Route path='/register' element={<Register/>}/>
       <Route path='/contact' element={<Contact/>}/>
-      <Route path='/dashboard' element={<Home/>}/>
+      <Route path='/dashboard' element={<Dashboard/>}/>
+      <Route path='/career' element={<Career/>}/>
      </Routes>
     <AppFooter />
     </UserProvider>

@@ -21,6 +21,7 @@ const LoginPage = () => {
 
         setEmail('');
         setPassword('');
+        navigate('/dashboard')
     };
 
     const handleLoginSuccess = (credentialResponse) => {
@@ -34,55 +35,56 @@ const LoginPage = () => {
         console.log('Login Failed');
     };
 
-    const handleLogout = () => {
-        setUser(null); // Clear the user state
-        navigate('/login'); // Redirect to login page after logout
-    };
+    // const handleLogout = () => {
+    //     setUser(null); // Clear the user state
+    //     navigate('/login'); // Redirect to login page after logout
+    // };
 
     return (
         <div className="login-container">
-            <div className='form-section' style={{ width: '40%' }}>
-                <h2>LOGIN</h2>
-                
-                    <div>
-                        <div style={{ gap: '1rem', marginBottom: '1rem' }}>
-                            <div>
-                                <div className="col" style={{ gap: '1rem', marginBottom: '1rem' }}>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="Email"
-                                        aria-label="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-                                <div className="col">
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        placeholder="Password"
-                                        value={password}
-                                        aria-label="password"
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </div>
-                            </div>
+        <div className="container mt-4">
+            <div className="row justify-content-center">
+                <div className="col-md-6 col-lg-4">
+                    <h2 className="text-center mb-4">LOGIN</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Email"
+                                aria-label="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         </div>
-                        <div className="button_space" style={{ borderBottom: '0.5px solid black', paddingBottom: '1.5rem' }}>
-                            <button onClick={handleSubmit} className='submit-button'>Submit</button>
+                        <div className="mb-3">
+                            <input
+                                type="password"
+                                className="form-control"
+                                placeholder="Password"
+                                aria-label="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                         </div>
-                        <div style={{ marginTop: '2rem' }}>
-                            <span>Don't have an account? <span style={{ textDecoration: 'underline', color: 'blue' }}>Register</span></span>
+                        <div className="mb-3">
+                            <button type="submit" className="login-page-button w-100">
+                                Submit
+                            </button>
                         </div>
-                        <div>
+                        <div className="text-center mt-3">
+                            <span>Don't have an account? <a href="/register" className="text-primary">Register</a></span>
+                        </div>
+                        <div className='google-button'>
                             <GoogleLogin
                                 onSuccess={handleLoginSuccess}
                                 onError={handleLoginError}
                             />
                         </div>
-                    </div>
+                    </form>
+                </div>
             </div>
+        </div>
         </div>
     );
 };

@@ -1,0 +1,211 @@
+import React from 'react'
+import '../styles/bodyCareer.css'
+import Accordion from 'react-bootstrap/Accordion'
+import { Link } from 'react-router-dom'
+
+const Career = () => {
+    return (
+        <div className='career-container'>
+            <div className="career-section">
+                <h3 style={{ marginBottom: "50px" }}>JOIN OUR TEAM</h3>
+                <div className='accrodion'>
+                    <h2 style={{ fontSize: "30px", fontWeight: "bold", marginBottom:'2rem' }}>OPEN POSITIONS</h2>
+                    <div className='JobRole'>
+                        <Accordion defaultActiveKey="0">
+                            <Accordion.Item eventKey="0">
+                                <Accordion.Header >I. Product Management</Accordion.Header>
+
+                                <Accordion.Body>
+
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}>1.UI Designer</h5>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+
+                                                <Link to={`/jobdetails/1/${encodeURIComponent('UI Designer')}`} ><i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }} >::before</i></Link>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </Accordion.Body>
+                                <Accordion.Body>
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}> 2. Marketing Analytics</h5>
+                                            <span style={{ fontSize: "1rem" }}>(SEO/Google Analytics) </span>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+                                                <Link to={`/jobdetails/2/${encodeURIComponent('Marketing Analytics')}`}><i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }}  >::before</i></Link>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="1">
+                                <Accordion.Header className="accordion-header">II. Tech Development</Accordion.Header>
+                                <Accordion.Body>
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}> 1. Jr. UI/UX Developer</h5>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+                                                <i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }} >::before</i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Accordion.Body>
+                                <Accordion.Body>
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}> 2. PHP Developer</h5>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+                                                <i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }} >::before</i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Accordion.Body>
+                                <Accordion.Body>
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}> 3. Web Developer Intern</h5>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+                                                <i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }} >::before</i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="2">
+                                <Accordion.Header className="accordion-header">III. Finance</Accordion.Header>
+                                <Accordion.Body>
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}> 1. Finance Intern</h5>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+                                                <i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }} >::before</i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="3">
+                                <Accordion.Header className="accordion-header">IV. Human Resource & EA</Accordion.Header>
+
+                                <Accordion.Body>
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}> 1. HR Generalist</h5>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+                                                <i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }} >::before</i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Accordion.Body>
+                                <Accordion.Body>
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}> 2. Executive Assistant to CEO</h5>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+                                                <i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }} >::before</i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Accordion.Body>
+
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="4">
+                                <Accordion.Header>V. Sales & Bussiness Development</Accordion.Header>
+
+                                <Accordion.Body>
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}> 1. Sr.Manager Sales & Bussiness Development </h5>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+                                                <i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }} >::before</i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Accordion.Body>
+                            </Accordion.Item>
+                            <Accordion.Item eventKey="5">
+                                <Accordion.Header>VI. Marketing</Accordion.Header>
+                                <Accordion.Body>
+                                    <div className='mob-down' style={{ display: "flex" }}>
+                                        <div className='col-lg-6'>
+                                            <h5 style={{ fontSize: "1.5rem", margin: "10 0", color: "#000" }}> 1. Social Media Executive</h5>
+                                        </div>
+                                        <div className='col-lg-6' style={{ textAlign: "right" }}>
+                                            <p style={{ fontWeight: "600", margin: "10px 0" }}>
+                                                <span className='link-btn'>Full-Time | On-Site| Goa </span>
+                                                <i className='fa fa-cheveron-right' style={{
+                                                    margin: "0 0 0 20px", fontWeight: "600",
+                                                    border: "2px solid #52565e", padding: "8px", borderRadius: "5px"
+                                                }} >::before</i>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </Accordion.Body>
+                            </Accordion.Item>
+
+                        </Accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Career
