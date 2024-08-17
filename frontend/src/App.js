@@ -9,14 +9,12 @@ import LoginPage from './pages/LoginPage';
 import Homepage from './pages/Homepage';
 import Contact from './pages/Contact';
 import { UserProvider } from './components/UserContext';
-import Home from './components/HomeDashboard/Home';
 import Register from './pages/Register';
 import Career from './pages/Career';
 import Dashboard from './components/HomeDashboard/Dashboard';
 import JobDetails from './pages/JobDetails';
-// import Contact from './pages/Contact';
-// import Register from './pages/Register';
-// import Career from './pages/Career';
+import RegsiteredUsers from './pages/RegsiteredUsers';
+
 
 
 function App() {
@@ -36,6 +34,7 @@ function App() {
       <Route path='/dashboard' element={<Dashboard/>}/>
       <Route path='/career' element={<Career/>}/>
       <Route path='/jobdetails/:id/:title' element={<JobDetails/>}/>
+      <Route path='/regusers' element={<RegsiteredUsers/>}/>
      </Routes>
     <AppFooter />
     </UserProvider>

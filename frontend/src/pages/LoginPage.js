@@ -35,11 +35,6 @@ const LoginPage = () => {
         console.log('Login Failed');
     };
 
-    // const handleLogout = () => {
-    //     setUser(null); // Clear the user state
-    //     navigate('/login'); // Redirect to login page after logout
-    // };
-
     return (
         <div className="login-container">
         <div className="container mt-4">
