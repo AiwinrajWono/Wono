@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
 const promisePool = require("./db");;
-const mysql = require('mysql2');
+
 
 const app = express();
 const port = 5000;
@@ -22,8 +22,69 @@ const transporter = nodemailer.createTransport({
 });
 
 
+app.post('/send-email', (req,res) =>{
+    const {jobTitle,name,email,date,number,location,experience,linkedInProfile,resume,monthlySalary,expectedSalary,
+        daysToJoin,relocateGoa,personality,skills,specialexperience,willing,message} = req.body;
+
+        //Apply form email content
+        const Mailoption = {
+            from:'anushri.bhagat263@gmail.com',
+            to:email,
+            subject:`Job Application: ${name} - ${jobTitle}`,
+            html:`<div >
+  <form action="action_page.php">
+  
+  <span>Job Position:${jobTitle}</span><br/>
+  <span>Name:${name}</span><br/>
+  <span>Date of Birth:${date}</span><br/>
+  <span>Email:<a href="${email}">${email}</a></span><br/>
+  
+  <span>Mobile Number:${number}</span><br/>
+  <span>Location:${location}</span><br/>
+  <span>Experience(in years):${experience}</span><br/>
+  <span>Linkedin Profile Url:<a href="${linkedInProfile}">${linkedInProfile}</a></span><br/>
+  <span>Message:${message}</span><br/>
+  <span>${personality}</span><br/>
+  <span>Resume:<a href="${resume}">${resume}</a></span><br/>
+  
+  </form>
+</div>`
+        };
+
+        transporter.sendMail(Mailoption,(error,info)=>{
+            if(error){
+                return res.status(500).send('Failed to send Email',+ error.message);
+            }
+            res.status(200).send('Application details have been sent');
+
+        });
+});
 
 
+app.post('/submit-form',(req,res)=>{
+    const {jobTitle,name,email ,date,number,location,experience,linkedInProfile,resume,monthlySalary,expectedSalary,
+      daysToJoin,relocateGoa,personality,skills,specialexperience,willing,message} = req.body;
+  
+      const query = `INSERT into apply_form (jobTitle,namee,email,application_date,PhoneNumber,location,
+      experience,linkedInProfile,resumelink,monthlySalary,expectedSalary,daysToJoin,relocateGoa,personality,
+      skills,specialexperience,willing,message
+      ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+  
+      promisePool.query(query,[jobTitle,name,email,date,number,location,experience,linkedInProfile,resume,
+        monthlySalary,expectedSalary,daysToJoin,relocateGoa,personality,skills,specialexperience,willing,
+        message
+      ],(err,result)=>{
+        if(err)
+        {
+          console.log('Error saving data', err);
+          res.status(500).send('Error saving data');
+          return;
+        }
+        res.status(200).send('Data saved successfully');
+      });
+  
+    
+  })
 // Route to handle form submission
 app.post("/register", async (req, res) => {
   const {
@@ -115,6 +176,8 @@ app.post("/register", async (req, res) => {
 
             `,
     };
+
+    
 
     // Send email
     transporter.sendMail(mailOptions, (error, info) => {
