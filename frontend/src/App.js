@@ -14,6 +14,8 @@ import Career from './pages/Career';
 import Dashboard from './components/HomeDashboard/Dashboard';
 import JobDetails from './pages/JobDetails';
 import RegsiteredUsers from './pages/RegsiteredUsers';
+import TermsAndCondtions from './pages/TermsAndCondtions';
+import PrivacyAndPolicy from './pages/PrivacyAndPolicy';
 
 
 
@@ -35,6 +37,8 @@ function App() {
       <Route path='/career' element={<Career/>}/>
       <Route path='/jobdetails/:id/:title' element={<JobDetails/>}/>
       <Route path='/regusers' element={<RegsiteredUsers/>}/>
+      <Route path='/termsandconditions' element={<TermsAndCondtions/>}/>
+      <Route path='/privacy' element={<PrivacyAndPolicy/>}/>
      </Routes>
     <AppFooter />
     </UserProvider>

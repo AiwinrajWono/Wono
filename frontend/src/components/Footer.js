@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 import "../layout/footer.css"
 import WonoLogo from '../assets/WONO_images/img/WONOCO-logo.png'
 
@@ -30,8 +30,8 @@ const Footer = () => {
 
           <div className='footer-section-3'>
             <h5>Contact</h5>
-            <h5>Privacy policy</h5>
-            <h5>Terms and conditions</h5>
+            <Link to={'/privacy'} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Privacy policy</Link>
+            <Link to={'/termsandconditions'} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Terms and Condtions</Link>
           </div>
         </div>
 

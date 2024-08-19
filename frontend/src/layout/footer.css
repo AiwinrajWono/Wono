@@ -6,7 +6,14 @@
 footer{
   width:100%
 }
-
+.footer-container a{
+  text-decoration: none;
+  font-size: 14px;
+  color: rgb(175, 175, 175);
+}
+.footer-container a:hover{
+  color: white;
+}
 
 .footer-container {
     display: grid;

@@ -9,21 +9,40 @@ import { UserContext } from '../components/UserContext';
 const LoginPage = () => {
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);
-
+    const [error, setError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState(''); // Manage the user's profile
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
-        console.log('Email:', email);
-        console.log('Password:', password);
-
+    
+        try {
+            const response = await fetch('http://localhost:5000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+    
+            if (!response.ok) {
+                // Get the response text or JSON to log
+                const errorText = await response.text();
+                throw new Error(`Login failed: ${errorText}`);
+            }
+    
+            const data = await response.json();
+            setUser(data.user); // Set the user's profile information
+            navigate('/dashboard'); // Redirect after successful login
+        } catch  {
+            setError('Invalid email or password');
+            console.error('Login Failed:', error);
+        }
+    
         setEmail('');
         setPassword('');
-        navigate('/dashboard')
     };
-
+    
     const handleLoginSuccess = (credentialResponse) => {
         const decoded = jwtDecode(credentialResponse?.credential);
         setUser(decoded); // Set the user's profile information

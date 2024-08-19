@@ -1,6 +1,12 @@
+@font-face {
+    font-family: Popins-Regular;
+    src: url('../assets/WONO_images/img/fonts/Poppins-Regular.ttf');
+  }
+
 section{
     padding: 40px 0;
     overflow: hidden;
+    font-family: Popins-Regular;
 }
 
 .contact .contact-form{
@@ -14,10 +20,14 @@ section{
 
 @media (max-width:768px) {
     .contact .contact-form button[type=submit] {
-        padding: 10px 140px;
+        padding: 10px;
     }
     .contact .contact-form {
         padding: 0;
+    }
+    section{
+        padding: 0;
+        overflow: hidden;
     }
     
 }

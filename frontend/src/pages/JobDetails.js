@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import Jobapply from '../components/jobroles/Jobapply'
 import Aos from 'aos'
 import 'aos/dist/aos.css';
+import { Link } from 'react-router-dom'
 
 
 const JobDetails = () => {
@@ -30,14 +31,14 @@ const JobDetails = () => {
 
             <ul className="nav nav-tabs row g-2 d-flex" role="tablist">
               <li className="nav-item col-6" role="presentation">
-                <a className="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1" aria-selected="true" role="tab">
+                <Link className="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1" aria-selected="true" role="tab">
                   <h4>JOB DESCRIPTION</h4>
-                </a>
+                </Link>
               </li>
               <li className="nav-iem col-6" role="presentation">
-                <a className="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2" aria-selected="false" tabIndex="-1" role="tab">
+                <Link className="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2" aria-selected="false" tabIndex="-1" role="tab">
                   <h4>APPLY NOW</h4>
-                </a>
+                </Link>
               </li>
             </ul>
             <div className="tab-content">
@@ -130,7 +131,7 @@ const JobDetails = () => {
 
                     </p>
                     <hr style={{ marginTop: "20px" }}></hr>
-                    <p style={{ marginBottom: "50px" }}>Please send in your Resume to <strong>Email:<a href="mailto:response@wono.co">response@wono.co</a></strong>
+                    <p style={{ marginBottom: "50px" }}>Please send in your Resume to <strong>Email:<Link to="mailto:response@wono.co">response@wono.co</Link></strong>
                       if unable to apply now</p>
                   </div>
                 </div>

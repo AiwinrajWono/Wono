@@ -38,7 +38,7 @@ const NavBar = () => {
           <Link to='/test'>Test</Link>
           <Link to='/contact'>Contact</Link>
           <Link to='/career'>Career</Link>
-          <Link to='/regusers'>Registered-Users</Link>
+          <Link to='/regusers'>Registered-Users(Testing)</Link>
           {user ? (
             <Link to={'/dashboard'}>Dashboard</Link>
           ) : (null)}
