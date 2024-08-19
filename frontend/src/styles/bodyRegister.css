@@ -29,19 +29,15 @@
     align-items: center;
 }
 
-.modal-dialog {
-    max-width: 400px;
-    width: 100%;
-}
 
 .modal-content {
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    padding: 20px;
     color: black;
 }
 
 .modal-body {
     text-align: center;
+    width: 100%;
 }

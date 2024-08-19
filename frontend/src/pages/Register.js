@@ -4,6 +4,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { UserContext } from '../components/UserContext';
 import { useNavigate } from 'react-router-dom';
+import emailSend from '../assets/WONO_images/img/emailSend.gif'
 
 const Register = () => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const Register = () => {
       return false;
     }
   };
-//handlesubmit section
+  //handlesubmit section
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -85,7 +86,7 @@ const Register = () => {
     }
 
     // Show "Sending details" modal
-    setModalMessage('Sending details');
+    setModalMessage(<img src={emailSend} style={{ width: 100 }} alt='emailSend' />);
     setIsLoading(true);
 
     try {
@@ -114,7 +115,10 @@ const Register = () => {
       setTimeout(() => {
         setModalMessage('');
       }, 3000);
-      navigate('/dashboard')
+      
+      setTimeout(()=>{
+        navigate('/login');
+      }, 1000)
     }
   };
 
@@ -274,12 +278,13 @@ const Register = () => {
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-body">
-                  <p>{modalMessage}</p>
+                  {modalMessage}
                 </div>
               </div>
             </div>
           </div>
         )}
+
       </section>
     </>
   );
