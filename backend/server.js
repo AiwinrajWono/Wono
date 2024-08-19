@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
-const promisePool = require("./db");
+const promisePool = require("./db");;
+const mysql = require('mysql2');
 
 const app = express();
 const port = 5000;
@@ -19,6 +20,9 @@ const transporter = nodemailer.createTransport({
     pass: "egbu dugk nupf xjry", // Your email password or app password
   },
 });
+
+
+
 
 // Route to handle form submission
 app.post("/register", async (req, res) => {

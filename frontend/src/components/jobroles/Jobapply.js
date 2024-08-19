@@ -1,25 +1,38 @@
 import React, { useState } from 'react'
 import Toasts from "../../components/Toasts"
+import Modals from '../Modals';
+import { Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
-const Jobapply = () => {
-  const [formvalues, setFormValues] = useState({
-    name: '',
-    email: '',
-    date: '',
-    number: '',
-    location: '',
-    experience: '',
-    linkedInProfile: '',
-    resume: '',
-    monthlySalary: '',
-    expectedSalary: '',
-    daysToJoin: '',
-    relocateGoa: '',
-    personality: '',
-    skills: '',
-    specialexperience: '',
-    willing: '',
-    message: ''
+
+const Jobapply = ({jobTitle}) => {
+  const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false) //for generic modals
+  const [showMessage,setShowMessage] = useState("");
+  const handleModal = () => setShowModal(true)
+
+    const [formvalues,setFormValues] = useState({
+        jobTitle:`${jobTitle}`,
+        name:'',
+        email:'',
+        date:'',
+        number:'',
+        location:'',
+        experience:'',
+        linkedInProfile:'',
+        resume:'',
+        monthlySalary:'',
+        expectedSalary:'',
+        daysToJoin:'',
+        relocateGoa:false,
+        personality:'',
+        skills:'',
+        specialexperience:'',
+        willing:'',
+        message:''
 
   });
 
@@ -28,21 +41,82 @@ const Jobapply = () => {
 
 
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues({
-      ...formvalues,
-      [name]: value
-    });
-  };
+    const handleInputChange=(event)=>{
+        const {name,value,type} = event.target;
+        setFormValues({
+            ...formvalues,
+            [name]:value === 'Yes' ? true : 
+            value === 'No' ? false:
+            type === 'number' ? parseFloat(value) : 
+               value,
+        });
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Data', formvalues);
+    const valideEmail=(email)=>{
+      const emailRegrex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegrex.test(email);
 
+    }
+    const handleCloseModal = () => {
+      setShowModal(false);
+    };
+
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+        
+
+        console.log("Printing form data");
+        console.log('Form Data',formvalues);
+        
+        let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if(formvalues.name ===""|| formvalues.email === ""|| formvalues.date === "" || formvalues.daysToJoin === ""
+        || formvalues.expectedSalary === ""|| formvalues.experience === "" || formvalues.linkedInProfile ==="" || 
+         formvalues.monthlySalary === "" || formvalues.number === "" || formvalues.personality === "" || 
+         formvalues.relocateGoa === "" || formvalues.location === "" || formvalues.resume === "" || formvalues.resume === ""
+         || formvalues.skills === "" || formvalues.specialexperience === "" || formvalues.willing === ""
+      )
+      {
+        setShowMessage("All Feilds are required");
+           setShowModal(true);
+           return;
+
+      }
+      else{
+        if(!formvalues.email.match(validRegex))
+        {
+          setShowModal(true);
+            setShowMessage("Please enter a valid email address");
+            return;
+        }
+        else{
+          axios.post('http://localhost:5000/send-email',formvalues)
+          .then(response => {
+           alert('Email sent successfully');
+          })
+          .catch(error=>
+          {
+           console.error('There was an error sending email',error);
+          }
+          );
+       };
+      }
+
+       axios.post('http://localhost:5000/submit-form',formvalues)
+      .then(response => {
+        alert('Form submitted successfully');
+      }).catch(error =>
+      {
+        console.error('Form could not be submitted',error)
+      }
+      );
+
+    //   try {
+    //     const response = await axios.post('http://localhost:5000/submit-form', formvalues);
+    //     console.log('Form submitted successfully:', response.data);
+    // } catch (error) {
+    //     console.error('Error submitting the form:', error);
+    // }
   }
-
-
 
   return (
     <div>
@@ -55,9 +129,9 @@ const Jobapply = () => {
             <input type="text" name="name" class="form-control" placeholder="Name" required="" value={formvalues.name} onChange={handleInputChange}></input>
           </div>
 
-          <div className="col-md-6">
-            <input type="email" className="form-control" name="email" placeholder="Email" required="" value={formvalues.email} onChange={handleInputChange}></input>
-          </div>
+    <div className="col-md-6">
+      <input type="text" className="form-control" name="email" placeholder="Email" required="" value={formvalues.email} onChange={handleInputChange}></input>
+    </div>
 
           <div className="col-md-6">
             <div className="date-picker" tabindex="0">
@@ -110,13 +184,13 @@ const Jobapply = () => {
             <input type="number" min="0" name="experience" className="form-control" placeholder="Experience (in years)" required="" value={formvalues.experience} onChange={handleInputChange}></input>
           </div>
 
-          <div className="col-md-6">
-            <input type="text" name="linkedin" className="form-control" placeholder="Linkedin Profile URl" required="" value={formvalues.linkedInProfile} onChange={handleInputChange}></input>
-          </div>
+    <div className="col-md-6">
+      <input type="text" name="linkedInProfile" className="form-control" placeholder="Linkedin Profile URl" required="" value={formvalues.linkedInProfile} onChange={handleInputChange}></input>
+    </div>
 
-          <div className="col-md-6">
-            <input type="file" className="form-control" name="resume" placeholder="Upload a Resume  / CV" onfocus="this.value=''" title=" " required="" value={formvalues.resume} onChange={handleInputChange}></input>
-          </div>
+    <div className="col-md-6">
+      <input type="file" className="form-control" name="resume" placeholder="Upload a Resume  / CV"  title=" " required="" value={formvalues.resume} onChange={handleInputChange}></input>
+    </div>
 
           <div className="col-md-6">
             <input type="number" min="0" name="monthlySalary" className="form-control" placeholder="Current Monthly Salary" required="" value={formvalues.monthlySalary} onChange={handleInputChange}></input>
@@ -138,14 +212,14 @@ const Jobapply = () => {
             </select>
           </div>
 
-          <div className="col-md-6">
-
-            <select className="form-select select-f" aria-label="Default select example" name="relocateGoa" value={formvalues.relocateGoa} onChange={handleInputChange}  >
-              <option value="" disabled="" selected="">Will You Relocate to Goa ?</option>
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
-            </select>
-          </div>
+    <div className="col-md-6">
+     
+      <select className="form-select select-f" aria-label="Default select example" name="relocateGoa" value={formvalues.relocateGoa ? 'Yes' : 'No' } onChange={handleInputChange}  >
+        <option value="" disabled="" selected="">Will You Relocate to Goa ?</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
 
           <div className="col-md-12">
             <textarea className="form-control" name="personality" rows="4" placeholder="Who are you as a person? 
@@ -174,17 +248,28 @@ Which means are you ok to join at same salary or at a minimum realistic pay incr
 Anything additional that you want us to know besides all above shared information" required="" value={formvalues.message} onChange={handleInputChange}></textarea>
           </div>
 
-          <div className="col-md-12 text-center">
+    <div className="col-md-12 text-center">
+      
+      
+      <div className='RealToast'>
+      {/* <Toasts toastMessage={'Form submitted'} position={'top-end'} show={show} onClose={() => { setShow(false) }} /> */}
+      <button name="submit" type="submit" style={{cursor:"pointer"}}>SUBMIT</button>
+      </div>
+    </div>
 
-
-            <div className='RealToast'>
-              <Toasts toastMessage={'Form submitted'} position={'top-end'} show={show} onClose={() => { setShow(false) }} />
-              <button name="submit" type="submit" onClick={handleShow}>SUBMIT</button>
-            </div>
-          </div>
-
-        </div>
+  </div>
       </form>
+          <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Form Submission Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{showMessage}</Modal.Body>
+        <Modal.Footer>
+          <button className="btn btn-secondary" onClick={handleCloseModal}>
+            Close
+          </button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }
