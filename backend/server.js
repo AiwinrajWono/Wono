@@ -22,7 +22,7 @@ app.use(session({
   cookie: {
     secure: false, // Set to true if using HTTPS
     httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 // 1 day
+    maxAge: 1000 * 60 * 60 * 2 // 2 hours
   }
 }))
 app.use(cors({
