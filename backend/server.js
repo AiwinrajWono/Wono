@@ -2,15 +2,35 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
-const promisePool = require("./db");;
+const promisePool = require("./db");
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
 
 
 const app = express();
 const port = 5000;
 
 // Middleware to parse JSON data
+app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(session({
+  key: 'Wono-login',
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Set to true if using HTTPS
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 // 1 day
+  }
+}))
+app.use(cors({
+  origin:["http://localhost:3000"],
+  methods: ["GET", "POST"],
+  credentials : true
+}
+));
 
 // Setup Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -19,6 +39,22 @@ const transporter = nodemailer.createTransport({
     user: "aiwinraj1810@gmail.com", // Your email
     pass: "egbu dugk nupf xjry", // Your email password or app password
   },
+});
+
+app.post('/', (req, res) => {
+  console.log('Session Data:', req.session);
+  if (req.session.user) {
+    res.json({ valid: true });
+  } else {
+    res.json({ valid: false });
+  }
+});
+app.get('/session', (req, res) => {
+  if (req.session.user) {
+    res.json({ user: req.session.user });
+  } else {
+    res.status(401).json({ error: 'Not authenticated' });
+  }
 });
 
 
@@ -193,27 +229,46 @@ app.post("/register", async (req, res) => {
 });
 
 // Route to handle user login
-app.post("/login", async (req, res) => {
+app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Check if the user exists
+    // Query to check user credentials
     const [rows] = await promisePool.query(
-      "SELECT * FROM user_data WHERE email = ? AND password = ?",
+      'SELECT * FROM user_data WHERE email = ? AND password = ?',
       [email, password]
     );
 
     if (rows.length === 0) {
-      return res.status(401).json({ error: "Invalid email or password" });
+      return res.status(401).json({ error: 'Invalid email or password' });
     }
-
     const user = rows[0];
-    res.json({ user: { id: user.id, email: user.email } });
+    // Set session user data
+    req.session.user = {
+      id: user.id,
+      email: user.email,
+      name: user.name
+    };
+    res.json({
+      user: req.session.user
+    });
   } catch (error) {
-    console.error("Error in /login:", error); // Add this for better error tracking
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('Error in /login:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// server.js or your main server file
+app.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      return res.status(500).json({ error: 'Failed to logout' });
+    }
+    res.json({ message: 'Logged out successfully' });
+  });
+});
+
 
 // Route to fetch all users
 app.get("/users", async (req, res) => {

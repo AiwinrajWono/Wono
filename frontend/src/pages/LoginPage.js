@@ -4,51 +4,52 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { UserContext } from '../components/UserContext';
-
+import Modals from '../components/Modals';
+import axios from 'axios';
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState(''); // Manage the user's profile
+    const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
-
+    const [showModal, setShowModal] = useState(false); // Control modal visibility
+    const [modalTitle, setModalTitle] = useState('Error'); // Modal title
+    const [modalMessage, setModalMessage] = useState('');
+    axios.defaults.withCredentials = true;
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         // Email validation using regex
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (!emailRegex.test(email)) {
-            setError('Please enter a valid email address');
+            setModalTitle('Invalid Email');
+            setModalMessage('Please enter a valid email address');
+            setShowModal(true); // Show the modal for the error
             return; // Exit the function if email is invalid
         }
 
         try {
-            const response = await fetch('http://localhost:5000/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
+            const response = await axios.post('http://localhost:5000/login', {
+        email,
+        password
+      });
 
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Login failed: ${errorText}`);
-            }
-
-            const data = await response.json();
-            setUser(data.user); // Set the user's profile information
-            navigate('/dashboard'); // Redirect after successful login
-        } catch {
-            setError('Invalid email or password');
+      const { user } = response.data;
+      setUser(user);
+      navigate('/dashboard');
+        } catch (error) {
+            setModalTitle('Login Failed');
+            setModalMessage('Invalid email or password');
+            setShowModal(true); // Show the modal for the error
             console.error('Login Failed:', error);
         }
 
         setEmail('');
         setPassword('');
     };
+
     const handleEmailChange = (e) => {
         const value = e.target.value;
         setEmail(value);
@@ -62,16 +63,19 @@ const LoginPage = () => {
         }
     };
 
-
     const handleLoginSuccess = (credentialResponse) => {
         const decoded = jwtDecode(credentialResponse?.credential);
         setUser(decoded); // Set the user's profile information
         console.log(decoded);
-        navigate('/dashboard') // Redirect after successful login
+        navigate('/dashboard'); // Redirect after successful login
     };
 
     const handleLoginError = () => {
         console.log('Login Failed');
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -122,6 +126,13 @@ const LoginPage = () => {
                     </div>
                 </div>
             </div>
+            <Modals 
+                show={showModal} 
+                handleClose={handleCloseModal} 
+                title={modalTitle} 
+            >
+                {modalMessage}
+            </Modals>
         </div>
     );
 };

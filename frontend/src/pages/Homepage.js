@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +9,7 @@ import Carousel2 from '../assets/WONO_images/img/hero-carousel/hero-carousel-2.p
 import Carousel3 from '../assets/WONO_images/img/hero-carousel/hero-carousel-3.png'
 import GlobalNomad from '../assets/WONO_images/img/icon_service/Birthday.webp'
 import { Divider } from 'primereact/divider';
+
 const Homepage = () => {
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
