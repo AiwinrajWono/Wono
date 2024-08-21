@@ -70,6 +70,9 @@
         gap: 2rem;
         text-transform: uppercase;
     }
+    .businesses > div > h1{
+        padding: 1rem 0 1rem 0 ;
+    }
 }
 
 
@@ -131,6 +134,9 @@
         gap: 2rem;
         text-transform: uppercase;
     }
+    .direct-customers > div > h1{
+        padding: 1rem 0 1rem 0 ;
+    }
 }
 
 
@@ -191,5 +197,8 @@
     .financing-grid {
         grid-template-columns: 50% 1fr;
         grid-template-rows: auto; /* Adjust rows based on content */
+    }
+    .financing > div > h1{
+        padding: 1rem 0 1rem 0 ;
     }
 }

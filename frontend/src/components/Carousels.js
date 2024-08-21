@@ -12,14 +12,13 @@ const Carousels = ({image1, image2, image3}) => {
                 </div>
                 <div className="carousel-inner" style={{ backgroundColor: 'black', borderRadius: '1rem' }}>
                     <div className="carousel-item active" >
-                        <Image src={image1} fluid />
+                        <Image src={image1} alt='carousel-image' fluid />
                     </div>
                     <div className="carousel-item">
-                        {/* <img src={image2} className="d-block w-100" alt="..." /> */}
-                        <Image src={image2} fluid />
+                        <Image src={image2} alt='carousel-image' fluid />
                     </div>
                     <div className="carousel-item">
-                        <Image src={image3} fluid />
+                        <Image src={image3} alt='carousel-image' fluid />
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

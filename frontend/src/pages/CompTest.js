@@ -1,22 +1,9 @@
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Batman from '../assets/batman.png'
-import Spiderman from '../assets/spiderman.png'
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Toast from 'react-bootstrap/Toast';
-import Toasts from '../components/Toasts';
-import CompOffCanvas from '../components/CompOffCanvas';
 import Modals from '../components/Modals';
 import Jobrole from '../components/Jobrole';
-import Users from './Users';
-import Alertbutton from '../components/Alertbutton';
-import FloatingLabels from '../components/FloatingLabels';
 import UserDetails from '../components/UserDetails';
-import Charts from '../components/Chart';
-import ScrollTops from '../components/ScrollTop';
-import FramerMotion from '../components/FramerMotion';
-import AnimatedCard from '../components/AnimatedCard';
 import Spinner from '../components/spinners/Spinners';
 import '../styles/componentStyle.css'
 import ToolTips from '../components/ToolTip';
@@ -34,16 +21,22 @@ import Ratings from '../components/Ratings';
 import TextBoxes from '../components/TextBoxes';
 import VerifyOTP from '../components/VerifyOTP';
 import Steppers from '../components/Steppers';
+import { Dropdown } from 'primereact/dropdown'
 
 
 
 function Example() {
+  const countries = [
+    { name: 'United States', code: 'US' },
+    { name: 'India', code: 'IN' },
+    { name: 'Germany', code: 'DE' },
+    { name: 'Australia', code: 'AU' },
+    { name: 'Canada', code: 'CA' },
+  ];
   const customSVG = "M25 5 L30 20 H20 Z";
-  const [show, setShow] = useState(false); //toast
-  const handleShow = () => setShow(true); //toast handleShow
 
-  const [showModal, setShowModal] = useState(false); //for generic modals
-  const handleModal = () => setShowModal(true)//for generic modals
+
+
 
   const [signUpModal, setSignUpModal] = useState(false);
   const [showRating, setShowRating] = useState(false);
@@ -56,10 +49,8 @@ function Example() {
 
   const handleRatingClose = () => setShowRating(false);
 
-  const [showA, setShowA] = useState(false); //popover
 
 
-  const toggleShowA = () => setShowA(!showA);
 
 
   const [index, setIndex] = useState(0);
@@ -69,8 +60,8 @@ function Example() {
   };
 
   const [showContent, setShowContent] = useState(false);
-  const [otp,setOTP] = useState(false)
-  const handleOTP = ()=>{
+  const [otp, setOTP] = useState(false)
+  const handleOTP = () => {
     setOTP(true)
   }
 
@@ -133,10 +124,10 @@ function Example() {
           <CompOffCanvas />
         </div> */}
 
-         <h1 style={{marginBottom:"50px"}}>JOIN OUR TEAM</h1>
+        <h1 style={{ marginBottom: "50px" }}>JOIN OUR TEAM</h1>
         <div className='accrodion'>
-          
-          <h2 style={{fontSize:"30px",fontWeight:"bold", display:"flex",alignItems:"start"}}>OPEN POSITIONS</h2>
+
+          <h2 style={{ fontSize: "30px", fontWeight: "bold", display: "flex", alignItems: "start" }}>OPEN POSITIONS</h2>
           <Jobrole />
         </div>
 
@@ -152,38 +143,38 @@ function Example() {
           <Alertbutton />
           </div> */}
 
-      {/* <div className='FloatingLabels'>
+        {/* <div className='FloatingLabels'>
         <h1>Floating Labels</h1>
       <FloatingLabels/>
       </div> */}
 
-      {/* <div className='UserDetails'>
+        {/* <div className='UserDetails'>
       <UserDetails/>
       </div> */}
 
-      {/* <div className='Chart'>
+        {/* <div className='Chart'>
         <h1>Chart</h1>
       <Charts/>
       </div> */}
 
-      {/* <div className='ScrollTop'>
+        {/* <div className='ScrollTop'>
         <h1>ScrollTop</h1>
        <ScrollTops/>
       </div> */}
 
 
-      {/* <div className='FramerMotion'>
+        {/* <div className='FramerMotion'>
         <h1>FramerMotion</h1>
         <FramerMotion/>
       </div> */}
 
-      {/* <div className='AnimatedCard'>
+        {/* <div className='AnimatedCard'>
         <h1>AnimatedCard</h1>
         <AnimatedCard/>
       </div> */}
 
-      
-        
+
+
 
         <div className='spinners-carousel' style={{ display: 'flex', backgroundColor: 'black', color: 'white' }}>
           <h2>Spinner Carousel</h2>
@@ -297,9 +288,9 @@ function Example() {
           <h2>Avatar-group</h2>
           <div className="profile-container">
             <div class="avatars">
-              <span class="avatar"><img src="https://picsum.photos/70" /></span>
-              <span class="avatar"><img src="https://picsum.photos/80" /></span>
-              <span class="avatar"><img src="https://picsum.photos/90" /></span>
+              <span class="avatar"><img src="https://picsum.photos/70" alt='avatar' /></span>
+              <span class="avatar"><img src="https://picsum.photos/80" alt='avatar' /></span>
+              <span class="avatar"><img src="https://picsum.photos/90" alt='avatar' /></span>
             </div>
           </div>
         </div>
@@ -319,14 +310,14 @@ function Example() {
               <input type="text" className="form-control" placeholder="Email" aria-label="email" />
             </div>
           </div>
-          <div style={{width:'100%', display:'flex', alignItems:'center', justifyContent:'center'}}>
-            <button className='submit-button' style={{width:'50%'}}>Submit</button>
+          <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <button className='submit-button' style={{ width: '50%' }}>Submit</button>
           </div>
-          <div style={{width:'100%', display:'flex', alignItems:'center', justifyContent:'center'}}>
+          <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-          <Button variant="primary" onClick={handleSignUpModal} style={{width:'50%'}} >
-            New user?
-          </Button>
+            <Button variant="primary" onClick={handleSignUpModal} style={{ width: '50%' }} >
+              New user?
+            </Button>
           </div>
           <Modals
             show={signUpModal}
@@ -337,13 +328,13 @@ function Example() {
               <input type="email" className="form-control" placeholder="Email" aria-label="email" />
               <input type="password" className="form-control" placeholder="Password" aria-label="password" />
               <input type="password" className="form-control" placeholder="Confirm Password" aria-label="confirm-password" />
-              <span onClick={handleOTP} style={{cursor:'pointer'}}>Verify-email</span>
-              {otp&& 
-              (
-                <div className="otp-container">
-                  <VerifyOTP />
-                </div>
-              )
+              <span onClick={handleOTP} style={{ cursor: 'pointer' }}>Verify-email</span>
+              {otp &&
+                (
+                  <div className="otp-container">
+                    <VerifyOTP />
+                  </div>
+                )
               }
               <Button variant="primary" onClick={handleSignUpClose}>Sign-up</Button>
             </form>
@@ -358,12 +349,53 @@ function Example() {
           </Modals>
         </div>
 
-        <div className="steps" style={{backgroundColor:'white'}}>
+        <div className="steps" style={{ backgroundColor: 'white' }}>
           <h2>Steppers</h2>
-          <Steppers children1={<UserDetails formTitle={'Step_1'}/>} children2={<UserDetails formTitle={'Step_2'} />} children3={<Jobrole />}>
-            
+          <Steppers children1={<UserDetails formTitle={'Step_1'} />} children2={<UserDetails formTitle={'Step_2'} />} children3={<Jobrole />}>
+
           </Steppers>
         </div>
+
+        <div className="input-groups">
+          {/* This will be visible on PC screens */}
+          <div className="p-inputgroup pc-screen">
+            <span className="p-inputgroup-addon firstDrop">
+              <Dropdown optionLabel="name"
+                placeholder="Counrty" className="w-full md:w-14rem firstDrop" options={countries} />
+            </span>
+
+            <span className="p-inputgroup-addon middleDrop" style={{ backgroundColor: 'white' }}>
+              <Dropdown optionLabel="name"
+                placeholder="State" className="w-full md:w-14rem middleDrop" options={countries} />
+            </span>
+
+            <span className="p-inputgroup-addon lastDrop">
+              <Dropdown optionLabel="name"
+                placeholder="City" className="w-full md:w-14rem lastDrop" options={countries} />
+            </span>
+          </div>
+
+          {/* This will be visible on mobile screens */}
+          <div className="mobile-screen">
+            <span>
+              <Dropdown
+                optionLabel="name"
+                placeholder="Select a State"
+                className="w-full md:w-14rem firstDrop responsive-placeholder"
+                options={countries}
+              />
+            </span>
+            <span>
+              <Dropdown
+                optionLabel="name"
+                placeholder="Select a City"
+                className="w-full md:w-14rem firstDrop responsive-placeholder"
+                options={countries}
+              />
+            </span>
+          </div>
+        </div>
+
       </div>
     </>
 

@@ -8,7 +8,7 @@ const Services = () => {
         <>
             <div className="services">
                 <div className="businesses">
-                    <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                         <h1>FOR BUSINESSES</h1>
                         <hr></hr>
                     </div>
