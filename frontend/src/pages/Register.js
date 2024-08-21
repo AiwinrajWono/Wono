@@ -1,10 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import '../styles/bodyRegister.css';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { UserContext } from '../components/UserContext';
 import { useNavigate } from 'react-router-dom';
 import emailSend from '../assets/WONO_images/img/emailSend.gif'
+import { Stepper } from 'primereact/stepper';
+import { StepperPanel } from 'primereact/stepperpanel';
+import { Button } from 'primereact/button';
+import { Link } from 'react-router-dom';
+
+// import "primereact/resources/themes/lara-light-cyan/theme.css";
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -115,16 +122,368 @@ const Register = () => {
       setTimeout(() => {
         setModalMessage('');
       }, 3000);
-      
-      setTimeout(()=>{
+
+      setTimeout(() => {
         navigate('/login');
       }, 1000)
     }
   };
+  const stepperRef = useRef(null);
 
   return (
     <>
       <section id='contact' className='register'>
+        <div className="card flex justify-content-center" style={{ backgroundColor: 'white' }}>
+          <Stepper ref={stepperRef} style={{ flexBasis: '50rem' }}>
+
+            {/* First section */}
+
+            <StepperPanel header='Personal Details'>
+              <div className="flex flex-column h-12rem">
+                <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center ">
+                  <div className="registration-section-header">
+                    <h2>Let's set up your free account</h2>
+                  </div>
+                  {/* Form here */}
+                  <div className='register-container'>
+                    <div className='row gy-4'>
+                      <div className='col-md-12' style={{ alignItems: "center", justifyContent: "center", display: "flex" }}>
+                        <div className='col-lg-6'>
+
+                          <form name='form-p' className={`register-form needs-validation ${Object.keys(errors).length ? 'was-validated' : ''}`} id='partner-form' onSubmit={handleSubmit} noValidate>
+
+                            <div className="row gy-3">
+                              {/* Form fields */}
+
+                              {/* Other fields */}
+                              <div className="col-lg-6">
+                                <input
+                                  type="text"
+                                  name="name"
+                                  className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                                  placeholder="Full Name"
+                                  value={formData.name}
+                                  onChange={handleChange}
+                                  required
+                                />
+                                {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                              </div>
+
+                              <div className="col-lg-6">
+                                <input
+                                  type="email"
+                                  name="email"
+                                  className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                                  placeholder="Email"
+                                  value={formData.email}
+                                  onChange={handleChange}
+                                  required
+                                />
+                                {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+                              </div>
+                              <div className="col-lg-6">
+                                <input
+                                  type="text"
+                                  name="mobile"
+                                  pattern="[1-9]{1}[0-9]{9}"
+                                  className={`form-control ${errors.mobile ? 'is-invalid' : ''}`}
+                                  placeholder="Phone-number"
+                                  value={formData.mobile}
+                                  onChange={handleChange}
+                                  required
+                                />
+                                {errors.mobile && <div className="invalid-feedback">{errors.mobile}</div>}
+                              </div>
+                              <div className="col-lg-6">
+                                <select
+                                  className={`form-control ${errors.city ? 'is-invalid' : ''}`}
+                                  aria-label="Default select example"
+                                  name="city"
+                                  value={formData.city}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="" disabled>City</option>
+                                  <option value="Mumbai">Mumbai</option>
+                                  <option value="Delhi">Delhi</option>
+                                  <option value="Bangalore">Bangalore</option>
+                                  <option value="Chennai">Chennai</option>
+                                  <option value="Kolkata">Kolkata</option>
+                                </select>
+                                {errors.partnerstype && <div className="invalid-feedback">{errors.partnerstype}</div>}
+                              </div>
+                              <div className="col-lg-6">
+                                <select
+                                  className={`form-select ${errors.partnerstype ? 'is-invalid' : ''}`}
+                                  aria-label="Default select example"
+                                  name="partnerstype"
+                                  value={formData.partnerstype}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="" disabled>State</option>
+                                  <option value="Maharashtra">Maharashtra</option>
+                                  <option value="Delhi">Delhi</option>
+                                  <option value="Karnataka">Karnataka</option>
+                                  <option value="Tamil Nadu">Tamil Nadu</option>
+                                  <option value="West Bengal">West Bengal</option>
+
+                                </select>
+                                {errors.partnerstype && <div className="invalid-feedback">{errors.partnerstype}</div>}
+                              </div>
+                              <div className="col-lg-6">
+                                <select
+                                  className={`form-control ${errors.country ? 'is-invalid' : ''}`}
+                                  aria-label="Default select example"
+                                  name="counrty"
+                                  value={formData.country}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="" disabled>Country</option>
+                                  <option value="India">India</option>
+                                  <option value="United States">United States</option>
+                                  <option value="United Kingdom">United Kingdom</option>
+                                  <option value="Canada">Canada</option>
+                                  <option value="Australia">Australia</option>
+
+                                </select>
+                                {errors.partnerstype && <div className="invalid-feedback">{errors.partnerstype}</div>}
+                              </div>
+
+                              <div className="register-page-button-space">
+                                <span>By clicking below you accept the terms and conditions</span>
+                                <button
+                                  type="submit"
+                                  className="register-page-button"
+                                  onClick={() => stepperRef.current.nextCallback()}
+                                >
+                                  <span> </span>
+                                  <span>Next</span>
+                                  <span>▶️</span>
+                                </button>
+                                <span>Already have an account <Link to={'/login'}>Log-in</Link></span>
+                              </div>
+                            </div>
+                          </form>
+                          {/* <GoogleLogin
+                            onSuccess={handleLoginSuccess}
+                            onError={handleLoginError}
+                          /> */}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </StepperPanel>
+
+            {/* Second Section */}
+            <StepperPanel header="Company Details">
+              <div className="flex flex-column h-12rem">
+                <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
+                  <div className="registration-section-header">
+                    <h2>Create company profile</h2>
+                  </div>
+                  {/* Form here */}
+                  <div className='register-container'>
+                    <div className='row gy-4'>
+                      <div className='col-md-16' style={{ alignItems: "center", justifyContent: "center", display: "flex" }}>
+                        <div className='col-lg-8'>
+
+                          <form name='form-p' className={`register-form needs-validation ${Object.keys(errors).length ? 'was-validated' : ''}`} id='partner-form' onSubmit={handleSubmit} noValidate>
+
+                            <div className="row gy-3">
+                              {/* Form fields */}
+
+                              {/* Other fields */}
+                              <div className="col-lg-6">
+                                <input
+                                  type="text"
+                                  name="name"
+                                  className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                                  placeholder="Company name"
+                                  value={formData.name}
+                                  onChange={handleChange}
+                                  required
+                                />
+                                {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                              </div>
+                              <div className="col-lg-6">
+                                <select
+                                  className={`form-select ${errors.partnerstype ? 'is-invalid' : ''}`}
+                                  aria-label="Default select example"
+                                  name="industry"
+                                  value={formData.partnerstype}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="" disabled>Co-Working</option>
+                                  <option value="Maharashtra">Co-Working</option>
+                                  <option value="Delhi">Workation</option>
+                                  <option value="Karnataka">Co-Living</option>
+                                </select>
+                                {errors.partnerstype && <div className="invalid-feedback">{errors.partnerstype}</div>}
+                              </div>
+
+                              <div className="col-lg-6">
+                                <select
+                                  className={`form-select ${errors.partnerstype ? 'is-invalid' : ''}`}
+                                  aria-label="Default select example"
+                                  name="companysize"
+                                  value={formData.partnerstype}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="" disabled>Company-size</option>
+                                  <option value="Maharashtra">50-100</option>
+                                  <option value="Delhi">100-200</option>
+                                  <option value="Karnataka">200-500</option>
+                                  <option value="Karnataka">500+</option>
+                                </select>
+                                {errors.partnerstype && <div className="invalid-feedback">{errors.partnerstype}</div>}
+                              </div>
+
+                              <div className="col-lg-6">
+                                <select
+                                  className={`form-select ${errors.partnerstype ? 'is-invalid' : ''}`}
+                                  aria-label="Default select example"
+                                  name="companttype"
+                                  value={formData.partnerstype}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="" disabled>Company Type</option>
+                                  <option value="Private Limited">Private Limited</option>
+                                  <option value="Public Limited">Public Limited</option>
+                                  <option value="Partnership">Partnership</option>
+                                  <option value="Sole Proprietorship">Sole Proprietorship</option>
+                                  <option value="LLP">LLP</option>
+                                  <option value="NGO">NGO</option>
+                                </select>
+                                {errors.partnerstype && <div className="invalid-feedback">{errors.partnerstype}</div>}
+                              </div>
+                              <div className="col-lg-6">
+                                <select
+                                  className={`form-control ${errors.city ? 'is-invalid' : ''}`}
+                                  aria-label="Default select example"
+                                  name="city"
+                                  value={formData.city}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="" disabled>City</option>
+                                  <option value="Mumbai">Mumbai</option>
+                                  <option value="Delhi">Delhi</option>
+                                  <option value="Bangalore">Bangalore</option>
+                                  <option value="Chennai">Chennai</option>
+                                  <option value="Kolkata">Kolkata</option>
+                                </select>
+                                {errors.partnerstype && <div className="invalid-feedback">{errors.partnerstype}</div>}
+                              </div>
+                              <div className="col-lg-6">
+                                <select
+                                  className={`form-select ${errors.partnerstype ? 'is-invalid' : ''}`}
+                                  aria-label="Default select example"
+                                  name="partnerstype"
+                                  value={formData.partnerstype}
+                                  onChange={handleChange}
+                                  required
+                                >
+                                  <option value="" disabled>State</option>
+                                  <option value="Maharashtra">Maharashtra</option>
+                                  <option value="Delhi">Delhi</option>
+                                  <option value="Karnataka">Karnataka</option>
+                                  <option value="Tamil Nadu">Tamil Nadu</option>
+                                  <option value="West Bengal">West Bengal</option>
+
+                                </select>
+                                {errors.partnerstype && <div className="invalid-feedback">{errors.partnerstype}</div>}
+                              </div>
+                              <div className="col-lg-6">
+                                <input
+                                  type="text"
+                                  name="name"
+                                  className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                                  placeholder="Website URL"
+                                  value={formData.name}
+                                  onChange={handleChange}
+                                  required
+                                />
+                                {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                              </div>
+                              <div className="col-lg-6">
+                                <input
+                                  type="text"
+                                  name="name"
+                                  className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                                  placeholder="Linkedin URL"
+                                  value={formData.name}
+                                  onChange={handleChange}
+                                  required
+                                />
+                                {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                              </div>
+
+
+                              <div className="register-page-button-space">
+                                <span>By clicking below you accept the terms and conditions</span>
+                                <button
+                                  type="submit"
+                                  className="register-page-button"
+                                  onClick={() => stepperRef.current.nextCallback()}
+                                >
+                                  <span> </span>
+                                  <span>Next</span>
+                                  <span>▶️</span>
+                                </button>
+                                <span>Already have an account <Link to={'/login'}>Log-in</Link></span>
+                              </div>
+                            </div>
+                          </form>
+                          {/* <GoogleLogin
+                            onSuccess={handleLoginSuccess}
+                            onError={handleLoginError}
+                          /> */}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* <div className="flex pt-4 justify-content-between">
+                <Button label="Back" severity="secondary" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()} />
+                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
+              </div> */}
+            </StepperPanel>
+
+            {/* Third section */}
+
+            <StepperPanel header="Header III">
+              <div className="flex flex-column h-12rem">
+                <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">Section - 3</div>
+              </div>
+              <div className="flex pt-4 justify-content-start">
+                <Button label="Back" severity="secondary" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()} />
+                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
+              </div>
+            </StepperPanel>
+            <StepperPanel header="Header IV">
+              <div className="flex flex-column h-12rem">
+                <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">Section - 4</div>
+              </div>
+              <div className="flex pt-4 justify-content-start">
+                <Button label="Back" severity="secondary" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()} />
+              </div>
+            </StepperPanel>
+          </Stepper>
+        </div>
+
+
+
+
+        {/* 
         <div className='register-container'>
           <div className='row gy-4'>
             <div className='col-md-12' style={{ alignItems: "center", justifyContent: "center", display: "flex" }}>
@@ -132,7 +491,6 @@ const Register = () => {
                 <form name='form-p' className={`register-form needs-validation ${Object.keys(errors).length ? 'was-validated' : ''}`} id='partner-form' onSubmit={handleSubmit} noValidate>
                   <h3 style={{ marginBottom: "30px", color: "#000" }}>REGISTER NOW</h3>
                   <div className="row gy-3">
-                    {/* Form fields */}
                     <div className="col-lg-12">
                       <select
                         className={`form-select ${errors.partnerstype ? 'is-invalid' : ''}`}
@@ -151,7 +509,6 @@ const Register = () => {
                       </select>
                       {errors.partnerstype && <div className="invalid-feedback">{errors.partnerstype}</div>}
                     </div>
-                    {/* Other fields */}
                     <div className="col-lg-12">
                       <input
                         type="text"
@@ -272,7 +629,7 @@ const Register = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         {isLoading && (
           <div className="modal">
             <div className="modal-dialog">
