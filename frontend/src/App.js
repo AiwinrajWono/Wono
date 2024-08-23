@@ -16,6 +16,7 @@ import JobDetails from './pages/JobDetails';
 import RegsiteredUsers from './pages/RegsiteredUsers';
 import TermsAndCondtions from './pages/TermsAndCondtions';
 import PrivacyAndPolicy from './pages/PrivacyAndPolicy';
+import TestingPage from './pages/TestingPage';
 
 
 
@@ -39,6 +40,7 @@ function App() {
       <Route path='/regusers' element={<RegsiteredUsers/>}/>
       <Route path='/termsandconditions' element={<TermsAndCondtions/>}/>
       <Route path='/privacy' element={<PrivacyAndPolicy/>}/>
+      <Route path='/testing' element={<TestingPage/>}/>
      </Routes>
     <AppFooter />
     </UserProvider>
