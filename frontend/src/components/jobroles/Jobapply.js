@@ -259,17 +259,20 @@ Anything additional that you want us to know besides all above shared informatio
 
   </div>
       </form>
-          <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
+        <div style={{height:'300px'}}>
+          <Modal show={showModal} onHide={handleCloseModal} >
+        {/* <Modal.Header closeButton>
           <Modal.Title>Form Submission Error</Modal.Title>
-        </Modal.Header>
+        </Modal.Header> */}
+        <h1 style={{display:'flex',alignContent:'center',justifyContent:'center',color:'red'}}>Error</h1>
         <Modal.Body>{showMessage}</Modal.Body>
-        <Modal.Footer>
-          <button className="btn btn-secondary" onClick={handleCloseModal}>
+          <button className="btn btn-secondary" onClick={handleCloseModal} style={{display:'flex',alignItems:'center',justifyContent:'center',
+            width:'100px', marginLeft:'40%', marginBottom:'10px'
+          }}>
             Close
           </button>
-        </Modal.Footer>
       </Modal>
+    </div>
     </div>
   )
 }

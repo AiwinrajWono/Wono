@@ -111,12 +111,11 @@ const JobDetails = () => {
                       <br></br>
                       Contribute to the user experience strategy, ensuring that design solutions align with business goals and user needs.
                       <br></br><br></br>
-
+                      
                     </p>
                     <br></br>
                     <br></br>
                     <h3 className="m-b-2">Qualifications</h3>
-
                     <p>
                       ●	Experience: Minimum 1 years of experience in UI design, with a strong focus on Destop &amp; mobile app design.<br></br>
                       ●	Design Tools Expertise: Proficient in Figma, Sketch, Adobe Suite.<br></br>
