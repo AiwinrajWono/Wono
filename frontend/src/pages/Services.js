@@ -1,5 +1,5 @@
 import React from 'react'
-import { GlobalNomad, TransactionalWebsite, BookingEngine, MeetingRoomEngine, PaymentGateway, Blog, Hiring, LeadGeneration, EmailMarketing, DataMarketing, SearchEngineMarketing, SearchEngineOptimisation, GoogleMyBusiness, EmployeeTaskManagement, EmployeeAttendance, CompanyCompliances, CustomerAgreements, VendorAgreements, EmployeeAgreements, CustomerInvoicing, AccountingTools, BusinessProjections, BudgetManagement, CashflowManagement, AnnualFiling, EmployeePerformance, EmployeeAppraisals, ReadyProcesses, ReadyPolicies, MeetingRoomManagement, BirthdayManagement, CustomerService, Chat, Trainings, CustomisedSupport, BusinessAnalytics, CustomerReports, EmployeeReports, FinancialReports, CustomerAnalytics, EmployeeAnalytics, HRSupport, GlobalNomadship, CentralNomadAccount, RemoteWorkingJobs, PrivateLivingSpace, CoWorkingSpace, FurnishedSpaces, Internet, MeetingRooms, BoardRooms, TrainingRooms, Community, Events, Ticketing, Visa, PersonalisedAssist, BestPricing, MultiLocationOptions, PassionProjects, VentureCapital, VentureDebt, WorkingCapital } from '../assets/WONO_images/img/icon_service';
+import {  TransactionalWebsite, BookingEngine, MeetingRoomEngine, PaymentGateway, Blog, Hiring, LeadGeneration, EmailMarketing, DataMarketing, SearchEngineMarketing, SearchEngineOptimisation, GoogleMyBusiness, EmployeeTaskManagement, EmployeeAttendance, CompanyCompliances, CustomerAgreements, VendorAgreements, EmployeeAgreements, CustomerInvoicing, AccountingTools, BusinessProjections, BudgetManagement, CashflowManagement, AnnualFiling, EmployeePerformance, EmployeeAppraisals, ReadyProcesses, ReadyPolicies, MeetingRoomManagement, BirthdayManagement, CustomerService, Chat, Trainings, CustomisedSupport, BusinessAnalytics, CustomerReports, EmployeeReports, FinancialReports, CustomerAnalytics, EmployeeAnalytics, HRSupport, GlobalNomadship, CentralNomadAccount, RemoteWorkingJobs, PrivateLivingSpace, CoWorkingSpace, FurnishedSpaces, Internet, MeetingRooms, BoardRooms, TrainingRooms, Community, Events, Ticketing, Visa, PersonalisedAssist, BestPricing, MultiLocationOptions, PassionProjects, VentureCapital, VentureDebt, WorkingCapital } from '../assets/WONO_images/img/icon_service';
 
 
 import '../styles/bodyServices.css'
@@ -8,7 +8,7 @@ const Services = () => {
         <>
             <div className="services">
                 <div className="businesses">
-                    <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                         <h1>FOR BUSINESSES</h1>
                         <hr></hr>
                     </div>

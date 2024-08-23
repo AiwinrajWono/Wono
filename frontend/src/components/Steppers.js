@@ -1,47 +1,92 @@
+import { useEffect, useRef, useState } from "react";
 
-import React, { useRef } from "react";
-import { Stepper } from 'primereact/stepper';
-import { StepperPanel } from 'primereact/stepperpanel';
-import { Button } from 'primereact/button';
-import UserDetails from "./UserDetails";
+const Steppers = ({ stepsConfig = [] }) => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isComplete, setIsComplete] = useState(false);
+  const [margins, setMargins] = useState({
+    marginLeft: 0,
+    marginRight: 0,
+  });
+  const stepRef = useRef([]);
 
-export default function Steppers({children1, children2, children3}) {
-    const stepperRef = useRef(null);
+  useEffect(() => {
+    if (stepRef.current.length > 0) {
+      setMargins({
+        marginLeft: stepRef.current[0].offsetWidth / 2,
+        marginRight: stepRef.current[stepsConfig.length - 1].offsetWidth / 2,
+      });
+    }
+  }, [stepRef, stepsConfig.length]);
 
-    return (
-    <div className="card flex justify-content-center" style={{backgroundColor:'white'}}>
-        <Stepper ref={stepperRef} style={{ flexBasis: '50rem' }}>
-            <StepperPanel header="Header I">
-                <div className="flex flex-column h-12rem">
-                    <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                       {children1}
-                    </div>
-                </div>
-                <div className="flex pt-4 justify-content-end">
-                    <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
-                </div>
-            </StepperPanel>
-            <StepperPanel header="Header II">
-                <div className="flex flex-column h-12rem">
-                    <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">
-                        {children2}
-                        </div>
-                </div>
-                <div className="flex pt-4 justify-content-between">
-                    <Button label="Back" severity="secondary" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()} />
-                    <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} />
-                </div>
-            </StepperPanel>
-            <StepperPanel header="Header III">
-                <div className="flex flex-column h-12rem">
-                    <div className="border-2 border-dashed surface-border border-round surface-ground flex-auto flex justify-content-center align-items-center font-medium">{children3}</div>
-                </div>
-                <div className="flex pt-4 justify-content-start">
-                    <Button label="Back" severity="secondary" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()} />
-                </div>
-            </StepperPanel>
-        </Stepper>
-    </div>
-    )
-}
-        
+  if (!stepsConfig.length) {
+    return null;
+  }
+
+  const handleNext = () => {
+    setCurrentStep((prevStep) => {
+      if (prevStep === stepsConfig.length) {
+        setIsComplete(true);
+        return prevStep;
+      } else {
+        return prevStep + 1;
+      }
+    });
+  };
+
+  const calculateProgressBarWidth = () => {
+    return ((currentStep - 1) / (stepsConfig.length - 1)) * 100;
+  };
+
+  const ActiveComponent = stepsConfig[currentStep - 1]?.Component;
+
+  return (
+    <>
+      <div className="stepper">
+        {stepsConfig.map((step, index) => (
+          <div
+            key={step.name}
+            ref={(el) => (stepRef.current[index] = el)}
+            className={`step ${
+              currentStep > index + 1 || isComplete ? "complete" : ""
+            } ${currentStep === index + 1 ? "active" : ""}`}
+          >
+            <div className="step-number">
+              {currentStep > index + 1 || isComplete ? (
+                <span>&#10003;</span>
+              ) : (
+                index + 1
+              )}
+            </div>
+            <div className="step-name">{step.name}</div>
+          </div>
+        ))}
+
+        <div
+          className="progress-bar"
+          style={{
+            width: `calc(100% - ${margins.marginLeft + margins.marginRight}px)`,
+            marginLeft: margins.marginLeft,
+            marginRight: margins.marginRight,
+          }}
+        >
+          <div
+            className="progress"
+            style={{ width: `${calculateProgressBarWidth()}%` }}
+          ></div>
+        </div>
+      </div>
+
+      <div className="step-content">
+        {ActiveComponent && <ActiveComponent />}
+      </div>
+
+      {!isComplete && (
+        <button className="btn" onClick={handleNext}>
+          {currentStep === stepsConfig.length ? "Finish" : "Next"}
+        </button>
+      )}
+    </>
+  );
+};
+
+export default Steppers;

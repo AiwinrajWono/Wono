@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Carousels from '../components/Carousels'
 import Toasts from '../components/Toasts'
 import Carousel1 from '../assets/WONO_images/img/hero-carousel/hero-carousel-1.webp'
 import Carousel2 from '../assets/WONO_images/img/hero-carousel/hero-carousel-2.png'
 import Carousel3 from '../assets/WONO_images/img/hero-carousel/hero-carousel-3.png'
 import GlobalNomad from '../assets/WONO_images/img/icon_service/Birthday.webp'
-import { Divider } from 'primereact/divider';
+import '../styles/componentStyle.css'
+
 const Homepage = () => {
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
@@ -21,12 +22,7 @@ const Homepage = () => {
         setShowToast(true);
     };
 
-    const navigate = useNavigate();
-
-    const linkToUserList = () => {
-        navigate('/users');
-
-    }
+    // const navigate = useNavigate();
 
 
     return (
@@ -67,7 +63,20 @@ const Homepage = () => {
                         >
                             LIST YOUR BUSINESS
                         </span>
+
                     </div>
+                    <div className="avatar-grid" style={{display:'grid', gridTemplateColumns:'1fr'}}>
+                    <div className="avatar-groups">
+                            <div className="profile-container">
+                                <div class="avatars">
+                                    <span class="avatar"><img src="https://picsum.photos/70" alt='avatar' /></span>
+                                    <span class="avatar"><img src="https://picsum.photos/80" alt='avatar' /></span>
+                                    <span class="avatar"><img src="https://picsum.photos/90" alt='avatar' /></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div className='home-item' style={{ flexDirection: 'column' }}>
                     <div className='form-section'>
@@ -114,9 +123,9 @@ const Homepage = () => {
                                                 Type of partner
                                             </button>
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li><a className="dropdown-item custom-dropdown-item" href="#">Action</a></li>
-                                                <li><a className="dropdown-item custom-dropdown-item" href="#">Another action</a></li>
-                                                <li><a className="dropdown-item custom-dropdown-item" href="#">Something else here</a></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -161,14 +170,14 @@ const Homepage = () => {
                     </div>
                     <div className="nomad-features">
                         <div className="nomad-1">
-                            <img src={GlobalNomad} /><br/>
+                            <img src={GlobalNomad} alt='nomad'/><br />
                             <span>Global nomadship</span>
                         </div>
-                        <div className="nomad-2"><img src={GlobalNomad} /><br/><span>Global nomadship</span></div>
-                        <div className="nomad-3"><img src={GlobalNomad} /><br/><span>Global nomadship</span></div>
-                        <div className="nomad-4"><img src={GlobalNomad} /><br/> <span>Global nomadship</span></div>
+                        <div className="nomad-2"><img src={GlobalNomad} alt='nomad' /><br /><span>Global nomadship</span></div>
+                        <div className="nomad-3"><img src={GlobalNomad} alt='nomad' /><br /><span>Global nomadship</span></div>
+                        <div className="nomad-4"><img src={GlobalNomad} alt='nomad' /><br /> <span>Global nomadship</span></div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign:'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
                         <div className='view-all-underline'>
                             <span className='view-all'>VIEW ALL</span>
                             <hr style={{
@@ -189,13 +198,13 @@ const Homepage = () => {
                         </span>
                     </div>
                     <div className="nomad-features">
-                    <div className="nomad-1">
-                            <img src={GlobalNomad} /><br/>
+                        <div className="nomad-1">
+                            <img src={GlobalNomad} alt='nomad' /><br />
                             <span>Global nomadship</span>
                         </div>
-                        <div className="nomad-2"><img src={GlobalNomad} /><br/><span>Global nomadship</span></div>
-                        <div className="nomad-3"><img src={GlobalNomad} /><br/><span>Global nomadship</span></div>
-                        <div className="nomad-4"><img src={GlobalNomad} /><br/> <span>Global nomadship</span></div>
+                        <div className="nomad-2"><img src={GlobalNomad} alt='nomad' /><br /><span>Global nomadship</span></div>
+                        <div className="nomad-3"><img src={GlobalNomad} alt='nomad' /><br /><span>Global nomadship</span></div>
+                        <div className="nomad-4"><img src={GlobalNomad} alt='nomad' /><br /> <span>Global nomadship</span></div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <div className='view-all-underline'>
@@ -217,7 +226,7 @@ const Homepage = () => {
                 </div>
                 <div className='image-space' >
                     <img className="image-world"
-                        src={World_map} />
+                        src={World_map} alt='nomad' />
                 </div>
             </div>
 

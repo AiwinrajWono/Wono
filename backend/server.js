@@ -13,8 +13,26 @@ const app = express();
 const port = 5000;
 
 // Middleware to parse JSON data
+app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(session({
+  key: 'Wono-login',
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Set to true if using HTTPS
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 2 // 2 hours
+  }
+}))
+app.use(cors({
+  origin:["http://localhost:3000"],
+  methods: ["GET", "POST"],
+  credentials : true
+}
+));
 
 // Setup Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -33,6 +51,22 @@ const transport = nodemailer.createTransport({
   },
 });
 
+
+app.post('/', (req, res) => {
+  console.log('Session Data:', req.session);
+  if (req.session.user) {
+    res.json({ valid: true });
+  } else {
+    res.json({ valid: false });
+  }
+});
+app.get('/session', (req, res) => {
+  if (req.session.user) {
+    res.json({ user: req.session.user });
+  } else {
+    res.status(401).json({ error: 'Not authenticated' });
+  }
+});
 
 
 app.post('/send-email', (req,res) =>{
@@ -177,91 +211,65 @@ app.post("/register", async (req, res) => {
     email,
     name,
     mobile,
-    link,
     country,
     city,
-    message,
-    password,
-    partnerstype,
+    state,
+    companyName,
+    industry,
+    companySize,
+    companyType,
+    companyCity,
+    companyState,
+    websiteURL,
+    linkedinURL,
+    selectedServices, // Add this
   } = req.body;
 
   try {
-    // Insert data into the database, excluding confirm_password
+    // Insert user data into user_data table
     const [result] = await promisePool.query(
-      `INSERT INTO user_data (partnerstype, name, mobile, email, password, link, country, city, message)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO user_data 
+        (name, mobile, email, country, city, state, companyName, industry, companySize, companyType, companyCity, companyState, websiteURL, linkedinURL)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        partnerstype,
         name,
         mobile,
         email,
-        password,
-        link,
         country,
         city,
-        message,
+        state,
+        companyName,
+        industry,
+        companySize,
+        companyType,
+        companyCity,
+        companyState,
+        websiteURL,
+        linkedinURL,
       ]
     );
+
+    const userId = result.insertId;
+
+    // Insert selected services into user_services table
+    const serviceEntries = Object.keys(selectedServices)
+      .filter(service => selectedServices[service])
+      .map(service => [userId, service]);
+
+    if (serviceEntries.length > 0) {
+      await promisePool.query(
+        'INSERT INTO user_services (user_id, service_name) VALUES ?',
+        [serviceEntries]
+      );
+    }
 
     // Email content
     const mailOptions = {
       from: "aiwinraj1810@gmail.com",
       to: email,
       subject: "Registration Details",
-      html: `
-            <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Email Template</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body style="font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; -webkit-text-size-adjust: none; -ms-text-size-adjust: none;">
-<div style="width: 100%; max-width: 600px; background-color: #ffffff; margin: 20px auto; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <div style="background-color: #daf5fe; padding: 1rem; text-align: center; border-radius: 1rem;">
-            <h1 style="font-size: 2rem; text-align: center; margin: 0; padding-bottom: 20px;">
-                C<b style="color: #0d6efd;">o</b>ngratula<b style="color: #0d6efd;">o</b>ns! Y<b style="color: #0d6efd;">o</b>ur acc<b style="color: #0d6efd;">o</b>unt has been activated
-            </h1>
-        </div>
-       
-        <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Name:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${name}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Mobile Number:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${mobile}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Email:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${email}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>LinkedIn Profile:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><a href="${link}" target="_blank" style="color: #0d6efd;">${link}</a></td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Country:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${country}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>City:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${city}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Personal Message:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${message}</td>
-            </tr>
-        </table>
-        <a href="#" style="background-color: #000; color: #fff; border: none; border-radius: 10px; padding: 0.75rem; font-size: 1.5rem; width: 100%; display: inline-block; text-align: center; cursor: pointer; margin-top: 20px; font-family: 'Poppins', sans-serif; font-weight: 600; text-decoration: none;">Log-in</a>
-    </div>
-    </body>
-</html>`,
+      html: `<h1>Registered successfully</h1>`,
     };
-
-    
 
     // Send email
     transporter.sendMail(mailOptions, (error, info) => {
@@ -276,28 +284,48 @@ app.post("/register", async (req, res) => {
   }
 });
 
+
 // Route to handle user login
-app.post("/login", async (req, res) => {
+app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Check if the user exists
+    // Query to check user credentials
     const [rows] = await promisePool.query(
-      "SELECT * FROM user_data WHERE email = ? AND password = ?",
+      'SELECT * FROM user_data WHERE email = ? AND password = ?',
       [email, password]
     );
 
     if (rows.length === 0) {
-      return res.status(401).json({ error: "Invalid email or password" });
+      return res.status(401).json({ error: 'Invalid email or password' });
     }
-
     const user = rows[0];
-    res.json({ user: { id: user.id, email: user.email } });
+    // Set session user data
+    req.session.user = {
+      id: user.id,
+      email: user.email,
+      name: user.name
+    };
+    res.json({
+      user: req.session.user
+    });
   } catch (error) {
-    console.error("Error in /login:", error); // Add this for better error tracking
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error('Error in /login:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// server.js or your main server file
+app.post('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      return res.status(500).json({ error: 'Failed to logout' });
+    }
+    res.json({ message: 'Logged out successfully' });
+  });
+});
+
 
 // Route to fetch all users
 app.get("/users", async (req, res) => {

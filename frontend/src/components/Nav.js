@@ -1,28 +1,34 @@
-
 // NavBar.js
 import React, { useContext, useState } from 'react';
 import { UserContext } from './UserContext';
 import { useNavigate } from 'react-router-dom';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/componentStyle.css';
 import WonoLogo from '../assets/WONO_images/img/WONOCO-black-bg-removed.png';
 
 const NavBar = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
-
-  const handleLogout = () => {
-    setUser(null); // Clear the user state
-    navigate('/home')
-  };
-  const handleRegister = () => {
-    navigate('/register'); // Clear the user state
-    setShow(false)
-  };
-
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:5000/logout', {}, { withCredentials: true });
+      setUser(null); // Clear the user state
+      navigate('/home');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
+  const handleRegister = () => {
+    navigate('/register');
+    setShow(false);
+  };
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -48,7 +54,7 @@ const NavBar = () => {
             <div className="user-profile">
               <div className="profile-container" onClick={() => setDropdownOpen(!dropdownOpen)}>
                 <img src={user.picture} alt={user.name} className="profile-image" />
-                <span>{user.name}</span>
+                <span>{user.name ? user.name : user.email}</span>
                 <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
                   <button onClick={handleLogout}>Logout</button>
                 </div>
@@ -56,8 +62,8 @@ const NavBar = () => {
             </div>
           ) : (
             <>
-            <Link to ='/login'  className ='login-button'>LOGIN</Link>
-            <button className='register-button' onClick={handleRegister}>REGISTER</button>
+              <Link to='/login' className='login-button'>LOGIN</Link>
+              <button className='register-button' onClick={handleRegister}>REGISTER</button>
             </>
           )}
         </div>
@@ -66,7 +72,6 @@ const NavBar = () => {
         </div>
       </nav>
 
-      {/* Offcanvas for mobile screens */}
       <Offcanvas show={show} onHide={handleClose} placement="start" backdrop="true" className="custom-offcanvas">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Menu</Offcanvas.Title>
@@ -90,11 +95,10 @@ const NavBar = () => {
                 </div>
               </div>
             </div>
-          ) : 
-          (
+          ) : (
             <>
-            <Link to ='/login' onClick={handleClose}  className ='login-button'>LOGIN</Link>
-            <button className='register-button' onClick={handleRegister}>REGISTER</button>
+              <Link to='/login' onClick={handleClose} className='login-button'>LOGIN</Link>
+              <button className='register-button' onClick={handleRegister}>REGISTER</button>
             </>
           )}
         </Offcanvas.Body>
@@ -104,5 +108,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-

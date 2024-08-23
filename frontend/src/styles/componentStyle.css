@@ -265,6 +265,11 @@
 .new-form>div {
   padding: 0.5rem;
 }
+@media (max-width:768px) {
+  .avatar{
+    width: 70px;
+  }
+}
 
 .login-button {
   background-color: rgb(13, 110, 253);
@@ -288,3 +293,88 @@
 .register-button:hover{
   font-family: Popins-Black;
 }
+.input-groups{
+  width: 100%;
+}
+.p-inputgroup{
+  justify-content: center;
+  width: 100%;
+}
+
+div.w-full.p-dropdown.p-component.p-inputwrapper{
+  background-color: white;
+  padding: 10px;
+  border: none;
+}
+.firstDrop{
+  border-radius: 0;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-color: black;
+}
+.middleDrop{
+  border-color: black;
+  border-radius: 0;
+}
+.lastDrop{
+  border-radius: 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-color: black;
+}
+.responsive-placeholder {
+  width: 100%; /* Reduce width on smaller screens */
+
+}
+div.p-dropdown-items-wrapper{
+  background-color: white;
+  border-radius: 10px;
+}
+ul.p-dropdown-items{
+  color: white;
+  padding: 10px;
+  text-align: center;
+  margin: 0 ;
+}
+li.p-dropdown-item{
+ justify-content: center;
+}
+
+/* To change the border color of the dropdown */
+.firstDrop .p-dropdown.p-focus {
+  box-shadow: 0 0 0 1px rgb(0, 145, 255); 
+}
+.middleDrop .p-dropdown.p-focus {
+  box-shadow: 0 0 0 1px rgb(0, 145, 255); 
+}
+.lastDrop .p-dropdown.p-focus {
+  box-shadow: 0 0 0 1px rgb(0, 145, 255); 
+}
+
+.middleDrop .p-dropdown-panel .p-dropdown-item {
+  color: black; 
+}
+/* Hide mobile layout by default */
+.mobile-screen {
+  display: none;
+}
+
+/* Hide PC layout on small screens */
+.pc-screen {
+  display: none;
+}
+
+/* Display PC layout on larger screens (e.g., desktop) */
+@media (min-width: 768px) {
+  .pc-screen {
+    display: flex; /* or block, depending on your layout needs */
+  }
+}
+
+/* Display mobile layout on smaller screens */
+@media (max-width: 767px) {
+  .mobile-screen {
+    display: block; /* or flex, if you want them in a row */
+  }
+}
+
