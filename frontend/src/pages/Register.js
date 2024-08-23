@@ -32,16 +32,29 @@ const Register = () => {
   });
   const [errors, setErrors] = useState({});
 
-  const handleNext = (e) => {
-    e.preventDefault()
+  const handleNext = async (e) => {
+    e.preventDefault();
     const validationErrors = validateCurrentStep();
+    
     if (Object.keys(validationErrors).length === 0) {
+      // Check for duplicate email in the first step
+      if (currentStep === 0 && formData.email) {
+        const isDuplicate = await checkEmailDuplicate(formData.email);
+        if (isDuplicate) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            email: 'This email is already in use.',
+          }));
+          return;
+        }
+      }
+      
       // If there are no validation errors, proceed to the next step
-      e.preventDefault();
       setCurrentStep((prev) => prev + 1);
-      console.log(formData)
-    } 
+      console.log(formData);
+    }
   };
+  
 
 const handleBack = () => {
     setCurrentStep((prev) => prev - 1);
@@ -126,11 +139,6 @@ const validateCurrentStep = () => {
 
     // Check for duplicate email
     console.log('handleSubmit')
-    const isDuplicate = await checkEmailDuplicate(formData.email);
-    if (isDuplicate) {
-      setErrors(prevErrors => ({ ...prevErrors, email: 'This email is already registered.' }));
-      return;
-    }
 
     // Show "Sending details" modal
     setModalMessage(<img src={emailSend} style={{ width: 100 }} alt='emailSend' />);
@@ -153,7 +161,8 @@ const validateCurrentStep = () => {
       console.log(result);
 
       // Show "Email sent" message
-      setModalMessage('Email sent');
+      // setModalMessage('Email sent');
+      console.log('Email sent')
 
       // Navigate to login after a successful submission
       setTimeout(() => {
@@ -161,7 +170,7 @@ const validateCurrentStep = () => {
       }, 1000);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
-      setModalMessage('Failed to send registration details');
+      console.log('Failed to send registration details');
     } finally {
       setIsLoading(false);
 
@@ -459,7 +468,7 @@ const validateCurrentStep = () => {
                        <button
                          type="submit"
                          className="register-page-button"
-                         onClick={handleNext}
+                         onClick={handleSubmit}
                        >
                          <span> </span>
                          <span>Next</span>

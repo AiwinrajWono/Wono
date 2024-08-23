@@ -127,90 +127,50 @@ app.post("/register", async (req, res) => {
     email,
     name,
     mobile,
-    link,
     country,
     city,
-    message,
-    password,
-    partnerstype,
+    state,
+    companyName,
+    industry,
+    companySize,
+    companyType,
+    companyCity,
+    companyState,
+    websiteURL,
+    linkedinURL,
   } = req.body;
 
   try {
     // Insert data into the database, excluding confirm_password
     const [result] = await promisePool.query(
-      `INSERT INTO user_data (partnerstype, name, mobile, email, password, link, country, city, message)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO user_data 
+        (name, mobile, email, country, city,state, companyName, industry, companySize, companyType, companyCity, companyState, websiteURL, linkedinURL)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        partnerstype,
         name,
         mobile,
         email,
-        password,
-        link,
         country,
         city,
-        message,
+        state,
+        companyName,
+        industry,
+        companySize,
+        companyType,
+        companyCity,
+        companyState,
+        websiteURL,
+        linkedinURL,
       ]
     );
+
 
     // Email content
     const mailOptions = {
       from: "aiwinraj1810@gmail.com",
       to: email,
       subject: "Registration Details",
-      html: `
-               <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Email Template</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body style="font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; -webkit-text-size-adjust: none; -ms-text-size-adjust: none;">
-    <div style="width: 100%; max-width: 600px; background-color: #ffffff; margin: 20px auto; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-        <div style="background-color: #daf5fe; padding: 1rem; text-align: center; border-radius: 1rem;">
-            <h1 style="font-size: 2rem; text-align: center; margin: 0; padding-bottom: 20px;">
-                C<b style="color: #0d6efd;">o</b>ngratula<b style="color: #0d6efd;">o</b>ns! Y<b style="color: #0d6efd;">o</b>ur acc<b style="color: #0d6efd;">o</b>unt has been activated
-            </h1>
-        </div>
-       
-        <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Name:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${name}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Mobile Number:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${mobile}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Email:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${email}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>LinkedIn Profile:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><a href="${link}" target="_blank" style="color: #0d6efd;">${link}</a></td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Country:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${country}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>City:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${city}</td>
-            </tr>
-            <tr>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><strong>Personal Message:</strong></td>
-                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${message}</td>
-            </tr>
-        </table>
-        <a href="#" style="background-color: #000; color: #fff; border: none; border-radius: 10px; padding: 0.75rem; font-size: 1.5rem; width: 100%; display: inline-block; text-align: center; cursor: pointer; margin-top: 20px; font-family: 'Poppins', sans-serif; font-weight: 600; text-decoration: none;">Log-in</a>
-    </div>
-</body>
-</html>
-
-            `,
+      html: ` <h1>Registered successfully</h1> `,
     };
 
     
