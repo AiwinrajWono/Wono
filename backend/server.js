@@ -138,13 +138,14 @@ app.post("/register", async (req, res) => {
     companyState,
     websiteURL,
     linkedinURL,
+    selectedServices, // Add this
   } = req.body;
 
   try {
-    // Insert data into the database, excluding confirm_password
+    // Insert user data into user_data table
     const [result] = await promisePool.query(
       `INSERT INTO user_data 
-        (name, mobile, email, country, city,state, companyName, industry, companySize, companyType, companyCity, companyState, websiteURL, linkedinURL)
+        (name, mobile, email, country, city, state, companyName, industry, companySize, companyType, companyCity, companyState, websiteURL, linkedinURL)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         name,
@@ -164,16 +165,27 @@ app.post("/register", async (req, res) => {
       ]
     );
 
+    const userId = result.insertId;
+
+    // Insert selected services into user_services table
+    const serviceEntries = Object.keys(selectedServices)
+      .filter(service => selectedServices[service])
+      .map(service => [userId, service]);
+
+    if (serviceEntries.length > 0) {
+      await promisePool.query(
+        'INSERT INTO user_services (user_id, service_name) VALUES ?',
+        [serviceEntries]
+      );
+    }
 
     // Email content
     const mailOptions = {
       from: "aiwinraj1810@gmail.com",
       to: email,
       subject: "Registration Details",
-      html: ` <h1>Registered successfully</h1> `,
+      html: `<h1>Registered successfully</h1>`,
     };
-
-    
 
     // Send email
     transporter.sendMail(mailOptions, (error, info) => {
@@ -187,6 +199,7 @@ app.post("/register", async (req, res) => {
     res.status(500).send("Failed to register user: " + error.message);
   }
 });
+
 
 // Route to handle user login
 app.post('/login', async (req, res) => {
