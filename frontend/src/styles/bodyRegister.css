@@ -118,6 +118,12 @@ span.p-stepper-separator{
     font-family: Popins-Regular;
 }
 
+/* stepper */
+
+button.StepButton-0-2-4.StepButton-d2-0-2-8.active{
+    background-color: black !important;
+}
+
 /* checkbox */
 .checkbox-group{
     display: flex;
@@ -140,7 +146,9 @@ span.p-stepper-separator{
   }
   
   .checkbox-card.checked {
-    border-color: green; /* Border color when selected */
+    border-color: #bcfd4c;
+    background-color: #a2ff46;
+    color: black;
   }
   .check-image-container{
     width: 100px;
@@ -157,6 +165,41 @@ span.p-stepper-separator{
   
   .checkbox-card input[type="checkbox"] {
     display: none; /* Hide the checkbox */
+  }
+
+  /* account activation */
+
+  .account-activation-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .account-activation-container  div{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .account-activation-section > span, button{
+    margin: 1rem;
+  }
+  .account-activation-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .mail-client-container{
+    display: flex;
+    justify-content: flex-start;
+    /* gap: 2rem;
+    padding: 2rem 0 1rem 0; */
+  }
+  .mail-client > * {
+    margin: 0 5px 0 5px;
+  }
+  .mail-client > img{
+    width: 50px;
   }
   
   
