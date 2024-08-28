@@ -17,6 +17,8 @@ import RegsiteredUsers from './pages/RegsiteredUsers';
 import TermsAndCondtions from './pages/TermsAndCondtions';
 import PrivacyAndPolicy from './pages/PrivacyAndPolicy';
 import TestingPage from './pages/TestingPage';
+import ForgotPassword from './pages/ForgotPassword';
+import NewPassword from './pages/NewPassword';
 
 
 
@@ -32,6 +34,8 @@ function App() {
       <Route path='/home' element={<Homepage/>}/>
       <Route path='/services' element={<Services/>}/>
       <Route path='/login' element={<LoginPage/>}/>
+      <Route path='/forgot-password' element={<ForgotPassword/>}/>
+      <Route path='/new-password' element={<NewPassword/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/dashboard' element={<Dashboard/>}/>

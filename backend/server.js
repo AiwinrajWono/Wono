@@ -5,6 +5,7 @@ const cors = require("cors");
 const promisePool = require("./db");
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
+const crypto = require('crypto');
 
 
 const app = express();
@@ -142,11 +143,22 @@ app.post("/register", async (req, res) => {
   } = req.body;
 
   try {
+
+    //This generates username
+    const username = name.replace(/\s+/g, '');
+
+    //for unique number
+
+    const uniqueNumber = crypto.randomInt(1000,9999)
+
+    //for password
+
+    const password = `${username}@Wono${uniqueNumber}`
     // Insert user data into user_data table
     const [result] = await promisePool.query(
       `INSERT INTO user_data 
-        (name, mobile, email, country, city, state, companyName, industry, companySize, companyType, companyCity, companyState, websiteURL, linkedinURL)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        (name, mobile, email, country, city, state, companyName, industry, companySize, companyType, companyCity, companyState, websiteURL, linkedinURL, username, password)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         name,
         mobile,
@@ -162,6 +174,8 @@ app.post("/register", async (req, res) => {
         companyState,
         websiteURL,
         linkedinURL,
+        username,
+        password
       ]
     );
 
@@ -184,7 +198,9 @@ app.post("/register", async (req, res) => {
       from: "aiwinraj1810@gmail.com",
       to: email,
       subject: "Registration Details",
-      html: `<h1>Registered successfully</h1>`,
+      html: `<h1>Registered successfully</h1>
+             <p>Your username is: ${username}</p>
+             <p>Your password is: ${password}</p>`,
     };
 
     // Send email
@@ -200,16 +216,42 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post('/reset-password', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+      return res.status(400).json({ error: 'Email and new password are required' });
+  }
+
+  try {
+      // Update the password in the database
+      const [result] = await promisePool.query(
+          'UPDATE user_data SET password = ? WHERE email = ?',
+          [password, email]
+      );
+
+      // Check if the update was successful
+      if (result.affectedRows === 0) {
+          return res.status(404).json({ error: 'Email not found' });
+      }
+
+      res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+      console.error('Error in /reset-password:', error);
+      res.status(500).json({ error: 'An error occurred while processing your request' });
+  }
+});
+
 
 // Route to handle user login
 app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
     // Query to check user credentials
     const [rows] = await promisePool.query(
-      'SELECT * FROM user_data WHERE email = ? AND password = ?',
-      [email, password]
+      'SELECT * FROM user_data WHERE username = ? AND password = ?',
+      [username, password]
     );
 
     if (rows.length === 0) {
@@ -230,6 +272,90 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+//forgot password
+
+app.post('/forgot-password', async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email is required' });
+  }
+
+  try {
+    const [rows] = await promisePool.query(
+      'SELECT * FROM user_data WHERE email = ?', [email]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Email not found' });
+    }
+
+    const generatedOTP = crypto.randomInt(100000, 999999);
+
+    await promisePool.query(
+      'UPDATE user_data SET otp = ? WHERE email = ?', [generatedOTP, email]
+    );
+
+    const mailOptions = {
+      from: 'aiwinraj1810@gmail.com',
+      to: email,
+      subject: 'Password Reset OTP',
+      text: `Your OTP for password reset is ${generatedOTP}`
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({ message: 'OTP sent successfully' });
+    } catch (error) {
+      console.error('Error sending OTP email:', error);
+      res.status(500).json({ error: 'Failed to send OTP email' });
+    }
+
+  } catch (error) {
+    console.error('Error in /forgot-password:', error);
+    res.status(500).json({ error: 'An error occurred while processing your request' });
+  }
+});
+
+//verify otp
+
+app.post('/verify-otp', async (req, res) => {
+  const { email, otp } = req.body;
+  console.log(req.body)
+
+  if (!email || !otp) {
+    return res.status(400).json({ error: 'Email and OTP are required' });
+  }
+
+  try {
+    const [rows] = await promisePool.query(
+      'SELECT otp FROM user_data WHERE email = ?', [email]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Email not found' });
+    }
+    console.log(email)
+    const storedOtp = rows[0].otp;
+    console.log(rows[0].otp)
+    console.log(storedOtp)
+    if (otp !== storedOtp) {
+      return res.status(400).json({ error: 'Invalid OTP' });
+    }
+
+     promisePool.query(
+      'UPDATE user_data SET otp = NULL WHERE email = ?', [email]
+    );
+
+    res.status(200).json({ message: 'OTP verified successfully' });
+
+  } catch (error) {
+    console.error('Error in /verify-otp:', error);
+    res.status(500).json({ error: 'An error occurred while processing your request' });
+  }
+});
+
 
 // server.js or your main server file
 app.post('/logout', (req, res) => {
