@@ -254,7 +254,7 @@ const ForgotPassword = () => {
             {overlayVisible && (
                 <div className="overlay">
                     <div className="overlay-content">
-                        <p>Processing...</p>
+                        <p>Sendings</p>
                     </div>
                 </div>
             )}

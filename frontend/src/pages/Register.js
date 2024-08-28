@@ -336,10 +336,13 @@ const Register = () => {
                               type="submit"
                               className="register-page-button"
                               onClick={handleNext}
+                              style={{width:'100%'}}
                             >
                               <span> </span>
                               <span>Next</span>
-                              <span>▶️</span>
+                              <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+                              <span style={{backgroundColor:'white', color:'black', borderRadius:'50%'}}>▶</span>
+                              </div>
                             </button>
                             <span>Already have an account <Link to={'/login'}>Log-in</Link></span>
                           </div>

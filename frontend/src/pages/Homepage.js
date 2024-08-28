@@ -53,7 +53,7 @@ const Homepage = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         responsive: [
             {
@@ -343,7 +343,7 @@ const Homepage = () => {
                                 images: [Template1, Template1_2]
                             })}
                         >
-                            <img src={Template1} alt="Template 1" style={{ objectFit: 'cover', objectPosition: 'top' }} />
+                            <img src={Template1} alt="Template 1" />
                         </div>
                     </div>
                     <div className="template-slide">
@@ -354,7 +354,7 @@ const Homepage = () => {
                                 images: [Template2, Template2_2]
                             })}
                         >
-                            <img src={Template2} alt="Template 2" style={{ objectFit: 'cover', objectPosition: 'top' }} />
+                            <img src={Template2} alt="Template 2" />
                         </div>
                     </div>
                     <div className="template-slide">
@@ -365,7 +365,7 @@ const Homepage = () => {
                                 images: [Template3, Template3_2]
                             })}
                         >
-                            <img src={Template3} alt="Template 3" style={{ objectFit: 'cover', objectPosition: 'top' }} />
+                            <img src={Template3} alt="Template 3"/>
                         </div>
                     </div>
                 </Slider>
@@ -395,7 +395,7 @@ const Homepage = () => {
                 </Modal>
             </div>
 
-            <div className="type-parent">
+            {/* <div className="type-parent">
                 <div className="type-grid-2">
                     <h2 style={{ textAlign: 'center' }}>FOR BUSINESSES</h2>
                     <hr></hr>
@@ -425,7 +425,7 @@ const Homepage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className='world-map'>
                 <div className="world-title">

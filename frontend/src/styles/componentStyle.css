@@ -19,6 +19,9 @@
   font-family: Popins-Regular;
   font-weight: 500;
 }
+.custom-navbar-logo{
+  padding: 0.5rem;
+}
 
 .custom-navbar-logo a {
   color: #fff;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import "../layout/footer.css"
-import WonoLogo from '../assets/WONO_images/img/WONOCO-logo.png'
+import WonoLogo from '../assets/WONO_images/img/WONO_LOGO_white _TP.png'
 
 const Footer = () => {
   return (
