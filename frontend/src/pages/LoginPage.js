@@ -6,33 +6,80 @@ import { jwtDecode } from 'jwt-decode';
 import { UserContext } from '../components/UserContext';
 import Modals from '../components/Modals';
 import axios from 'axios';
+import Carousels from '../components/Carousels'
+import Batman from '../assets/batman.png'
+import Spiderman from '../assets/spiderman.png'
+// import "../styles/slick-style/slick.css";
+// import "../styles/slick-style/slick-theme.css";
+import Slider from "react-slick";
+import BookingEngine from '../assets/WONO_images/img/booking_engine_login.png'
+
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);
     const [error, setError] = useState('');
-    const [email, setEmail] = useState('');
+    const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [emailError, setEmailError] = useState('');
+    const [userNameError, setUserNameError] = useState('');
     const [showModal, setShowModal] = useState(false); // Control modal visibility
     const [modalTitle, setModalTitle] = useState('Error'); // Modal title
     const [modalMessage, setModalMessage] = useState('');
     axios.defaults.withCredentials = true;
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        dotsClass: 'login-slick-dots',
+        prevArrow: <div className="login-slick-prev" />,
+        nextArrow: <div className="login-slick-next" />,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: false,
+        autoplaySpeed: 3000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ],
+    };
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Email validation using regex
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailRegex.test(email)) {
-            setModalTitle('Invalid Email');
-            setModalMessage('Please enter a valid email address');
+        // username validation using regex
+        const usernameRegex = /^.{2,}$/; // At least 2 characters long
+        if (!usernameRegex.test(username)) {
+            setModalTitle('Invalid Username');
+            setModalMessage('Enter a valid username');
             setShowModal(true); // Show the modal for the error
-            return; // Exit the function if email is invalid
+            return; // Exit the function if the username is invalid
         }
 
         try {
             const response = await axios.post('http://localhost:5000/login', {
-        email,
+        username,
         password
       });
 
@@ -41,27 +88,29 @@ const LoginPage = () => {
       navigate('/dashboard');
         } catch (error) {
             setModalTitle('Login Failed');
-            setModalMessage('Invalid email or password');
+            setModalMessage('Invalid username or password');
             setShowModal(true); // Show the modal for the error
             console.error('Login Failed:', error);
         }
 
-        setEmail('');
+        setUserName('');
         setPassword('');
     };
 
-    const handleEmailChange = (e) => {
-        const value = e.target.value;
-        setEmail(value);
     
-        // Email validation using regex
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailRegex.test(value)) {
-            setEmailError('Please enter a valid email address');
+
+    const handleUsernameChange = (e) => {
+        const value = e.target.value;
+        setUserName(value);
+    
+        // Username validation using regex (at least 2 characters long)
+        const usernameRegex = /^.{2,}$/; // At least 2 characters
+        if (!usernameRegex.test(value)) {
+            setUserNameError('Enter a valid username');
         } else {
-            setEmailError(''); // Clear error if email is valid
+            setUserNameError(''); // Clear error if username is valid
         }
-    };
+    }
 
     const handleLoginSuccess = (credentialResponse) => {
         const decoded = jwtDecode(credentialResponse?.credential);
@@ -80,22 +129,20 @@ const LoginPage = () => {
 
     return (
         <div className="login-container">
-            <div className="container mt-4">
-                <div className="row justify-content-center">
-                    <div className="col-md-6 col-lg-4">
-                        <h2 className="text-center mb-4">LOGIN</h2>
-                        <form onSubmit={handleSubmit}>
+            <div className="login-left-container">
+            <h2 className="text-center mb-4">Login to your account</h2>
+            <form className='loginForm' onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <input
                                     type="text"
                                     className="form-control"
-                                    placeholder="Email"
-                                    aria-label="email"
-                                    value={email}
-                                    onChange={handleEmailChange}  // Updated onChange handler
+                                    placeholder="Username"
+                                    aria-label="username"
+                                    value={username}
+                                    onChange={handleUsernameChange}  // Updated onChange handler
                                     required
                                 />
-                                {email && emailError && <div className="text-danger">{emailError}</div>}
+                                {username && userNameError && <div className="text-danger">{userNameError}</div>}
                             </div>
                             <div className="mb-3">
                                 <input
@@ -109,23 +156,39 @@ const LoginPage = () => {
                                 />
                             </div>
                             <div className="mb-3">
+                                <div className="forgot-password" style={{textAlign:'end', marginBottom:8}}>
+                                    <span style={{cursor:'pointer'}} onClick={()=>navigate('/forgot-password')}>Forgot passoword</span>
+                                </div>
                                 <button type="submit" className="login-page-button w-100">
-                                    Submit
+                                    Log-in
                                 </button>
                             </div>
                             <div className="text-center mt-3">
                                 <span>Don't have an account? <a href="/register" className="text-primary">Register</a></span>
                             </div>
-                            <div className='google-button'>
-                                <GoogleLogin
-                                    onSuccess={handleLoginSuccess}
-                                    onError={handleLoginError}
-                                />
-                            </div>
                         </form>
-                    </div>
-                </div>
             </div>
+
+            <div className="login-right-container">
+            <div className="container">
+                <div className="login-carousel-container">
+                    <Slider {...settings}>
+                        <div className='login-carousel-item'>
+                            
+                            <img  src={Batman} alt="Slide 1" />
+                        </div>
+                        <div className='login-carousel-item'>
+                            <img  src={Spiderman} alt="Slide 2" />
+                        </div>
+                        <div className='login-carousel-item'>
+                        <h1>Booking Engine</h1>
+                            <img src={BookingEngine} alt="Slide 3" />
+                        </div>
+                    </Slider>
+                </div>
+                
+            </div>
+        </div>
             <Modals 
                 show={showModal} 
                 handleClose={handleCloseModal} 

@@ -11,6 +11,29 @@ import GlobalNomad from '../assets/WONO_images/img/icon_service/Birthday.webp'
 import Homefeatures from '../components/Homefeatures'
 
 import '../styles/componentStyle.css'
+import { Modal, Button, Container, Row, Col, Nav } from 'react-bootstrap';
+import WonoLogo from '../assets//WONO_images/img/WONOCO-black-bg-removed.png';
+import Template1 from '../assets/WONO_images/img/website-builder/template-1.jpeg'
+import Template1_2 from '../assets/WONO_images/img/website-builder/template-1-2.jpeg'
+import Template1_3 from '../assets/WONO_images/img/website-builder/template-1-3.jpeg'
+import Template1_4 from '../assets/WONO_images/img/website-builder/template-1-4.jpeg'
+import Template2 from '../assets/WONO_images/img/website-builder/template-2.jpeg'
+import Template2_2 from '../assets/WONO_images/img/website-builder/template-2-2.jpeg'
+import Template2_3 from '../assets/WONO_images/img/website-builder/template-2-3.jpeg'
+import Template2_4 from '../assets/WONO_images/img/website-builder/template-2-4.jpeg'
+import Template3 from '../assets/WONO_images/img/website-builder/template-3.jpeg'
+import Template3_2 from '../assets/WONO_images/img/website-builder/template-3-2.jpeg'
+import Template3_3 from '../assets/WONO_images/img/website-builder/template-3-3.jpeg'
+import Template3_4 from '../assets/WONO_images/img/website-builder/template-3-4.jpeg'
+import DashboardBooking from './Dashboard-pages/DashboardBooking'
+import DashboardAsset from './Dashboard-pages/DashboardAsset'
+import DashboardHR from './Dashboard-pages/DashboardHR'
+import DashboardTickets from './Dashboard-pages/DashboardTickets'
+import DashboardVisitor from './Dashboard-pages/DashboardVisitor'
+import DashboardProducts from './Dashboard-pages/DashboardProducts'
+import Slider from 'react-slick';
+
+
 
 const Homepage = () => {
     const navigate = useNavigate();
@@ -29,6 +52,62 @@ const Homepage = () => {
         navigate('/register');
       };
     
+    const [showWebisteModal, setShowWebsiteModal] = useState(false);
+    const [selectedTemplate, setSelectedTemplate] = useState(null);
+    const [collapsed, setCollapsed] = useState(false);
+    const [selectedItem, setSelectedItem] = useState('dashboard-booking');
+
+
+    //Template objects
+
+    const templates = [
+        { id: 1, name: "Template 1", images: [Template1, Template1_2, Template1_3, Template1_4] },
+        { id: 2, name: "Template 2", images: [Template2, Template2_2, Template2_3, Template2_4] },
+        { id: 3, name: "Template 3", images: [Template3, Template3_2, Template3_3, Template3_4] },
+    ];
+    const templateSliderSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
+
+    const handleTemplateClick = (template) => {
+        setSelectedTemplate(template);
+        setShowWebsiteModal(true);
+    };
+
+    const handleClose = () => {
+        setShowWebsiteModal(false);
+        setSelectedTemplate(null);
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -59,7 +138,33 @@ const Homepage = () => {
         setShowToast(true);
     };
 
-    // const navigate = useNavigate();
+    const handleToggle = () => {
+        setCollapsed(!collapsed);
+    };
+
+
+    const renderContent = () => {
+        switch (selectedItem) {
+            case 'dashboard-booking':
+                return <DashboardBooking />;
+            case 'dashboard-products':
+                return <DashboardProducts />;
+            case 'dashboard-tickets':
+                return <DashboardTickets />;
+            case 'dashboard-hr':
+                return <DashboardHR />;
+            case 'dashboard-visitor':
+                return <DashboardVisitor />;
+            case 'dashboard-asset':
+                return <DashboardAsset />;
+            default:
+                return <DashboardBooking />;
+        }
+    };
+    const handleMenuSelect = (menu) => {
+        setSelectedItem(menu);
+        // handleToggle(); 
+    };
 
 
     return (
@@ -232,37 +337,140 @@ const Homepage = () => {
                 </div>
               </div>
             </div>
+            <div className="backend-panel-container">
+                <h2>Checkout our dashboard</h2>
+            <div className="backend-panel">
+                {/* Sidebar */}
+                <Container fluid>
+                    <Row>
+                        <Col md={collapsed ? 1 : 2} className="backend-sidebar">
+                        <div className="backend-sidebar-header">
+                            <div className="backend-sidebar-logo">
+                            <img src={WonoLogo} alt=''/>
+                            </div>
+                            <Button
+                                className="collapse-btn"
+                                onClick={handleToggle}
+                                aria-controls="sidebar"
+                                aria-expanded={!collapsed}
+                            >
+                                {collapsed ? '☰' : '✖'}
+                            </Button>
+                        </div>
+                            {!collapsed && (
+                                <Nav id="backend-sidebar" className="flex-column p-0">
+                                    <Nav.Link
 
-            <div className="type-parent">
-                <div className="type-grid-1">
-                    <h2 style={{ textAlign: 'center',}}>FOR NOMADS</h2>
-                    <hr></hr>
-                    <div style={{ borderBottom: '1px solid black', padding: '1rem 0 1rem' }}>
-                        <span>
-                            The World's Nomad Community is being developed and designed exclusively for individuals and companies who intend to work remotely from the various aspiring destinations of the world. We are developing the World's 1st such Platform & Community which will enable you to discover, help in making decisions, provide assistance, provide logistics and let you do everything centrally for single, multiple or year long working from destinations as a true sorted Global Nomad.
-                        </span>
-                    </div>
-                    <div className="nomad-features">
-                        <div className="nomad-1">
-                            <img src={GlobalNomad} alt='nomad'/><br />
-                            <span>Global nomadship</span>
+                                        onClick={() => handleMenuSelect('dashboard-booking')}
+                                    >
+                                        Booking engine
+                                    </Nav.Link>
+                                    <Nav.Link
+
+                                        onClick={() => handleMenuSelect('dashboard-tickets')}
+                                    >
+                                        Ticket Management
+                                    </Nav.Link>
+                                    <Nav.Link
+
+                                        onClick={() => handleMenuSelect('dashboard-hr')}
+                                    >
+                                        HR Management
+                                    </Nav.Link>
+                                    <Nav.Link
+
+                                        onClick={() => handleMenuSelect('dashboard-asset')}
+                                    >
+                                        Asset Management
+                                    </Nav.Link>
+                                    <Nav.Link
+
+                                        onClick={() => handleMenuSelect('dashboard-products')}
+                                    >
+                                        Products
+                                    </Nav.Link>
+                                    <Nav.Link
+
+                                        onClick={() => handleMenuSelect('dashboard-visitor')}
+                                    >
+                                        Visitor Management
+                                    </Nav.Link>
+                                </Nav>
+                            )}
+                        </Col>
+                        <Col md={collapsed ? 11 : 10} className="p-3">
+                            {renderContent()}
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            </div>
+
+            <div className="website-builder">
+            <Container>
+                <h2 style={{padding:'2rem'}}>Check out our Website-Templates</h2>
+                <Slider {...templateSliderSettings}>
+                    <div className="template-slide">
+                        <div
+                            className="template-card"
+                            onClick={() => handleTemplateClick({
+                                name: "Template 1",
+                                images: [Template1, Template1_2]
+                            })}
+                        >
+                            <img src={Template1} alt="Template 1" />
                         </div>
-                        <div className="nomad-2"><img src={GlobalNomad} alt='nomad' /><br /><span>Global nomadship</span></div>
-                        <div className="nomad-3"><img src={GlobalNomad} alt='nomad' /><br /><span>Global nomadship</span></div>
-                        <div className="nomad-4"><img src={GlobalNomad} alt='nomad' /><br /> <span>Global nomadship</span></div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-                        <div className='view-all-underline'>
-                            <span className='view-all'>VIEW ALL</span>
-                            <hr style={{
-                                margin: 0,
-                                border: '4px solid #0875e2',
-                                opacity: 1,
-                                padding: 0
-                            }}></hr>
+                    <div className="template-slide">
+                        <div
+                            className="template-card"
+                            onClick={() => handleTemplateClick({
+                                name: "Template 2",
+                                images: [Template2, Template2_2]
+                            })}
+                        >
+                            <img src={Template2} alt="Template 2" />
                         </div>
                     </div>
-                </div>
+                    <div className="template-slide">
+                        <div
+                            className="template-card"
+                            onClick={() => handleTemplateClick({
+                                name: "Template 3",
+                                images: [Template3, Template3_2]
+                            })}
+                        >
+                            <img src={Template3} alt="Template 3"/>
+                        </div>
+                    </div>
+                </Slider>
+            </Container>
+
+
+
+                <Modal show={showWebisteModal} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{selectedTemplate?.name}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {selectedTemplate && selectedTemplate.images.map((image, index) => (
+                            <img
+                                key={index}
+                                src={image}
+                                alt={`${selectedTemplate.name} Image ${index + 1}`}
+                                style={{ width: '100%', marginBottom: '10px' }}
+                            />
+                        ))}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+
+            {/* <div className="type-parent">
                 <div className="type-grid-2">
                     <h2 style={{ textAlign: 'center' }}>FOR BUSINESSES</h2>
                     <hr></hr>
@@ -292,7 +500,7 @@ const Homepage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className='world-map'>
                 {/* <div className="world-title">

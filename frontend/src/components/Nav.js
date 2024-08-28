@@ -6,7 +6,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/componentStyle.css';
-import WonoLogo from '../assets/WONO_images/img/WONO LOGO white TP.png';
+import WonoLogo from '../assets/WONO_images/img/WONO_LOGO_white _TP.png';
 
 const NavBar = () => {
   const navigate = useNavigate();

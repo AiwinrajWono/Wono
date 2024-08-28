@@ -71,8 +71,8 @@ const Register = () => {
       }
 
 
-      setCurrentStep((prev) => prev + 1); //This will go above the console.log, disabled for development
       console.log(formData);
+      setCurrentStep((prev) => prev + 1); 
     }
   };
 
@@ -336,10 +336,13 @@ const Register = () => {
                               type="submit"
                               className="register-page-button"
                               onClick={handleNext}
+                              style={{width:'100%'}}
                             >
                               <span> </span>
                               <span>Next</span>
-                              <span>▶️</span>
+                              <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+                              <span style={{backgroundColor:'white', color:'black', borderRadius:'50%'}}>▶</span>
+                              </div>
                             </button>
                             <span>Already have an account <Link to={'/login'}>Log-in</Link></span>
                           </div>
@@ -591,17 +594,67 @@ const Register = () => {
                         <label>PaymentGateway</label>
                       </div>
                     </div>
-                    <button onClick={handleSubmit}>Submit</button>
+                    <div className='register-page-button-space'>
+                      <button
+                        type="submit"
+                        className="register-page-button"
+                        onClick={handleNext}
+                      >
+                        Next
+                      </button>
+                    </div>
+
                   </div>
 
                 </div>
               </>
             )}
             {currentStep === 3 && (
-              <div className='register-container'>
-                <h2>Account-activation</h2>
-                <button onClick={handleBack}>Back</button>
-              </div>
+              <>
+                <div className="registration-section-header">
+                  <h2>Account activation</h2>
+                </div>
+                <div className="account-activation-container">
+                <div className='account-activation-section'>
+                <div className='account-activation-description'>
+                  <span>
+                    An email has been send to your email address :<b>{formData.email ? formData.email : 'EMAIL HERE'}</b>  containing all the further process for
+                    activating the account.
+                   
+                  </span>
+
+                  <span>
+                  Please let us know if there is any more queries from your side or you can connect us as : response@wono.co
+                  </span>
+                <div className="mail-client-container">
+                  <div className="mail-client">
+                    <img src={TransactionalWebsite} alt='Website' />
+                    <span>Open G-mail</span>
+                  </div>
+                  <div className="mail-client">
+                    <img src={BookingEngine} alt='Outlook' />
+                    <span>Open Outlook</span>
+                  </div>
+                </div>
+                </div>
+                <div >
+                  <span>
+                    Did not recieve an email ? Please check your spam folder..!!
+                    <br />
+                    <br />
+                   Resend and try again
+                  </span>
+                </div>
+                <div className="register-page-button-space">
+               
+                    <button className="register-page-button" onClick={handleSubmit}>
+                      Submit
+                    </button>
+                    <span>Already have an account ? log-in</span>
+                </div>
+                </div>
+                </div>
+              </>
             )}
           </form>
         </div>

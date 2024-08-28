@@ -33,6 +33,9 @@
   left: 0;
   z-index: 50; */
 }
+.custom-navbar-logo{
+  padding: 0.5rem;
+}
 
 .custom-navbar-logo a {
   color: #fff;
