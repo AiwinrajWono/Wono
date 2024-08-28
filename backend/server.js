@@ -3,6 +3,10 @@ const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
 const promisePool = require("./db");
+const fs = require('fs');
+const { Parser } = require('json2csv');
+const path = require('path');
+const { error } = require("console");
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const crypto = require('crypto');
@@ -42,6 +46,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+const transport = nodemailer.createTransport({
+  service: "gmail", // You can use other services like Yahoo, Outlook, etc.
+  auth: {
+    user: "anushri.bhagat263@gmail.com", // Your email
+    pass: "xwhn rrhx ldba vvfx", // Your email password or app password
+  },
+});
+
+
 app.post('/', (req, res) => {
   console.log('Session Data:', req.session);
   if (req.session.user) {
@@ -68,40 +81,81 @@ app.post('/send-email', (req,res) =>{
             from:'anushri.bhagat263@gmail.com',
             to:email,
             subject:`Job Application: ${name} - ${jobTitle}`,
-            html:`<div >
-  <form action="action_page.php">
-  
-  <span>Job Position:${jobTitle}</span><br/>
-  <span>Name:${name}</span><br/>
-  <span>Date of Birth:${date}</span><br/>
-  <span>Email:<a href="${email}">${email}</a></span><br/>
-  
-  <span>Mobile Number:${number}</span><br/>
-  <span>Location:${location}</span><br/>
-  <span>Experience(in years):${experience}</span><br/>
-  <span>Linkedin Profile Url:<a href="${linkedInProfile}">${linkedInProfile}</a></span><br/>
-  <span>Message:${message}</span><br/>
-  <span>${personality}</span><br/>
-  <span>Resume:<a href="${resume}">${resume}</a></span><br/>
-  
-  </form>
-</div>`
+            html:`<head><style>
+table, td {
+  border: 1px solid;
+}
+</style></head>
+ <body style="font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; -webkit-text-size-adjust: none; -ms-text-size-adjust: none;">
+ 
+<div style="width: 100%; max-width: 600px; background-color: #ffffff; margin: 20px auto; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+ <div style="padding: 1rem; text-align: center; border-radius: 1rem;">
+                <h1 style="font-size: 2rem; text-align: center; margin: 0; padding-bottom: 20px;">
+                    Application form for the post of<br></br>
+                    <b>${jobTitle}</b>
+                </h1>
+  </div>
+<table style="width: 100%; border-collapse: collapse; border-radius:1rem">
+  <tr>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">Jobtitle</td>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${jobTitle}</td>
+  </tr>
+  <tr>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">name</td>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${name}</td>
+  </tr>
+  <tr>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">Experience</td>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${experience}</td>
+  </tr>
+  <tr>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">LinkedInProfile</td>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><a href="">${linkedInProfile}</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">Personality</td>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${personality}</td>
+  </tr>
+  <tr>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">Skills</td>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">${skills}</td>
+  </tr>
+  <tr>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;">ResumeLink</td>
+    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 14px;"><a href=${resume}>${resume}</a></td>
+  </tr> 
+</table>
+</div>
+</body>`,
         };
 
-        transporter.sendMail(Mailoption,(error,info)=>{
+        transport.sendMail(Mailoption,(error,info)=>{
             if(error){
                 return res.status(500).send('Failed to send Email',+ error.message);
             }
             res.status(200).send('Application details have been sent');
+  });
+});
 
-        });
+// Route to download the CSV file
+app.get('/download-csv', (req, res) => {
+  const filePath = path.join(__dirname, 'form_data.csv');
+  
+  // Check if the file exists
+  if (fs.existsSync(filePath)) {
+    res.download(filePath);
+  } else {
+    res.status(404).send('CSV file not found');
+  }
 });
 
 
 app.post('/submit-form',(req,res)=>{
     const {jobTitle,name,email ,date,number,location,experience,linkedInProfile,resume,monthlySalary,expectedSalary,
       daysToJoin,relocateGoa,personality,skills,specialexperience,willing,message} = req.body;
-  
+
+      let formData = req.body;
+
       const query = `INSERT into apply_form (jobTitle,namee,email,application_date,PhoneNumber,location,
       experience,linkedInProfile,resumelink,monthlySalary,expectedSalary,daysToJoin,relocateGoa,personality,
       skills,specialexperience,willing,message
@@ -119,9 +173,41 @@ app.post('/submit-form',(req,res)=>{
         }
         res.status(200).send('Data saved successfully');
       });
-  
+
+  const filePath = path.join(__dirname,"form_data.csv");
+
+  const fields = Object.keys(formData);
+
+  const csvParser = new Parser({fields});
+
+  let csv = csvParser.parse([formData]);
+
+  if(fs.existsSync(filePath))
+  {
+    fs.appendFile(filePath , "\n" + csv, (error)=>{
+      if(error){
+        console.error('Error appending to csv file:', error);
+        res.status(500).send('Failed to send formdata');
+        return;
+      }
+       res.send('FormData saved successfully');
+      });
+  }
+  else{
+    fs.writeFile(filePath,csv, (err) => {
+      if(err){
+        console.error('Error writing to csv file:',err);
+        res.status(500).send('Failed to send form Data');
+        return;
+      }
+      res.send("Formdata saved successfully");
+    });
+  }
     
-  })
+  });
+
+  
+  
 // Route to handle form submission
 app.post("/register", async (req, res) => {
   const {
@@ -406,3 +492,4 @@ app.get("/check-email", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+

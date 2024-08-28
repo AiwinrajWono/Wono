@@ -3,6 +3,9 @@
     padding: 0;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 @font-face {
     font-family: BAUHS93;
     src: url('../assets/WONO_images/img/fonts/BAUHS93.ttf');
@@ -28,55 +31,250 @@
     src: url('../assets/WONO_images/img/fonts/Poppins-Black.ttf');
 }
 
+
 .home-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
     gap: 1rem;
     margin: 0;
-    padding: 2rem;
+    /* padding: 2rem;
     margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; */
 }
 
-.main-title {
-    font-size: 6rem;
-    font-family: Popins-Medium;
+.overlay-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    z-index: 2;
+}
+.text-overlay{
+    color: white;
+    /* max-width: 50%; */
+    flex: 0 0 60%;
+    margin-top: 5px;
+}
+.text-overlay h2{
+    color: #fff;
+    font-size: 110px;
+    font-weight: 500;
+    font-family: poppins;
+}
+.form-card{
+    background-color: rgba(255, 255, 255, 255); 
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    padding-top: 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* max-width: max-content;  */
+    flex: 0 0 30%;
+    width: 100px;
+    
+}
+
+.carousel-section{
+    width: 100%;
+    height: max-content;
+    position: relative;
 }
 
 .O {
-    color: rgb(10, 169, 239);
+    /* color: rgb(10, 169, 239); */
     display: contents;
     font-family: BAUHS93;
 }
 
+.carousel-background {
+    width: 100%;
+    height: 100%; /* Full height */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+     /* Replace with your image path */
+}
+
+.carousel-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black color with 50% transparency */
+    z-index: 1; /* Place behind the text but above the image */
+}
+.Globe{
+    flex: 0 0 40%;
+}
+
+.N-Commerce{
+    flex: 0 0 53%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   flex-direction: column;
+   font-family: Bebas-Regular;
+}
+
+.N-Commerce > h3 > strong{
+    display: flex;
+    font-family: Bebas-Regular;
+    font-size:160px;
+    color: #fff;
+    font-weight:600;
+    width: 100%;
+    margin-top: 0;
+    text-align: center;
+}
+.N-Commerce p{
+    color:#0875e2;
+    align-self: center;
+    font-size: 30px;
+    width: fit-content;
+    font-family: BebasNeue-Regular;
+}
+.N-Commerce a{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    width: 200px;
+    height: 50px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    padding: 20px;
+    list-style: none;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+.N-Commerce a:hover{
+    color: #0875e2;transition: 1s;
+
+}
+
+
+
+
+
 @media (max-width: 768px) {
     .main-title {
-        font-size: 50px;
+        font-size: 40px;
         padding: 0.75rem;
+        color: #fff;
+
     }
 
 
     .home-section {
-        display: grid;
-        grid-template-columns: 1fr;
+        /* display: grid;
+        grid-template-columns: 1fr; */
         gap: 1rem;
         margin: 0;
-        padding: 0.75rem;
+       
         /* margin-top: 1rem; */
         margin-bottom: 2rem;
+        width: 100%;
+        height: 500px;
+    }
+    .carousel-section{
+        height: 800px;
+    }
+    .carousel-item img{
+        height: 800px;
+    }
+    .carousel-background{
+        height: 100vh;
+    }
+
+    
+    .form-card{
+        display: flex;
+        flex: 1;
+        width: 240px;
+        height: 180px;
     }
 
     .home-item {
+        
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: white;
+        align-items: start;
+        
+       
+        /* background-color: white; */
+    }
+    .home-desc{
+        font-size: smaller;
+        line-height: 0%;
+    }
+    
+    .text-overlay p{
+        font-size: 5px;
+        display: flex;
+        width: 100%;
     }
 
-    .carousel-section {
-        padding: 0rem;
+    .overlay-container{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
     }
+    .Nomads-list-bussiness{
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .Nomad-List-Your-Bussiness{
+        font-size: 20px;
+        font-weight: 100px;
+        padding: 0;
+        display: flex;
+        flex: 1;
+        margin: 0;
+        border: none;
+        color: white;
+        
+    }
+    .Globe-N-Commerce{
+        display: flex;
+        flex-direction: column;
+    }
+    .Globe img{
+        width: 200px;
+    }
+    .N-Commerce h3{
+        font-family: BebasNeue-Regular;
+        font-size: 40px;
+        color: #fff;
+        font-weight:200;
+        position: relative;
+        text-align: center;
+        letter-spacing: -2px;
+    }
+    /* .carousel-section{
+        padding: 0rem;
+        width: 100%;
+        position: relative;
+         
+    } */
+    
 }
+
+.slick-next:before {
+    content: '→';
+    right: -20%;
+}
+
 
 
 .home-item {
@@ -84,7 +282,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    background-color: white;
+   
 }
 
 .home-desc {
@@ -384,6 +582,10 @@ padding: 0;
     }
 }
 
+.main-title .O{
+    color: #0875e2;
+
+}
 
 
 
@@ -392,10 +594,11 @@ padding: 0;
 .world-map {
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color:black;
     color: white;
     margin-top: 2rem;
     width: 100%;
+    height: 500px;
 }
 
 .world-title {
@@ -409,6 +612,7 @@ padding: 0;
     font-size: 60px;
     font-weight: 700;
     position: relative;
+    color: black;
 
 }
 
