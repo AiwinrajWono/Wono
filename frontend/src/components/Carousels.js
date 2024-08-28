@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'react-bootstrap/Image';
+import "../styles/bodyHome.css";
 
 const Carousels = ({image1, image2, image3}) => {
     return (
@@ -21,11 +22,11 @@ const Carousels = ({image1, image2, image3}) => {
                         <Image src={image3} alt='carousel-image' fluid />
                     </div>
                 </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style={{zIndex:'3',position:'absolute',top:'90%',height:'50px',width:'50px'}}>
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>
                 </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style={{zIndex:'3',position:'absolute',top:'90%',height:'50px',width:'50px'}}>
                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                     <span className="visually-hidden">Next</span>
                 </button>

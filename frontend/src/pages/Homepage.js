@@ -1,23 +1,60 @@
 import React, { useState } from 'react'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Carousels from '../components/Carousels'
 import Toasts from '../components/Toasts'
 import Carousel1 from '../assets/WONO_images/img/hero-carousel/hero-carousel-1.webp'
 import Carousel2 from '../assets/WONO_images/img/hero-carousel/hero-carousel-2.png'
 import Carousel3 from '../assets/WONO_images/img/hero-carousel/hero-carousel-3.png'
 import GlobalNomad from '../assets/WONO_images/img/icon_service/Birthday.webp'
+import Homefeatures from '../components/Homefeatures'
+
 import '../styles/componentStyle.css'
 
 const Homepage = () => {
+    const navigate = useNavigate();
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
+    //form fields on banner
+    const [name,setname] = useState('');
+    const [email,setEmail] = useState('');
+    const [number,setNumber] = useState('');
+    const [isNameInvalid, setIsNameInvalid] = useState(false);
+    const [isEmailInvalid, setIsEmailInvalid] = useState(false);
+    const [isMobileInvalid, setIsMobileInvalid] = useState(false);
+
+
+    const handleRegister = () => {
+        navigate('/register');
+      };
+    
 
     const handleSubmit = (event) => {
         event.preventDefault();
         // Your form submission logic here
         // Set the message and show the Toast
+
+        if (name.trim() === '') {
+            setIsNameInvalid(true);
+            
+        } else {
+            setIsNameInvalid(false);
+        }
+
+        if (email === '') {
+            setIsEmailInvalid(true);
+            
+        } else {
+            setIsEmailInvalid(false);
+        }
+
+        if (number.trim() === '') {
+            setIsMobileInvalid(true);
+            
+        } else {
+            setIsMobileInvalid(false);
+        }
         setToastMessage('Form submitted successfully!');
         setShowToast(true);
     };
@@ -28,101 +65,130 @@ const Homepage = () => {
     return (
         <>
             <div className='home-section'>
-                <div className='home-item' >
+                <div className='home-item' style={{position:'relative'}}>
+                <div className='carousel-section'>
+                    <div className='carousel-background'>
+                            <Carousels image1={Carousel1} image2={Carousel2} image3={Carousel3} />
+                    </div>
+                </div>
+                <div className='overlay-container'>
+                <div className='text-overlay'>
                     <h2 className='main-title'>
                         W<span className='O'>O</span>RLDS
                         N<span className='O'>O</span>MAD
                         C<span className='O'>O</span>MMUNITY
                     </h2>
                     <span className='home-desc'>The World’s only Nomad Community which is a curation of the best of platforms for Living & Working from Aspiring Destinations across the world.</span>
-                    <div style={{ display: 'flex', marginTop: '1rem' }}>
+                    {/* <div style={{ display: 'flex', marginTop: '1rem' }} className='Nomads-list-bussiness' >
                         <p
                             style={{
                                 fontFamily: 'Popins-Regular',
                                 marginBottom: '1rem',
-                                color: '#0d6efd',
-                                fontSize: '22px',
-                                fontWeight: 300,
+                                color: 'black',
                                 borderRight: '1px solid #000',
                                 marginRight: '0px',
                                 padding: '1rem'
-                            }}
+                            }} className='Nomad-List-Your-Bussiness login-button'
                         >
-                            NOMAD REMOTE WORKING
+                            LOGIN
                         </p>
                         <span
                             style={{
                                 fontFamily: 'Popins-Regular',
                                 marginBottom: '1rem',
-                                color: '#0d6efd',
-                                fontSize: '22px',
-                                fontWeight: 300,
+                                color: 'black',
                                 marginRight: '0px',
                                 padding: '1rem'
-                            }}
+                            }} className='Nomad-List-Your-Bussiness register-button'
                         >
-                            LIST YOUR BUSINESS
+                            REGISTER
                         </span>
-
                     </div>
-                    <div className="avatar-grid" style={{display:'grid', gridTemplateColumns:'1fr'}}>
-                    <div className="avatar-groups">
-                            <div className="profile-container">
-                                <div class="avatars">
-                                    <span class="avatar"><img src="https://picsum.photos/70" alt='avatar' /></span>
-                                    <span class="avatar"><img src="https://picsum.photos/80" alt='avatar' /></span>
-                                    <span class="avatar"><img src="https://picsum.photos/90" alt='avatar' /></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div className='home-item' style={{ flexDirection: 'column' }}>
-                    <div className='form-section'>
-                        <div className='carousel-section'>
-                            <Carousels image1={Carousel1} image2={Carousel2} image3={Carousel3} />
-                        </div>
+                     */}
+                       <div className='login-registration' style={{display:"flex",gap:"10px", marginTop:"20px"}}>
+                          <Link to='/login'  className='login-button'>LOGIN</Link>
+                          <button className='register-button' onClick={handleRegister}>REGISTER</button>
+                      </div>
+                    
+                    
+</div>
+<div className='form-card'>
+                    <div className='form-section '> 
                         <div className="container mt-4">
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit} className='needs-validation' noValidate>
+                            <h1 style={{textAlign:'center',paddingBottom:'20px',color:'#000'}}>Connect</h1>
                                 {/* First Row */}
-                                <div className="row mb-3">
-                                    <div className="col-md-6 mb-3">
+                                <div className="col-md-12">
+                                    <div className="col-md-12 mb-3">
+                                        
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className={`form-control ${isNameInvalid ? 'is-invalid':''}`}
                                             placeholder="Name"
                                             aria-label="name"
+                                            id="validationCustom05"
+                                            value={name}
+                                            required
+                                            onChange={(e)=>setname(e.target.value)}
+                                            
                                         />
+                                        <div className="invalid-feedback">
+                                            Please provide a name
+                                        </div>
+     
                                     </div>
-                                    <div className="col-md-6 mb-3">
+                                    <div className="col-md-12 mb-3">
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className={`form-control ${isEmailInvalid ? 'is-invalid':''}`}
                                             placeholder="Email"
                                             aria-label="email"
+                                            id="validationCustom01"
+                                            value={email}
+                                            required
+                                            onChange={(e)=>setEmail(
+                                                e.target.value
+                                            )}
                                         />
+                                        <div className="invalid-feedback">
+                                            Please provide an email
+                                        </div>
+
                                     </div>
-                                    <div className="col-md-6 mb-3">
+                                    <div className="col-md-12 mb-3">
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className={`form-control ${isMobileInvalid ? 'is-invalid': ''}`}
                                             placeholder="Mobile-number"
                                             aria-label="mobile-number"
+                                            value={number}
+                                            required
+                                            onChange={(e)=>setNumber(e.target.value)}
                                         />
+                                        <div className="invalid-feedback">
+                                            Please provide a mobile number
+                                        </div>
+
                                     </div>
-                                    <div className="col-md-6 mb-3">
+                                    <div className="col-md-12 mb-3">
                                         <div className="dropdown">
                                             <button
-                                                className="btn btn-secondary dropdown-toggle w-100"
+                                                className="btn  dropdown-toggle w-100"
                                                 type="button"
                                                 id="dropdownMenuButton"
                                                 data-bs-toggle="dropdown"
                                                 aria-expanded="false"
+                                                style={{border:"1px solid grey"}}
+                                                required
+                                                
                                             >
                                                 Type of partner
                                             </button>
-                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <div className="invalid-feedback">
+                                            Please select one option
+                                        </div>
+
+                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{backgroundColor:'white'}}>
                                                 <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
                                                 <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
                                                 <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
@@ -139,6 +205,10 @@ const Homepage = () => {
                                 </div>
                             </form>
                         </div>
+                    </div>
+                    </div>
+                </div>
+                    
                         <Toasts
                             position="top-end"
                             toastMessage={toastMessage}
@@ -147,21 +217,25 @@ const Homepage = () => {
                         />
 
                     </div>
-
                 </div>
+
+            <div className='Globe-N-Commerce' style={{ display: 'flex', backgroundColor: 'black', padding: '20px' }}>
+              <div className='Globe' style={{ textAlign: 'left' }}>
+                <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2" 
+                ></img>
+              </div>
+              <div className='N-Commerce'>
+                <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
+                <p > [ “NOMAD COMMERCE” ] </p>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <a data-aos-delay="200" href="contact.html">PARTNER NOW</a>
+                </div>
+              </div>
             </div>
-
-
-            <div className="hero-container">
-                <span className='hero-desc'>INTRODUCING N-COMMERCE<br /></span>
-                <span className='hero-desc2'>(“NOMAD COMMERCE”)</span>
-                <button className='hero-button'>Partner now</button>
-            </div>
-
 
             <div className="type-parent">
                 <div className="type-grid-1">
-                    <h2 style={{ textAlign: 'center' }}>FOR NOMADS</h2>
+                    <h2 style={{ textAlign: 'center',}}>FOR NOMADS</h2>
                     <hr></hr>
                     <div style={{ borderBottom: '1px solid black', padding: '1rem 0 1rem' }}>
                         <span>
@@ -221,12 +295,11 @@ const Homepage = () => {
             </div>
 
             <div className='world-map'>
-                <div className="world-title">
-                    <h2>EXISTING CUSTOMER SIGNUPS</h2>
-                </div>
+                {/* <div className="world-title">
+                    <h2 style={{width:'100%',backgroundColor:"#000",color:"#fff"}}>FEATURES</h2>
+                </div> */}
                 <div className='image-space' >
-                    <img className="image-world"
-                        src={World_map} alt='nomad' />
+                    <Homefeatures/>
                 </div>
             </div>
 

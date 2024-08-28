@@ -6,7 +6,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/componentStyle.css';
-import WonoLogo from '../assets/WONO_images/img/WONOCO-black-bg-removed.png';
+import WonoLogo from '../assets/WONO_images/img/WONO LOGO white TP.png';
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -41,10 +41,9 @@ const NavBar = () => {
         <div className="custom-navbar-menu">
           <Link to='/'>Home</Link>
           <Link to='/services'>Services</Link>
-          <Link to='/test'>Test</Link>
           <Link to='/contact'>Contact</Link>
           <Link to='/career'>Career</Link>
-          <Link to='/regusers'>Registered-Users(Testing)</Link>
+         
           {user ? (
             <Link to={'/dashboard'}>Dashboard</Link>
           ) : (null)}
