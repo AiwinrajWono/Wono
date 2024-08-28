@@ -226,7 +226,7 @@ const Homepage = () => {
               </div>
               <div className='N-Commerce'>
                 <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
-                <p > [ “NOMAD COMMERCE” ] </p>
+                <p > ( “NOMAD COMMERCE” ) </p>
                 <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
                 <a data-aos-delay="200" href="contact.html">PARTNER NOW</a>
                 </div>
