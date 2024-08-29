@@ -46,6 +46,11 @@ const Homepage = () => {
     const [isNameInvalid, setIsNameInvalid] = useState(false);
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
     const [isMobileInvalid, setIsMobileInvalid] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('Type of partner');
+
+    const handleSelect = (option) => {
+        setSelectedOption(option);
+      };
 
 
     const handleRegister = () => {
@@ -210,7 +215,7 @@ const Homepage = () => {
                         </span>
                     </div>
                      */}
-                       <div className='login-registration' style={{display:"flex",gap:"10px", marginTop:"20px"}}>
+                       <div className='login-registration' style={{marginTop:"20px"}}>
                           <Link to='/login'  className='login-button'>LOGIN</Link>
                           <button className='register-button' onClick={handleRegister}>REGISTER</button>
                       </div>
@@ -283,20 +288,20 @@ const Homepage = () => {
                                                 id="dropdownMenuButton"
                                                 data-bs-toggle="dropdown"
                                                 aria-expanded="false"
-                                                style={{border:"1px solid grey"}}
+                                                style={{border:"1px solid #e0e0e0",margin:"0"}}
                                                 required
                                                 
                                             >
-                                                Type of partner
+                                               {selectedOption}
                                             </button>
                                             <div className="invalid-feedback">
                                             Please select one option
                                         </div>
 
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{backgroundColor:'white'}}>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Action 1')}>Action 1</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Action 2')}>Action 2</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Action 3')}>Action 3</Link></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -305,7 +310,7 @@ const Homepage = () => {
                                 {/* Submit Button */}
                                 <div className="button_space">
                                     <button type="submit" className="submit-button">
-                                        Submit
+                                        Connect
                                     </button>
                                 </div>
                             </form>
