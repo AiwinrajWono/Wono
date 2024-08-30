@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+.master-container{
+    background-color: black
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
@@ -37,8 +40,8 @@
     grid-template-columns: 1fr 1fr; */
     gap: 1rem;
     margin: 0;
-    /* padding: 2rem;
-    margin-top: 1rem;
+    /* padding: 1rem; */
+    /* margin-top: 1rem;
     margin-bottom: 2rem; */
 }
 
@@ -76,14 +79,13 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* max-width: max-content;  */
     flex: 0 0 30%;
-    width: 100px;
+    width: 50%;
     
 }
 
 .carousel-section{
     width: 100%;
     height: max-content;
-    position: relative;
 }
 
 .O {
@@ -128,7 +130,7 @@
 .N-Commerce > h3 > strong{
     display: flex;
     font-family: Bebas-Regular;
-    font-size:160px;
+    font-size:170px;
     color: #fff;
     font-weight:600;
     width: 100%;
@@ -136,7 +138,7 @@
     text-align: center;
 }
 .N-Commerce p{
-    color:#0875e2;
+    color: #0875e2;
     align-self: center;
     font-size: 40px;
     width: fit-content;
@@ -175,7 +177,6 @@
 
     }
 
-
     .home-section {
         /* display: grid;
         grid-template-columns: 1fr; */
@@ -185,41 +186,48 @@
         /* margin-top: 1rem; */
         margin-bottom: 2rem;
         width: 100%;
-        height: 500px;
+        /* height: 500px; */
     }
     .carousel-section{
-        height: 800px;
+        height: 100%;
     }
     .carousel-item img{
-        height: 800px;
+        height: 100%;
     }
     .carousel-background{
         height: 100vh;
     }
+    .N-Commerce > h3 > strong{
+        font-size:70px;
+        color: #fff;
+    }
+
+    .Globe{
+        flex: 0 0 40%;
+    }
 
     
-    .form-card{
+    .form-section{
         display: flex;
-        flex: 1;
-        width: 240px;
-        height: 180px;
+        /* flex: 1; */
+        width: 100%;
+        position: absolute;
     }
 
     .home-item {
-        
+        position: 'relative' ;
         display: flex;
-        align-items: start;
-        
-       
-        /* background-color: white; */
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
     }
     .home-desc{
         font-size: smaller;
         line-height: 0%;
     }
     
-    .text-overlay p{
-        font-size: 5px;
+    .text-overlay h2{
+        font-size: 100%;
         display: flex;
         width: 100%;
     }
@@ -228,6 +236,7 @@
         display: flex;
         flex-direction: column;
         align-items: start;
+        position: relative;
     }
     .Nomads-list-bussiness{
         display: flex;
@@ -250,7 +259,7 @@
         flex-direction: column;
     }
     .Globe img{
-        width: 200px;
+        width: 100%;
     }
     .N-Commerce h3{
         font-family: BebasNeue-Regular;
@@ -275,15 +284,6 @@
     right: -20%;
 }
 
-
-
-.home-item {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-   
-}
 
 .home-desc {
     text-align: center;
@@ -324,10 +324,8 @@
 }
 
 .backend-panel-container{
-    padding: 1rem;
+    /* padding: 1rem; */
     background-color: black;
-    border: 1px solid white ;
-    margin: 1rem 0 1rem 0;
 }
 .backend-panel-container h2{
 color: white;
@@ -338,23 +336,23 @@ padding: 2rem;
     display: flex;
     font-family: Bebas-Regular;
     flex-direction: column;
-    margin: 1rem 0 1rem 0;
     background-color: white;
     color: black;
     width: 100%;
     position: relative;
-    border: 1px solid white;
-    overflow: hidden;
-    padding: 1rem;
-    border-radius: 20px;
+    height: 630px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.backend-panel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
 }
 .backend-sidebar {
   background-color: black;
   border-right: 1px solid #dee2e6;
   color: black;
   height: 100;
-  border-top-left-radius: 20px ;
-  border-top-right-radius: 20px ;
+  position: sticky;
 }
 .backend-sidebar .col-md-2 {
 padding: 0;
@@ -364,6 +362,10 @@ padding: 0;
     color: white;
     border: 1px solid gray;
     border-radius: 10px;
+}
+
+.backend-panel-content{
+    
 }
 .backend-sidebar a.nav-link {
     display: flex;
@@ -381,6 +383,9 @@ padding: 0;
 }
 .backend-sidebar-header{
     display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 1rem 0;
 
 }
 .backend-sidebar-logo{
@@ -630,26 +635,90 @@ padding: 0;
 
 
 .website-builder {
+    display: grid;
+    grid-template-columns: 40% 1fr;
     background-color: black;
     color: white;
-    padding: 2em;
+    margin: 2rem 0 2rem 0;
 }
 
-/* .website-template-card{
-    width: 15rem;
-    height: 25rem;
-    overflow: hidden;
+.website-builder-grid-2 {
+    overflow-y: auto;
+    max-height: 580px; /* Adjust this value as needed */
+    padding: 1rem;
+    border: 1px solid #ddd; /* Optional: Add a border for better visibility */
+    margin: 0 1rem 0  1rem ;
 }
-.website-template-card img{
-    width: 100%;
-    object-fit: cover;
-} */
+
+.website-builder-grid-2::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+
+
 
 .template-slide {
     padding: 0 10px; /* Adjust left and right padding for spacing */
     width: 250px !important;
-    margin-left: 40px;
+    margin-left: 152px;
 }
+
+/* slider */
+
+
+.home-website-slick-dots {
+    bottom: 10px; /* Position dots at the bottom of the slider */
+    display: flex !important;
+    justify-content: center;
+}
+
+.home-website-slick-dots li {
+    margin: 0 5px; /* Space between dots */
+}
+
+.home-website-slick-dots button {
+    background-color: white; /* Default color for inactive dots */
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+}
+
+.home-website-slick-dots .slick-active button {
+    background-color: #000; /* Color for the active dot */
+}
+
+.home-website-slick-prev,
+.home-website-slick-next {
+    width: 30px; /* Width of the arrow */
+    height: 30px; /* Height of the arrow */
+    background-color: white; /* Background color of the arrow */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black; /* Color of the arrow icon */
+    font-size: 20px; /* Size of the arrow icon */
+    cursor: pointer;
+}
+
+.home-website-slick-prev {
+    left: 10px; /* Position from the left side */
+    z-index: 1; /* Ensure it’s above other content */
+}
+
+.home-website-slick-next {
+    right: 10px; /* Position from the right side */
+    z-index: 1; /* Ensure it’s above other content */
+}
+
+/* Optional: Customize the appearance of the arrow icons */
+.home-website-slick-prev::before,
+.home-website-slick-next::before {
+    content: '←'; /* Customize the arrow character */
+    font-size: 20px; /* Size of the arrow icon */
+}
+
 @media (max-width:768px) {
     .template-slide {
         padding: 0 10px; /* Adjust left and right padding for spacing */
