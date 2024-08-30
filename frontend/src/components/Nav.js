@@ -39,13 +39,13 @@ const NavBar = () => {
           <img style={{ cursor: 'pointer' }} onClick={() => { navigate('/') }} src={WonoLogo} alt='logo' />
         </div>
         <div className="custom-navbar-menu">
-          <Link to='/'>Home</Link>
+          <Link to='/' className='active'>Home</Link>
           <Link to='/services'>Services</Link>
           <Link to='/contact'>Contact</Link>
           <Link to='/career'>Career</Link>
          
           {user ? (
-            <Link to={'/dashboard'}>Dashboard</Link>
+            <Link to={'/dashboard' } className='active'>Dashboard</Link>
           ) : (null)}
         </div>
         <div className="custom-navbar-menu">

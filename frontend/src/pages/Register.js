@@ -55,7 +55,7 @@ const Register = () => {
 
   const handleNext = async (e) => {
     e.preventDefault();
-    const validationErrors = validateCurrentStep();
+    // const validationErrors = validateCurrentStep();
 
     // if (Object.keys(validationErrors).length === 0) {
 

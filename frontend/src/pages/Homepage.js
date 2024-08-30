@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
 import { Link, useNavigate } from 'react-router-dom'
@@ -31,6 +32,7 @@ import DashboardHR from './Dashboard-pages/DashboardHR'
 import DashboardTickets from './Dashboard-pages/DashboardTickets'
 import DashboardVisitor from './Dashboard-pages/DashboardVisitor'
 import DashboardProducts from './Dashboard-pages/DashboardProducts'
+import GlobeWithMarkers from '../components/GlobeWithMarkers'
 import Slider from 'react-slick';
 import { CustomNextArrow, CustomPrevArrow } from '../components/WebsiteBuilderArrows/CustomArrows'
 
@@ -47,6 +49,11 @@ const Homepage = () => {
     const [isNameInvalid, setIsNameInvalid] = useState(false);
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
     const [isMobileInvalid, setIsMobileInvalid] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('Type of partner');
+
+    const handleSelect = (option) => {
+        setSelectedOption(option);
+      };
 
 
     const handleRegister = () => {
@@ -122,33 +129,70 @@ const Homepage = () => {
         setSelectedTemplate(null);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
+
+        let valid = true;
         // Your form submission logic here
         // Set the message and show the Toast
 
         if (name.trim() === '') {
             setIsNameInvalid(true);
+            valid = false
 
         } else {
             setIsNameInvalid(false);
+            
         }
 
         if (email === '') {
             setIsEmailInvalid(true);
+            valid = false
 
         } else {
             setIsEmailInvalid(false);
+            
         }
 
         if (number.trim() === '') {
             setIsMobileInvalid(true);
+            valid = false
 
         } else {
             setIsMobileInvalid(false);
         }
+        if(valid){
         setToastMessage('Form submitted successfully!');
         setShowToast(true);
+
+        if(name && email && number)
+        {
+            try{
+                const response = await axios.post('http://localhost:5000/banner-email', {
+                    name,
+                    email,
+                    number,
+                    selectedOption
+                });
+                if (response.data.success) {
+                    alert('Email sent successfully');
+                } else {
+                    alert('Error sending email');
+                }
+
+                // Reset form
+                setname('');
+                setEmail('');
+                setNumber('');
+                setSelectedOption('Select an option');
+
+            }
+            catch(error){
+                console.error('There was an error sending the email!', error);
+
+            }
+        }
+        }
     };
 
     const handleToggle = () => {
@@ -223,54 +267,54 @@ const Homepage = () => {
                         </span>
                     </div>
                      */}
-                            <div className='login-registration' style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-                                <Link to='/login' className='login-button'>LOGIN</Link>
-                                <button className='register-button' onClick={handleRegister}>REGISTER</button>
-                            </div>
-
-
-                        </div>
-                        <div className='form-card'>
-                            <div className='form-section '>
-                                <div className="container mt-4">
-                                    <form onSubmit={handleSubmit} className='needs-validation' noValidate>
-                                        <h1 style={{ textAlign: 'center', paddingBottom: '20px', color: '#000' }}>Connect</h1>
-                                        {/* First Row */}
-                                        <div className="col-md-12">
-                                            <div className="col-md-12 mb-3">
-
-                                                <input
-                                                    type="text"
-                                                    className={`form-control ${isNameInvalid ? 'is-invalid' : ''}`}
-                                                    placeholder="Name"
-                                                    aria-label="name"
-                                                    id="validationCustom05"
-                                                    value={name}
-                                                    required
-                                                    onChange={(e) => setname(e.target.value)}
-
-                                                />
-                                                <div className="invalid-feedback">
-                                                    Please provide a name
-                                                </div>
-
-                                            </div>
-                                            <div className="col-md-12 mb-3">
-                                                <input
-                                                    type="text"
-                                                    className={`form-control ${isEmailInvalid ? 'is-invalid' : ''}`}
-                                                    placeholder="Email"
-                                                    aria-label="email"
-                                                    id="validationCustom01"
-                                                    value={email}
-                                                    required
-                                                    onChange={(e) => setEmail(
-                                                        e.target.value
-                                                    )}
-                                                />
-                                                <div className="invalid-feedback">
-                                                    Please provide an email
-                                                </div>
+                       <div className='login-registration' style={{marginTop:"20px"}}>
+                          <Link to='/login'  className='login-button'>LOGIN</Link>
+                          <button className='register-button' onClick={handleRegister}>REGISTER</button>
+                      </div>
+                    
+                    
+</div>
+<div className='form-card'>
+                    <div className='form-section '> 
+                        <div className="container mt-4">
+                            <form onSubmit={handleSubmit} className='needs-validation' noValidate>
+                
+                                {/* First Row */}
+                                <div className="col-md-12">
+                                    <div className="col-md-12 mb-3">
+                                        
+                                        <input
+                                            type="text"
+                                            className={`form-control ${isNameInvalid ? 'is-invalid':''}`}
+                                            placeholder="Name"
+                                            aria-label="name"
+                                            id="validationCustom05"
+                                            value={name}
+                                            required
+                                            onChange={(e)=>setname(e.target.value)}
+                                            
+                                        />
+                                        <div className="invalid-feedback">
+                                            Please provide a name
+                                        </div>
+     
+                                    </div>
+                                    <div className="col-md-12 mb-3">
+                                        <input
+                                            type="text"
+                                            className={`form-control ${isEmailInvalid ? 'is-invalid':''}`}
+                                            placeholder="Email"
+                                            aria-label="email"
+                                            id="validationCustom01"
+                                            value={email}
+                                            required
+                                            onChange={(e)=>setEmail(
+                                                e.target.value
+                                            )}
+                                        />
+                                        <div className="invalid-feedback">
+                                            Please provide an email
+                                        </div>
 
                                             </div>
                                             <div className="col-md-12 mb-3">
@@ -287,68 +331,71 @@ const Homepage = () => {
                                                     Please provide a mobile number
                                                 </div>
 
-                                            </div>
-                                            <div className="col-md-12 mb-3">
-                                                <div className="dropdown">
-                                                    <button
-                                                        className="btn  dropdown-toggle w-100"
-                                                        type="button"
-                                                        id="dropdownMenuButton"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                        style={{ border: "1px solid grey" }}
-                                                        required
-
-                                                    >
-                                                        Type of partner
-                                                    </button>
-                                                    <div className="invalid-feedback">
-                                                        Please select one option
-                                                    </div>
-
-                                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: 'white' }}>
-                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
-                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
-                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/">Action</Link></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Submit Button */}
-                                        <div className="button_space">
-                                            <button type="submit" className="submit-button">
-                                                Submit
+                                    </div>
+                                    <div className="col-md-12 mb-3">
+                                        <div className="dropdown">
+                                            <button
+                                                className="btn  dropdown-toggle w-100"
+                                                type="button"
+                                                id="dropdownMenuButton"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                                style={{border:"1px solid #e0e0e0",margin:"0",textAlign:"left"}}
+                                                
+                                                required
+                                                
+                                            >
+                                               {selectedOption}
                                             </button>
+                                            <div className="invalid-feedback">
+                                            Please select one option
                                         </div>
-                                    </form>
+                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{backgroundColor:'white'}}>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2B Saas Technology Licensing')}>B2B Saas Technology Licensing</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2C Workation/Co-Working Booking')}>B2C Workation/Co-Working Booking</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Landlord Partnership')}>Landlord Partnership</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Investment Related')}>Investment Related</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Coffee Meeting to know us better')}>Coffee Meeting to know us better</Link></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
+                                {/* Submit Button */}
+                                <div className="button_space">
+                                    <button type="submit" className="submit-button">
+                                        Connect
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
-                    <Toasts
-                        position="top-end"
-                        toastMessage={toastMessage}
-                        show={showToast}
-                        onClose={() => setShowToast(false)}
-                    />
+                    </div>
+                </div>
+                    
+                        <Toasts
+                            position="top-end"
+                            toastMessage={toastMessage}
+                            show={showToast}
+                            onClose={() => setShowToast(false)}
+                        />
 
                 </div>
             </div>
 
             <div className='Globe-N-Commerce' style={{ display: 'flex', backgroundColor: 'black', padding: '20px' }}>
-                <div className='Globe' style={{ textAlign: 'left' }}>
-                    <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2"
-                    ></img>
+              <div className='Globe' style={{ textAlign: 'left' }}>
+                {/* <GlobeWithMarkers/> */}
+                <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2" 
+                ></img>  
+              </div>
+              <div className='N-Commerce'>
+                <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
+                <p > ( “NOMAD COMMERCE” ) </p>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <a data-aos-delay="200" href="contact.html">PARTNER NOW</a>
                 </div>
-                <div className='N-Commerce'>
-                    <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
-                    <p>(“NOMAD COMMERCE”)</p>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <a data-aos-delay="200" href="contact.html">PARTNER NOW</a>
-                    </div>
-                </div>
+              </div>
             </div>
             <div className="backend-panel-container">
                 <div className="backend-panel">
@@ -466,9 +513,9 @@ const Homepage = () => {
                 {/* <div className="world-title">
                     <h2 style={{width:'100%',backgroundColor:"#000",color:"#fff"}}>FEATURES</h2>
                 </div> */}
-                <div className='image-space' >
+                {/* <div className='image-space' >
                     <Homefeatures />
-                </div>
+                </div> */}
             </div>
 
         </div>

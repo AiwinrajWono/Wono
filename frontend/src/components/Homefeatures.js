@@ -20,7 +20,7 @@ const Homefeatures = () => {
       <div>
         <div className='feature-container'>
             <div className='sidenav'>
-            <h1><a href="#">Booking Engine</a></h1>
+            <h1>Booking Engine</h1>
             <p>Booking engine is one of the most amazing features that we have in this application</p>
             <ul>
 
