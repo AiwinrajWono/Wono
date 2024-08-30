@@ -53,7 +53,7 @@ const Homepage = () => {
 
     const handleSelect = (option) => {
         setSelectedOption(option);
-      };
+    };
 
 
     const handleRegister = () => {
@@ -82,7 +82,7 @@ const Homepage = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 3,
-        autoplay :true,
+        autoplay: true,
         dotsClass: 'home-website-slick-dots',
         prevArrow: <CustomPrevArrow />,
         nextArrow: <CustomNextArrow />,
@@ -106,7 +106,7 @@ const Homepage = () => {
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     initialSlide: 1,
-                    autoplay :true,
+                    autoplay: true,
                 }
             },
             {
@@ -129,7 +129,7 @@ const Homepage = () => {
         setSelectedTemplate(null);
     };
 
-    const handleSubmit = async(event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         let valid = true;
@@ -142,7 +142,7 @@ const Homepage = () => {
 
         } else {
             setIsNameInvalid(false);
-            
+
         }
 
         if (email === '') {
@@ -151,7 +151,7 @@ const Homepage = () => {
 
         } else {
             setIsEmailInvalid(false);
-            
+
         }
 
         if (number.trim() === '') {
@@ -161,37 +161,36 @@ const Homepage = () => {
         } else {
             setIsMobileInvalid(false);
         }
-        if(valid){
-        setToastMessage('Form submitted successfully!');
-        setShowToast(true);
+        if (valid) {
+            setToastMessage('Form submitted successfully!');
+            setShowToast(true);
 
-        if(name && email && number)
-        {
-            try{
-                const response = await axios.post('http://localhost:5000/banner-email', {
-                    name,
-                    email,
-                    number,
-                    selectedOption
-                });
-                if (response.data.success) {
-                    alert('Email sent successfully');
-                } else {
-                    alert('Error sending email');
+            if (name && email && number) {
+                try {
+                    const response = await axios.post('http://localhost:5000/banner-email', {
+                        name,
+                        email,
+                        number,
+                        selectedOption
+                    });
+                    if (response.data.success) {
+                        alert('Email sent successfully');
+                    } else {
+                        alert('Error sending email');
+                    }
+
+                    // Reset form
+                    setname('');
+                    setEmail('');
+                    setNumber('');
+                    setSelectedOption('Select an option');
+
                 }
+                catch (error) {
+                    console.error('There was an error sending the email!', error);
 
-                // Reset form
-                setname('');
-                setEmail('');
-                setNumber('');
-                setSelectedOption('Select an option');
-
+                }
             }
-            catch(error){
-                console.error('There was an error sending the email!', error);
-
-            }
-        }
         }
     };
 
@@ -227,10 +226,11 @@ const Homepage = () => {
     return (
         <div className='master-container'>
             <div className='home-section'>
-                <div className='home-item' style={{ position: 'relative' }}>
+                <div className='home-item'>
                     <div className='carousel-section'>
                         <div className='carousel-background'>
-                            <Carousels image1={Carousel1} image2={Carousel2} image3={Carousel3} />
+                            {/* <Carousels image1={Carousel1} image2={Carousel2} image3={Carousel3} /> */}
+                            <img src='src="https://via.placeholder.com/800x400"' />
                         </div>
                     </div>
                     <div className='overlay-container'>
@@ -241,80 +241,54 @@ const Homepage = () => {
                                 C<span className='O'>O</span>MMUNITY
                             </h2>
                             <span className='home-desc'>The World’s only Nomad Community which is a curation of the best of platforms for Living & Working from Aspiring Destinations across the world.</span>
-                            {/* <div style={{ display: 'flex', marginTop: '1rem' }} className='Nomads-list-bussiness' >
-                        <p
-                            style={{
-                                fontFamily: 'Popins-Regular',
-                                marginBottom: '1rem',
-                                color: 'black',
-                                borderRight: '1px solid #000',
-                                marginRight: '0px',
-                                padding: '1rem'
-                            }} className='Nomad-List-Your-Bussiness login-button'
-                        >
-                            LOGIN
-                        </p>
-                        <span
-                            style={{
-                                fontFamily: 'Popins-Regular',
-                                marginBottom: '1rem',
-                                color: 'black',
-                                marginRight: '0px',
-                                padding: '1rem'
-                            }} className='Nomad-List-Your-Bussiness register-button'
-                        >
-                            REGISTER
-                        </span>
-                    </div>
-                     */}
-                       <div className='login-registration' style={{marginTop:"20px"}}>
-                          <Link to='/login'  className='login-button'>LOGIN</Link>
-                          <button className='register-button' onClick={handleRegister}>REGISTER</button>
-                      </div>
-                    
-                    
-</div>
-<div className='form-card'>
-                    <div className='form-section '> 
-                        <div className="container mt-4">
-                            <form onSubmit={handleSubmit} className='needs-validation' noValidate>
-                
-                                {/* First Row */}
-                                <div className="col-md-12">
-                                    <div className="col-md-12 mb-3">
-                                        
-                                        <input
-                                            type="text"
-                                            className={`form-control ${isNameInvalid ? 'is-invalid':''}`}
-                                            placeholder="Name"
-                                            aria-label="name"
-                                            id="validationCustom05"
-                                            value={name}
-                                            required
-                                            onChange={(e)=>setname(e.target.value)}
-                                            
-                                        />
-                                        <div className="invalid-feedback">
-                                            Please provide a name
-                                        </div>
-     
-                                    </div>
-                                    <div className="col-md-12 mb-3">
-                                        <input
-                                            type="text"
-                                            className={`form-control ${isEmailInvalid ? 'is-invalid':''}`}
-                                            placeholder="Email"
-                                            aria-label="email"
-                                            id="validationCustom01"
-                                            value={email}
-                                            required
-                                            onChange={(e)=>setEmail(
-                                                e.target.value
-                                            )}
-                                        />
-                                        <div className="invalid-feedback">
-                                            Please provide an email
-                                        </div>
+                            <div className='login-registration' style={{ marginTop: "20px" }}>
+                                <Link to='/login' className='login-button'>LOGIN</Link>
+                                <button className='register-button' onClick={handleRegister}>REGISTER</button>
+                            </div>
+
+
+                        </div>
+                        <div className='form-card'>
+                            <div className='form-section '>
+                                <div className="container mt-4">
+                                    <form onSubmit={handleSubmit} className='needs-validation' noValidate>
+
+                                        {/* First Row */}
+                                        <div className="col-md-12">
+                                            <div className="col-md-12 mb-3">
+
+                                                <input
+                                                    type="text"
+                                                    className={`form-control ${isNameInvalid ? 'is-invalid' : ''}`}
+                                                    placeholder="Name"
+                                                    aria-label="name"
+                                                    id="validationCustom05"
+                                                    value={name}
+                                                    required
+                                                    onChange={(e) => setname(e.target.value)}
+
+                                                />
+                                                <div className="invalid-feedback">
+                                                    Please provide a name
+                                                </div>
+
+                                            </div>
+                                            <div className="col-md-12 mb-3">
+                                                <input
+                                                    type="text"
+                                                    className={`form-control ${isEmailInvalid ? 'is-invalid' : ''}`}
+                                                    placeholder="Email"
+                                                    aria-label="email"
+                                                    id="validationCustom01"
+                                                    value={email}
+                                                    required
+                                                    onChange={(e) => setEmail(
+                                                        e.target.value
+                                                    )}
+                                                />
+                                                <div className="invalid-feedback">
+                                                    Please provide an email
+                                                </div>
 
                                             </div>
                                             <div className="col-md-12 mb-3">
@@ -331,117 +305,117 @@ const Homepage = () => {
                                                     Please provide a mobile number
                                                 </div>
 
-                                    </div>
-                                    <div className="col-md-12 mb-3">
-                                        <div className="dropdown">
-                                            <button
-                                                className="btn  dropdown-toggle w-100"
-                                                type="button"
-                                                id="dropdownMenuButton"
-                                                data-bs-toggle="dropdown"
-                                                aria-expanded="false"
-                                                style={{border:"1px solid #e0e0e0",margin:"0",textAlign:"left"}}
-                                                
-                                                required
-                                                
-                                            >
-                                               {selectedOption}
-                                            </button>
-                                            <div className="invalid-feedback">
-                                            Please select one option
-                                        </div>
-                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{backgroundColor:'white'}}>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2B Saas Technology Licensing')}>B2B Saas Technology Licensing</Link></li>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2C Workation/Co-Working Booking')}>B2C Workation/Co-Working Booking</Link></li>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Landlord Partnership')}>Landlord Partnership</Link></li>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Investment Related')}>Investment Related</Link></li>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Coffee Meeting to know us better')}>Coffee Meeting to know us better</Link></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                            </div>
+                                            <div className="col-md-12 mb-3">
+                                                <div className="dropdown">
+                                                    <button
+                                                        className="btn  dropdown-toggle w-100"
+                                                        type="button"
+                                                        id="dropdownMenuButton"
+                                                        data-bs-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                        style={{ border: "1px solid #e0e0e0", margin: "0", textAlign: "left" }}
 
-                                {/* Submit Button */}
-                                <div className="button_space">
-                                    <button type="submit" className="submit-button">
-                                        Connect
-                                    </button>
+                                                        required
+
+                                                    >
+                                                        {selectedOption}
+                                                    </button>
+                                                    <div className="invalid-feedback">
+                                                        Please select one option
+                                                    </div>
+                                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: 'white' }}>
+                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2B Saas Technology Licensing')}>B2B Saas Technology Licensing</Link></li>
+                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2C Workation/Co-Working Booking')}>B2C Workation/Co-Working Booking</Link></li>
+                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Landlord Partnership')}>Landlord Partnership</Link></li>
+                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Investment Related')}>Investment Related</Link></li>
+                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Coffee Meeting to know us better')}>Coffee Meeting to know us better</Link></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Submit Button */}
+                                        <div className="button_space">
+                                            <button type="submit" className="submit-button">
+                                                Connect
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                </div>
-                    
-                        <Toasts
-                            position="top-end"
-                            toastMessage={toastMessage}
-                            show={showToast}
-                            onClose={() => setShowToast(false)}
-                        />
+
+                    <Toasts
+                        position="top-end"
+                        toastMessage={toastMessage}
+                        show={showToast}
+                        onClose={() => setShowToast(false)}
+                    />
 
                 </div>
             </div>
 
             <div className='Globe-N-Commerce' style={{ display: 'flex', backgroundColor: 'black', padding: '20px' }}>
-              <div className='Globe' style={{ textAlign: 'left' }}>
-                {/* <GlobeWithMarkers/> */}
-                <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2" 
-                ></img>  
-              </div>
-              <div className='N-Commerce'>
-                <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
-                <p > ( “NOMAD COMMERCE” ) </p>
-                <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
-                <a data-aos-delay="200" href="contact.html">PARTNER NOW</a>
+                <div className='Globe' style={{ textAlign: 'left' }}>
+                    {/* <GlobeWithMarkers/> */}
+                    <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2"
+                    ></img>
                 </div>
-              </div>
+                <div className='N-Commerce'>
+                    <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
+                    <p > ( “NOMAD COMMERCE” ) </p>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <a data-aos-delay="200" href="contact.html">PARTNER NOW</a>
+                    </div>
+                </div>
             </div>
             <div className="backend-panel-container">
                 <div className="backend-panel">
 
-                            <div className="backend-panel-sidebar">
-                                <div className="backend-sidebar-header">
-                                    <div className="backend-sidebar-logo">
-                                        <img src={WonoLogo} alt='' />
-                                    </div>
-                                </div>
-                                {!collapsed && (
-                                    <Nav id="backend-sidebar" className="flex-column p-0 backend-sidebar">
-                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-booking')}>
-                                            Booking engine
-                                        </Nav.Link>
-                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-tickets')}>
-                                            Ticket Management
-                                        </Nav.Link>
-                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-hr')}>
-                                            HR Management
-                                        </Nav.Link>
-                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-asset')}>
-                                            Asset Management
-                                        </Nav.Link>
-                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-products')}>
-                                            Products
-                                        </Nav.Link>
-                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-visitor')}>
-                                            Visitor Management
-                                        </Nav.Link>
-                                    </Nav>
-                                )}
+                    <div className="backend-panel-sidebar">
+                        <div className="backend-sidebar-header">
+                            <div className="backend-sidebar-logo">
+                                <img src={WonoLogo} alt='' />
                             </div>
-                            <div className="backend-panel-content">
-                                <AnimatePresence>
-                                    <motion.div
-                                        key={selectedItem}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        {renderContent()}
-                                    </motion.div>
-                                </AnimatePresence>
-                            </div>
+                        </div>
+                        {!collapsed && (
+                            <Nav id="backend-sidebar" className="flex-column p-0 backend-sidebar">
+                                <Nav.Link onClick={() => handleMenuSelect('dashboard-booking')}>
+                                    Booking engine
+                                </Nav.Link>
+                                <Nav.Link onClick={() => handleMenuSelect('dashboard-tickets')}>
+                                    Ticket Management
+                                </Nav.Link>
+                                <Nav.Link onClick={() => handleMenuSelect('dashboard-hr')}>
+                                    HR Management
+                                </Nav.Link>
+                                <Nav.Link onClick={() => handleMenuSelect('dashboard-asset')}>
+                                    Asset Management
+                                </Nav.Link>
+                                <Nav.Link onClick={() => handleMenuSelect('dashboard-products')}>
+                                    Products
+                                </Nav.Link>
+                                <Nav.Link onClick={() => handleMenuSelect('dashboard-visitor')}>
+                                    Visitor Management
+                                </Nav.Link>
+                            </Nav>
+                        )}
+                    </div>
+                    <div className="backend-panel-content">
+                        <AnimatePresence>
+                            <motion.div
+                                key={selectedItem}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                {renderContent()}
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
 
                 </div>
 
@@ -509,14 +483,14 @@ const Homepage = () => {
                 </div>
             </div> */}
 
-            <div className='world-map'>
-                {/* <div className="world-title">
+            {/* <div className='world-map'>
+                <div className="world-title">
                     <h2 style={{width:'100%',backgroundColor:"#000",color:"#fff"}}>FEATURES</h2>
-                </div> */}
-                {/* <div className='image-space' >
+                </div>
+                <div className='image-space' >
                     <Homefeatures />
-                </div> */}
-            </div>
+                </div>
+            </div> */}
 
         </div>
     )

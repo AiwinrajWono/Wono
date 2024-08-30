@@ -3,7 +3,9 @@
     padding: 0;
 }
 .master-container{
-    background-color: black
+    background-color: black;
+    padding: 1rem 0 1rem 0;
+    height: 100%
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -38,11 +40,15 @@
 .home-section {
     /* display: grid;
     grid-template-columns: 1fr 1fr; */
-    gap: 1rem;
-    margin: 0;
+    /* gap: 1rem;
+    margin: 0; */
     /* padding: 1rem; */
     /* margin-top: 1rem;
     margin-bottom: 2rem; */
+}
+
+.home-item {
+    position: 'relative' ;
 }
 
 .overlay-container{
@@ -68,7 +74,7 @@
 }
 .text-overlay h2{
     color: #fff;
-    font-size: 100px;
+    font-size: 120px;
     font-weight: 500;
     font-family: poppins;
 }
@@ -633,7 +639,7 @@ padding: 2rem;
     grid-template-columns: 40% 1fr;
     background-color: black;
     color: white;
-    margin: 3rem 0 3rem 0;
+    /* margin: 3rem 0 3rem 0; */
     overflow: hidden;
 }
 
