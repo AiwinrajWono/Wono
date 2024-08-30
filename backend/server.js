@@ -55,6 +55,10 @@ const transport = nodemailer.createTransport({
 });
 
 
+
+
+
+
 app.post('/', (req, res) => {
   console.log('Session Data:', req.session);
   if (req.session.user) {
@@ -70,6 +74,48 @@ app.get('/session', (req, res) => {
     res.status(401).json({ error: 'Not authenticated' });
   }
 });
+
+
+//Banner-Email
+
+app.post('/banner-email',async(req,res)=>{
+  const { name, email, number, selectedOption } = req.body;
+
+  const Options = {
+    from: 'anushri.bhagat263@gmail.com',
+    to: 'productwonoco@gmail.com', // Send to the user
+    subject: 'Your Data is Received',
+    text: `Hello ${name},\n\nWe have received your data with the following details:\n\nName: ${name}\nEmail: ${email}\nMobile: ${number}\nOption: ${selectedOption}\n\nThank you!`
+};
+
+try{
+  await transport.sendMail(Options);
+
+        // Auto-reply
+        const autoReplyOptions = {
+            from: 'anushri.bhagat263@gmail.com',
+            to: email, // Send to yourself
+            subject: 'New Submission Received',
+            html: `<h1>Thank you for your concern.</h1>
+            <br></br>
+            <p>
+            We have received your application. We will get back to you in 24hrs.
+            </p>`
+        };
+
+        await transport.sendMail(autoReplyOptions);
+
+        res.json({ success: true });
+
+}
+catch(error)
+{
+  console.error('Error sending email:', error);
+  res.json({ success: false });
+}
+})// End Banner-Email
+
+
 
 
 app.post('/send-email', (req,res) =>{
@@ -148,6 +194,7 @@ app.get('/download-csv', (req, res) => {
     res.status(404).send('CSV file not found');
   }
 });
+
 
 
 app.post('/submit-form',(req,res)=>{

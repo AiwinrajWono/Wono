@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
 import { Link, useNavigate } from 'react-router-dom'
@@ -31,6 +32,7 @@ import DashboardHR from './Dashboard-pages/DashboardHR'
 import DashboardTickets from './Dashboard-pages/DashboardTickets'
 import DashboardVisitor from './Dashboard-pages/DashboardVisitor'
 import DashboardProducts from './Dashboard-pages/DashboardProducts'
+import GlobeWithMarkers from '../components/GlobeWithMarkers'
 import Slider from 'react-slick';
 
 
@@ -78,7 +80,7 @@ const Homepage = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 1,
+        slidesToShow: 3,
         // dotsClass: <div className="home-website-slick-dots" />,
         prevArrow: <div className="home-website-slick-prev" />,
         nextArrow: <div className="home-website-slick-next" />,
@@ -124,33 +126,70 @@ const Homepage = () => {
         setSelectedTemplate(null);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
+
+        let valid = true;
         // Your form submission logic here
         // Set the message and show the Toast
 
         if (name.trim() === '') {
             setIsNameInvalid(true);
+            valid = false
 
         } else {
             setIsNameInvalid(false);
+            
         }
 
         if (email === '') {
             setIsEmailInvalid(true);
+            valid = false
 
         } else {
             setIsEmailInvalid(false);
+            
         }
 
         if (number.trim() === '') {
             setIsMobileInvalid(true);
+            valid = false
 
         } else {
             setIsMobileInvalid(false);
         }
+        if(valid){
         setToastMessage('Form submitted successfully!');
         setShowToast(true);
+
+        if(name && email && number)
+        {
+            try{
+                const response = await axios.post('http://localhost:5000/banner-email', {
+                    name,
+                    email,
+                    number,
+                    selectedOption
+                });
+                if (response.data.success) {
+                    alert('Email sent successfully');
+                } else {
+                    alert('Error sending email');
+                }
+
+                // Reset form
+                setname('');
+                setEmail('');
+                setNumber('');
+                setSelectedOption('Select an option');
+
+            }
+            catch(error){
+                console.error('There was an error sending the email!', error);
+
+            }
+        }
+        }
     };
 
     const handleToggle = () => {
@@ -236,7 +275,7 @@ const Homepage = () => {
                     <div className='form-section '> 
                         <div className="container mt-4">
                             <form onSubmit={handleSubmit} className='needs-validation' noValidate>
-                            <h1 style={{textAlign:'center',paddingBottom:'20px',color:'#000'}}>Connect</h1>
+                
                                 {/* First Row */}
                                 <div className="col-md-12">
                                     <div className="col-md-12 mb-3">
@@ -298,7 +337,8 @@ const Homepage = () => {
                                                 id="dropdownMenuButton"
                                                 data-bs-toggle="dropdown"
                                                 aria-expanded="false"
-                                                style={{border:"1px solid #e0e0e0",margin:"0"}}
+                                                style={{border:"1px solid #e0e0e0",margin:"0",textAlign:"left"}}
+                                                
                                                 required
                                                 
                                             >
@@ -307,11 +347,12 @@ const Homepage = () => {
                                             <div className="invalid-feedback">
                                             Please select one option
                                         </div>
-
                                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{backgroundColor:'white'}}>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Action 1')}>Action 1</Link></li>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Action 2')}>Action 2</Link></li>
-                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Action 3')}>Action 3</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2B Saas Technology Licensing')}>B2B Saas Technology Licensing</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2C Workation/Co-Working Booking')}>B2C Workation/Co-Working Booking</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Landlord Partnership')}>Landlord Partnership</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Investment Related')}>Investment Related</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Coffee Meeting to know us better')}>Coffee Meeting to know us better</Link></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -341,8 +382,9 @@ const Homepage = () => {
 
             <div className='Globe-N-Commerce' style={{ display: 'flex', backgroundColor: 'black', padding: '20px' }}>
               <div className='Globe' style={{ textAlign: 'left' }}>
+                {/* <GlobeWithMarkers/> */}
                 <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2" 
-                ></img>
+                ></img>  
               </div>
               <div className='N-Commerce'>
                 <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
@@ -495,9 +537,9 @@ const Homepage = () => {
                 {/* <div className="world-title">
                     <h2 style={{width:'100%',backgroundColor:"#000",color:"#fff"}}>FEATURES</h2>
                 </div> */}
-                <div className='image-space' >
+                {/* <div className='image-space' >
                     <Homefeatures />
-                </div>
+                </div> */}
             </div>
 
         </div>

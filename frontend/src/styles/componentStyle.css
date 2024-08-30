@@ -53,11 +53,39 @@
   color: #fff;
   text-decoration: none;
   transition: color 0.3s ease, font-family 0.3s ease;
+  position: relative;
   /* Smooth transition for color and text-decoration */
 }
+/* Changes */
 
+.custom-navbar-menu a::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: white; /* Color of the underline */
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
 .custom-navbar-menu a:hover {
   font-family: Popins-Black;
+}
+/* Changes */
+.custom-navbar-menu a:hover::before {
+  visibility: visible;
+  width: 100%;
+}
+/* Changes */
+.custom-navbar-menu a.active::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #007bff; /* Color of the underline */
 }
 
 .custom-navbar-menu-toggle {

@@ -1,7 +1,11 @@
 .sidenav {
-    padding: 20px;
+  padding: 20px 1rem 20px 4rem;
     width: 40%;
     background-color: #111; /* Black */
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
     
   }
   .sidenav a {
@@ -11,11 +15,14 @@
     color: #fff;
     display: block;
   }
+  .sidenav h1{
+    font-size: 50px;
+  }
 
   .sidenav p{
-    padding: 0px 15px 8px 16px;
-    font-size: 15px;
-    line-height: 1rem;
+    /* padding: 0px 15px 8px 16px; */
+    font-size: 18px;
+    line-height: 2rem;
     color:#fff ;
   }
   .sidenav a:hover {
