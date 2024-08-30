@@ -125,47 +125,59 @@ button.StepButton-0-2-4.StepButton-d2-0-2-8.active{
 }
 
 /* checkbox */
-.checkbox-group{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
+
 .checkbox-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 5px solid gray ;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 8px;
-    position: relative;
-    cursor: pointer; /* Make the card clickable */
-    width: 200px;
-  }
-  
-  .checkbox-card.checked {
-    border-color: #bcfd4c;
-    background-color: #a2ff46;
-    color: black;
-  }
-  .check-image-container{
-    width: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .checkbox-card img {
-    width: 100%; /* Make image fit the card */
-    border-radius: 8px;
-  }
-  
-  .checkbox-card input[type="checkbox"] {
-    display: none; /* Hide the checkbox */
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid gray;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px;
+  position: relative;
+  cursor: pointer; /* Make the card clickable */
+  width: 200px;
+  transition: border-color 0.3s ease;
+}
+
+.checkbox-card.checked {
+  border-color: #28b900;
+  /* Remove background color change */
+}
+
+.check-image-container {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-card img {
+  width: 100%; /* Make image fit the card */
+  border-radius: 8px;
+}
+
+.checkbox-card input[type="checkbox"] {
+  display: none; /* Hide the checkbox */
+}
+
+/* Add tick mark when checkbox is checked */
+.checkbox-card input[type="checkbox"]:checked + .check-image-container::after {
+  content: "✅";
+  font-size: 20px;
+  color: #28b900;
+  position: absolute;
+  bottom: 120px;
+  right: 8px;
+}
 
   /* account activation */
 

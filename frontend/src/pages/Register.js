@@ -57,23 +57,23 @@ const Register = () => {
     e.preventDefault();
     const validationErrors = validateCurrentStep();
 
-    if (Object.keys(validationErrors).length === 0) {
+    // if (Object.keys(validationErrors).length === 0) {
 
-      if (currentStep === 0 && formData.email) {
-        const isDuplicate = await checkEmailDuplicate(formData.email);
-        if (isDuplicate) {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            email: 'This email is already in use.',
-          }));
-          return;
-        }
-      }
+    //   if (currentStep === 0 && formData.email) {
+    //     const isDuplicate = await checkEmailDuplicate(formData.email);
+    //     if (isDuplicate) {
+    //       setErrors((prevErrors) => ({
+    //         ...prevErrors,
+    //         email: 'This email is already in use.',
+    //       }));
+    //       return;
+    //     }
+    //   }
 
 
-      console.log(formData);
-      setCurrentStep((prev) => prev + 1); 
-    }
+    //   console.log(formData);
+    // }
+    setCurrentStep((prev) => prev + 1); 
   };
 
 

@@ -225,21 +225,15 @@ app.post("/register", async (req, res) => {
     companyState,
     websiteURL,
     linkedinURL,
-    selectedServices, // Add this
+    selectedServices,
   } = req.body;
 
   try {
-
-    //This generates username
+    // Generate username and password
     const username = name.replace(/\s+/g, '');
+    const uniqueNumber = crypto.randomInt(1000, 9999);
+    const password = `${username}@Wono${uniqueNumber}`;
 
-    //for unique number
-
-    const uniqueNumber = crypto.randomInt(1000,9999)
-
-    //for password
-
-    const password = `${username}@Wono${uniqueNumber}`
     // Insert user data into user_data table
     const [result] = await promisePool.query(
       `INSERT INTO user_data 
@@ -261,7 +255,7 @@ app.post("/register", async (req, res) => {
         websiteURL,
         linkedinURL,
         username,
-        password
+        password,
       ]
     );
 
@@ -279,28 +273,59 @@ app.post("/register", async (req, res) => {
       );
     }
 
-    // Email content
-    const mailOptions = {
+    // Prepare email templates
+    const userMailOptions = {
       from: "aiwinraj1810@gmail.com",
       to: email,
-      subject: "Registration Details",
-      html: `<h1>Registered successfully</h1>
-             <p>Your username is: ${username}</p>
-             <p>Your password is: ${password}</p>`,
+      subject: "Welcome to Our Service!",
+      html: `
+        <h1>Welcome to Our Service, ${name}!</h1>
+        <p>Thank you for registering with us. We'll be contacting you within 24 hours</p>
+
+        <p>Feel free to explore our services and let us know if you need any assistance.</p>
+        <p>Best Regards,<br>Wono</p>
+      `,
     };
 
-    // Send email
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return res.status(500).send("Failed to send email: " + error.message);
-      }
-      res.status(200).send("Registration details sent successfully!");
-    });
+    const companyMailOptions = {
+      from: "aiwinraj1810@gmail.com",
+      to: "aiwinraj1018@gmail.com",
+      subject: "New User Registration",
+      html: `
+        <h1>New User Registration Details</h1>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Mobile:</strong> ${mobile}</p>
+        <p><strong>Country:</strong> ${country}</p>
+        <p><strong>City:</strong> ${city}</p>
+        <p><strong>State:</strong> ${state}</p>
+        <p><strong>Company Name:</strong> ${companyName}</p>
+        <p><strong>Industry:</strong> ${industry}</p>
+        <p><strong>Company Size:</strong> ${companySize}</p>
+        <p><strong>Company Type:</strong> ${companyType}</p>
+        <p><strong>Company City:</strong> ${companyCity}</p>
+        <p><strong>Company State:</strong> ${companyState}</p>
+        <p><strong>Website URL:</strong> ${websiteURL}</p>
+        <p><strong>LinkedIn URL:</strong> ${linkedinURL}</p>
+        <p><strong>Selected Services:</strong> ${Object.keys(selectedServices).filter(service => selectedServices[service]).join(', ')}</p>
+        <p><strong>Username:</strong> ${username}</p>
+        <p><strong>Password:</strong> ${password}</p>
+      `,
+    };
+
+    // Send both emails concurrently
+    await Promise.all([
+      transporter.sendMail(userMailOptions),
+      transporter.sendMail(companyMailOptions),
+    ]);
+
+    res.status(200).send("Registration and emails sent successfully!");
   } catch (error) {
     console.error("Database error:", error.message);
     res.status(500).send("Failed to register user: " + error.message);
   }
 });
+
 
 app.post('/reset-password', async (req, res) => {
   const { email, password } = req.body;

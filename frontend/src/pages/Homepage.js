@@ -75,6 +75,7 @@ const Homepage = () => {
         infinite: true,
         speed: 500,
         slidesToShow: 3,
+        autoplay :true,
         dotsClass: 'home-website-slick-dots',
         prevArrow: <CustomPrevArrow />,
         nextArrow: <CustomNextArrow />,
@@ -97,7 +98,8 @@ const Homepage = () => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    initialSlide: 1
+                    initialSlide: 1,
+                    autoplay :true,
                 }
             },
             {
@@ -422,6 +424,7 @@ const Homepage = () => {
                             src={image}
                             alt={`${selectedTemplate.name} Image ${index + 1}`}
                             style={{ width: '100%', marginBottom: '10px' }}
+                            className='template-content-image'
                         />
                     ))}
                 </div>

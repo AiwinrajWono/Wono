@@ -26,6 +26,7 @@
     width: 100%;
     display: flex;
     position: relative;
+    flex-wrap: wrap;
   }
   .feature-main {
    
@@ -47,7 +48,7 @@
   .slick-prev{
     left:10px;
   }
-  .slick-prev:before, .slick-next:before {
-    color: white; /* Change the color of the arrow if needed */
-    font-size: 40px; /* Adjust the size of the arrows */
-  }
+  /* .slick-prev:before, .slick-next:before {
+    color: white;
+    font-size: 40px; 
+  } */

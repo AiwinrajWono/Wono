@@ -326,6 +326,7 @@
 .backend-panel-container{
     /* padding: 1rem; */
     background-color: black;
+    margin: 2rem 0 2rem 0;
 }
 .backend-panel-container h2{
 color: white;
@@ -347,7 +348,10 @@ padding: 2rem;
 .backend-panel-content {
     padding: 2rem;
     background-color: #ecf0f1; /* Example background color for the content area */
-    overflow-y: auto; /* Scroll if content overflows */
+    overflow-y: scroll; /* Scroll if content overflows */
+}
+.backend-panel-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
 }
 
 .backend-sidebar a.nav-link {
@@ -623,7 +627,7 @@ padding: 2rem;
     grid-template-columns: 40% 1fr;
     background-color: black;
     color: white;
-    margin: 2rem 0 2rem 0;
+    margin: 3rem 0 3rem 0;
     overflow: hidden;
 }
 
@@ -679,9 +683,9 @@ padding: 2rem;
 
 .home-website-slick-prev,
 .home-website-slick-next {
-    width: 30px; /* Width of the arrow */
-    height: 30px; /* Height of the arrow */
-    background-color: white; /* Background color of the arrow */
+    width: 10px; /* Width of the arrow */
+    height: 10px; /* Height of the arrow */
+    background-color: transparent  ; /* Background color of the arrow */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -705,9 +709,15 @@ padding: 2rem;
 /* Optional: Customize the appearance of the arrow icons */
 .home-website-slick-prev::before,
 .home-website-slick-next::before {
-     /* Customize the arrow character */
-    font-size: 20px; /* Size of the arrow icon */
+    font-size: 20px;
+    line-height: 1;
+    z-index: 10;
+    opacity: .75;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
+
 
 @media (max-width:768px) {
     .template-slide {
@@ -724,13 +734,13 @@ padding: 2rem;
     }
     .website-builder-grid-2{
         width: 100%;
-        height: 100%;
+        height: 400px;
+        overflow: scroll;
     }
 }
 .template-slide {
     padding: 0 10px; /* Adjust left and right padding for spacing */
-    /* width: 100% !important; */
-    /* margin-left: 152px; */
+    margin-top: 10px;
 }
 .template-container > div{
     padding: 0 4rem 0 4rem;
@@ -757,6 +767,9 @@ padding: 2rem;
     }
     .template-container > div{
         padding: 0;
+    }
+    .template-content-image img{
+        object-fit: cover;
     }
 }
 
