@@ -32,6 +32,7 @@ import DashboardTickets from './Dashboard-pages/DashboardTickets'
 import DashboardVisitor from './Dashboard-pages/DashboardVisitor'
 import DashboardProducts from './Dashboard-pages/DashboardProducts'
 import Slider from 'react-slick';
+import { CustomNextArrow, CustomPrevArrow } from '../components/WebsiteBuilderArrows/CustomArrows'
 
 
 
@@ -55,10 +56,10 @@ const Homepage = () => {
     const [showWebisteModal, setShowWebsiteModal] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
     const [selectedItem, setSelectedItem] = useState('dashboard-booking');
-    
-    
+
+
     //Template objects
-    
+
     const templates = [
         { id: 1, name: "Template 1", images: [Template1] },
         { id: 2, name: "Template 2", images: [Template2] },
@@ -73,20 +74,20 @@ const Homepage = () => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 1,
-        // dotsClass: <div className="home-website-slick-dots" />,
-        prevArrow: <div className="home-website-slick-prev" />,
-        nextArrow: <div className="home-website-slick-next" />,
+        slidesToShow: 3,
+        dotsClass: 'home-website-slick-dots',
+        prevArrow: <CustomPrevArrow />,
+        nextArrow: <CustomNextArrow />,
         vertical: true,
         verticalSwiping: true,
-        afterChange: handleAfterChange,
+        // afterChange: handleAfterChange,
         slidesToScroll: 1,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
                     infinite: true,
                     dots: true
                 }
@@ -349,65 +350,37 @@ const Homepage = () => {
             </div>
             <div className="backend-panel-container">
                 <div className="backend-panel">
-                    {/* Sidebar */}
-                    <Container fluid>
-                        <Row>
-                            <Col md={collapsed ? 1 : 2} className="backend-sidebar">
+
+                            <div className="backend-panel-sidebar">
                                 <div className="backend-sidebar-header">
                                     <div className="backend-sidebar-logo">
                                         <img src={WonoLogo} alt='' />
                                     </div>
-                                    {/* <Button
-                                        className="collapse-btn"
-                                        onClick={handleToggle}
-                                        aria-controls="sidebar"
-                                        aria-expanded={!collapsed}
-                                    >
-                                        {collapsed ? '☰' : '✖'}
-                                    </Button> */}
                                 </div>
                                 {!collapsed && (
-                                    <Nav id="backend-sidebar" className="flex-column p-0">
-                                        <Nav.Link
-
-                                            onClick={() => handleMenuSelect('dashboard-booking')}
-                                        >
+                                    <Nav id="backend-sidebar" className="flex-column p-0 backend-sidebar">
+                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-booking')}>
                                             Booking engine
                                         </Nav.Link>
-                                        <Nav.Link
-
-                                            onClick={() => handleMenuSelect('dashboard-tickets')}
-                                        >
+                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-tickets')}>
                                             Ticket Management
                                         </Nav.Link>
-                                        <Nav.Link
-
-                                            onClick={() => handleMenuSelect('dashboard-hr')}
-                                        >
+                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-hr')}>
                                             HR Management
                                         </Nav.Link>
-                                        <Nav.Link
-
-                                            onClick={() => handleMenuSelect('dashboard-asset')}
-                                        >
+                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-asset')}>
                                             Asset Management
                                         </Nav.Link>
-                                        <Nav.Link
-
-                                            onClick={() => handleMenuSelect('dashboard-products')}
-                                        >
+                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-products')}>
                                             Products
                                         </Nav.Link>
-                                        <Nav.Link
-
-                                            onClick={() => handleMenuSelect('dashboard-visitor')}
-                                        >
+                                        <Nav.Link onClick={() => handleMenuSelect('dashboard-visitor')}>
                                             Visitor Management
                                         </Nav.Link>
                                     </Nav>
                                 )}
-                            </Col>
-                            <Col md={collapsed ? 11 : 10} className="p-3 backend-panel-content">
+                            </div>
+                            <div className="backend-panel-content">
                                 <AnimatePresence>
                                     <motion.div
                                         key={selectedItem}
@@ -419,39 +392,39 @@ const Homepage = () => {
                                         {renderContent()}
                                     </motion.div>
                                 </AnimatePresence>
-                            </Col>
-                        </Row>
-                    </Container>
+                            </div>
+
                 </div>
+
             </div>
 
             <div className="website-builder">
                 <div className="website-builder-grid-1">
-                <Container>
-                    <Slider {...templateSliderSettings}>
-                        {templates.map((template, index) => (
-                            <div className="template-slide" key={index}>
-                                <div
-                                    className="template-card"
-                                    onClick={() => handleTemplateClick(template)}
-                                >
-                                    <img src={template.images[0]} alt={template.name} />
+                    <Container className='template-container'>
+                        <Slider {...templateSliderSettings}>
+                            {templates.map((template, index) => (
+                                <div className="template-slide" key={index}>
+                                    <div
+                                        className="template-card"
+                                        onClick={() => handleTemplateClick(template)}
+                                    >
+                                        <img src={template.images[0]} alt={template.name} />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </Slider>
-                </Container>
+                            ))}
+                        </Slider>
+                    </Container>
                 </div>
                 <div className="website-builder-grid-2">
-                {selectedTemplate && selectedTemplate.images.map((image, index) => (
-                    <img
-                        key={index}
-                        src={image}
-                        alt={`${selectedTemplate.name} Image ${index + 1}`}
-                        style={{ width: '100%', marginBottom: '10px' }}
-                    />
-                ))}
-                </div>  
+                    {selectedTemplate && selectedTemplate.images.map((image, index) => (
+                        <img
+                            key={index}
+                            src={image}
+                            alt={`${selectedTemplate.name} Image ${index + 1}`}
+                            style={{ width: '100%', marginBottom: '10px' }}
+                        />
+                    ))}
+                </div>
             </div>
 
             {/* <div className="type-parent">

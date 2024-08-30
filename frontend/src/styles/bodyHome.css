@@ -333,40 +333,23 @@ padding: 2rem;
 }
 
 .backend-panel {
-    display: flex;
-    font-family: Bebas-Regular;
-    flex-direction: column;
-    background-color: white;
-    color: black;
-    width: 100%;
-    position: relative;
-    height: 630px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-.backend-panel::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, and Opera */
-}
-.backend-sidebar {
-  background-color: black;
-  border-right: 1px solid #dee2e6;
-  color: black;
-  height: 100;
-  position: sticky;
-}
-.backend-sidebar .col-md-2 {
-padding: 0;
-}
-.collapse-btn{
-    background-color: black;
-    color: white;
-    border: 1px solid gray;
-    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 15% 85%; /* Sidebar takes 30%, content takes 70% */
+    height: 80vh; /* Full viewport height */
 }
 
-.backend-panel-content{
-    
+.backend-panel-sidebar {
+    background-color: black; /* Example background color for the sidebar */
+    padding: 1rem;
+    overflow-y: auto; /* Scroll if content overflows */
 }
+
+.backend-panel-content {
+    padding: 2rem;
+    background-color: #ecf0f1; /* Example background color for the content area */
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
 .backend-sidebar a.nav-link {
     display: flex;
     align-items: center;
@@ -399,6 +382,7 @@ padding: 0;
 @media (max-width:768px) {
     .backend-panel {
         height: fit-content;
+        grid-template-columns: 1fr;
     }
     .backend-sidebar {
       background-color: black;
@@ -640,14 +624,21 @@ padding: 0;
     background-color: black;
     color: white;
     margin: 2rem 0 2rem 0;
+    overflow: hidden;
 }
 
+.website-builder-grid-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    max-height: 580px;
+}
 .website-builder-grid-2 {
     overflow-y: auto;
     max-height: 580px; /* Adjust this value as needed */
     padding: 1rem;
     border: 1px solid #ddd; /* Optional: Add a border for better visibility */
-    margin: 0 1rem 0  1rem ;
 }
 
 .website-builder-grid-2::-webkit-scrollbar {
@@ -657,18 +648,16 @@ padding: 0;
 
 
 
-.template-slide {
-    padding: 0 10px; /* Adjust left and right padding for spacing */
-    width: 250px !important;
-    margin-left: 152px;
-}
+
+
+
 
 /* slider */
 
 
 .home-website-slick-dots {
     bottom: 10px; /* Position dots at the bottom of the slider */
-    display: flex !important;
+    display: none !important;
     justify-content: center;
 }
 
@@ -700,6 +689,7 @@ padding: 0;
     color: black; /* Color of the arrow icon */
     font-size: 20px; /* Size of the arrow icon */
     cursor: pointer;
+    /* display: none; */
 }
 
 .home-website-slick-prev {
@@ -715,16 +705,35 @@ padding: 0;
 /* Optional: Customize the appearance of the arrow icons */
 .home-website-slick-prev::before,
 .home-website-slick-next::before {
-    content: '←'; /* Customize the arrow character */
+     /* Customize the arrow character */
     font-size: 20px; /* Size of the arrow icon */
 }
 
 @media (max-width:768px) {
     .template-slide {
         padding: 0 10px; /* Adjust left and right padding for spacing */
-        width: 100% !important;
-        margin: 0;
+        width: 70% !important;
+        margin-left: 13%;
     }  
+    .website-builder{
+        grid-template-columns: 1fr;
+    }
+    .website-builder-grid-1{
+        width: 100%;
+        height: 100%;
+    }
+    .website-builder-grid-2{
+        width: 100%;
+        height: 100%;
+    }
+}
+.template-slide {
+    padding: 0 10px; /* Adjust left and right padding for spacing */
+    /* width: 100% !important; */
+    /* margin-left: 152px; */
+}
+.template-container > div{
+    padding: 0 4rem 0 4rem;
 }
 
 .template-card {
@@ -734,7 +743,7 @@ padding: 0;
     cursor: pointer;
     overflow: hidden;
     width: 100%;
-    height: 580px; /* Adjust height as needed to make it more rectangular */
+    height: 280px; /* Adjust height as needed to make it more rectangular */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -742,9 +751,18 @@ padding: 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
 }
 
+@media (max-width:768px) {
+    .template-card{
+        padding: 0;
+    }
+    .template-container > div{
+        padding: 0;
+    }
+}
+
 .template-card img {
     width: 100%;
     height: 100%; /* Adjust height to fit within the card */
     object-fit: cover;
-    object-position: left;
+    object-position: top;
 }
