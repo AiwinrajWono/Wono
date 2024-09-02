@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import '../styles/bodyHome.css'
+import RotatingGlobe from '../components/RotatingGlobe'
 import World_map from '../assets/World_map.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import Carousels from '../components/Carousels'
@@ -33,6 +34,8 @@ import DashboardTickets from './Dashboard-pages/DashboardTickets'
 import DashboardVisitor from './Dashboard-pages/DashboardVisitor'
 import DashboardProducts from './Dashboard-pages/DashboardProducts'
 import GlobeWithMarkers from '../components/GlobeWithMarkers'
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, useTexture } from '@react-three/drei';
 import Slider from 'react-slick';
 
 
@@ -265,8 +268,8 @@ const Homepage = () => {
                     </div>
                      */}
                        <div className='login-registration' style={{marginTop:"20px"}}>
-                          <Link to='/login'  className='login-button'>LOGIN</Link>
-                          <button className='register-button' onClick={handleRegister}>REGISTER</button>
+                          <Link to='/login'  className='login-button'>Sign In</Link>
+                          <button className='register-button' onClick={handleRegister}>Sign Up</button>
                       </div>
                     
                     
@@ -383,8 +386,14 @@ const Homepage = () => {
             <div className='Globe-N-Commerce' style={{ display: 'flex', backgroundColor: 'black', padding: '20px' }}>
               <div className='Globe' style={{ textAlign: 'left' }}>
                 {/* <GlobeWithMarkers/> */}
-                <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2" 
-                ></img>  
+                {/* <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2" 
+                ></img>   */}
+                <Canvas camera={{ position: [0, 0, 20], fov: 40 }} style={{width:"100%",height:"100%"}}>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} />
+      <RotatingGlobe/>
+      <OrbitControls enableZoom={false} />
+    </Canvas>
               </div>
               <div className='N-Commerce'>
                 <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
@@ -533,14 +542,14 @@ const Homepage = () => {
                 </div>
             </div> */}
 
-            <div className='world-map'>
-                {/* <div className="world-title">
+            {/* <div className='world-map'>
+                <div className="world-title">
                     <h2 style={{width:'100%',backgroundColor:"#000",color:"#fff"}}>FEATURES</h2>
-                </div> */}
-                {/* <div className='image-space' >
+                </div>
+                <div className='image-space' >
                     <Homefeatures />
-                </div> */}
-            </div>
+                </div>
+            </div> */}
 
         </div>
     )
