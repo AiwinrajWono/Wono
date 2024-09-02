@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import '../styles/bodyHome.css'
+import RotatingGlobe from '../components/RotatingGlobe'
 import World_map from '../assets/World_map.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import Carousels from '../components/Carousels'
@@ -34,6 +35,8 @@ import DashboardTickets from './Dashboard-pages/DashboardTickets'
 import DashboardVisitor from './Dashboard-pages/DashboardVisitor'
 import DashboardProducts from './Dashboard-pages/DashboardProducts'
 import GlobeWithMarkers from '../components/GlobeWithMarkers'
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, useTexture } from '@react-three/drei';
 import Slider from 'react-slick';
 import { CustomNextArrow, CustomPrevArrow } from '../components/WebsiteBuilderArrows/CustomArrows'
 
@@ -394,19 +397,25 @@ const Homepage = () => {
 
             </div>
 
-            <div className='Globe-N-Commerce'>
-                <div className='Globe' style={{ textAlign: 'left' }}>
-                    {/* <GlobeWithMarkers/> */}
-                    <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2"
-                    ></img>
+            <div className='Globe-N-Commerce' style={{ display: 'flex', backgroundColor: 'black', padding: '20px' }}>
+              <div className='Globe' style={{ textAlign: 'left' }}>
+                {/* <GlobeWithMarkers/> */}
+                {/* <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2" 
+                ></img>   */}
+                <Canvas camera={{ position: [0, 0, 20], fov: 40 }} style={{width:"100%",height:"100%"}}>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} />
+      <RotatingGlobe/>
+      <OrbitControls enableZoom={false} />
+    </Canvas>
+              </div>
+              <div className='N-Commerce'>
+                <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
+                <p > ( “NOMAD COMMERCE” ) </p>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <a data-aos-delay="200" href="contact.html">PARTNER NOW</a>
                 </div>
-                <div className='N-Commerce'>
-                    <h3><strong>INTRODUCING N-COMMERCE</strong></h3>
-                    <p > ( “NOMAD COMMERCE” ) </p>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <a data-aos-delay="200" href="contact.html">PARTNER NOW</a>
-                    </div>
-                </div>
+              </div>
             </div>
 
             <div className="backend-container-master" style={{ backgroundColor: 'white' }}>
