@@ -228,14 +228,16 @@
 .Globe-N-Commerce{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    height: 100vh;
 }
 .Globe {
     /* flex: 0 0 40%; */
-    min-width: 50%;
+    min-width: 100%;
 }
-.Globe img{
+.Globe > {
     max-width: 100%;
 }
+
 
 
 .N-Commerce {
@@ -324,6 +326,7 @@
     .Globe-N-Commerce {
         display: flex;
         flex-direction: column;
+        height: 80vh;
     }
 
     .Globe img {
