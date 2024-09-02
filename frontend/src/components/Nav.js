@@ -60,10 +60,10 @@ const NavBar = () => {
               </div>
             </div>
           ) : (
-            <>
+            <div style={{display:'flex', gap:'20px'}}>
               <Link to='/login' className='login-button'>LOGIN</Link>
-              <button className='register-button' onClick={handleRegister}>REGISTER</button>
-            </>
+              <Link style={{color:'black'}} className='register-button' to='/register'>REGISTER</Link>
+            </div>
           )}
         </div>
         <div className="custom-navbar-menu-toggle" onClick={handleShow}>

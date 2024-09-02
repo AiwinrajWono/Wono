@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import '../styles/bodyHome.css'
 import World_map from '../assets/World_map.svg'
@@ -14,6 +14,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/componentStyle.css'
 import { Modal, Button, Container, Row, Col, Nav } from 'react-bootstrap';
 import WonoLogo from '../assets//WONO_images/img/WONO_LOGO_white _TP.png';
+import WonoLogoBlack from '../assets//WONO_images/img/WONO_LOGO_Black_TP.png';
 import Template1 from '../assets/WONO_images/img/website-builder/template-1.jpeg'
 import Template1_2 from '../assets/WONO_images/img/website-builder/template-1-2.jpeg'
 import Template1_3 from '../assets/WONO_images/img/website-builder/template-1-3.jpeg'
@@ -50,6 +51,25 @@ const Homepage = () => {
     const [isEmailInvalid, setIsEmailInvalid] = useState(false);
     const [isMobileInvalid, setIsMobileInvalid] = useState(false);
     const [selectedOption, setSelectedOption] = useState('Type of partner');
+    const [currentSlide, setCurrentSlide] = useState(0);
+
+    //First section carousel
+
+    const images = [Carousel1, Carousel2, Carousel3];
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSlide((prevSlide) => (prevSlide + 1) % images.length);
+        }, 8000); // 
+        return () => clearInterval(interval); // Cleanup interval on component unmount
+    }, []);
+
+    const fadeVariants = {
+        hidden: { opacity: 0.2 },
+        visible: { opacity: 1 },
+        exit: { opacity: 0.5 }
+    };
+
+
 
     const handleSelect = (option) => {
         setSelectedOption(option);
@@ -59,10 +79,14 @@ const Homepage = () => {
     const handleRegister = () => {
         navigate('/register');
     };
+    const handleLogin = () => {
+        navigate('/login');
+    };
 
-    const [showWebisteModal, setShowWebsiteModal] = useState(false);
+    const [showWebsiteModal, setShowWebsiteModal] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
     const [selectedItem, setSelectedItem] = useState('dashboard-booking');
+    const [selectedTemplate, setSelectedTemplate] = useState(null);
 
 
     //Template objects
@@ -71,12 +95,10 @@ const Homepage = () => {
         { id: 1, name: "Template 1", images: [Template1] },
         { id: 2, name: "Template 2", images: [Template2] },
         { id: 3, name: "Template 3", images: [Template3] },
+        { id: 4, name: "Template 4", images: [Template1_2] },
     ];
-    const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
 
-    const handleAfterChange = (index) => {
-        setSelectedTemplate(templates[index]);
-    };
+
     const templateSliderSettings = {
         dots: true,
         infinite: true,
@@ -86,10 +108,11 @@ const Homepage = () => {
         dotsClass: 'home-website-slick-dots',
         prevArrow: <CustomPrevArrow />,
         nextArrow: <CustomNextArrow />,
-        vertical: true,
-        verticalSwiping: true,
         // afterChange: handleAfterChange,
         slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: "20px",
+        className: "center",
         responsive: [
             {
                 breakpoint: 1024,
@@ -118,6 +141,7 @@ const Homepage = () => {
             }
         ]
     };
+
 
     const handleTemplateClick = (template) => {
         setSelectedTemplate(template);
@@ -198,6 +222,15 @@ const Homepage = () => {
         setCollapsed(!collapsed);
     };
 
+    const menuTitles = {
+        'dashboard-booking': 'Booking engine',
+        'dashboard-products': 'Products',
+        'dashboard-tickets': 'Ticket Management',
+        'dashboard-hr': 'HR Management',
+        'dashboard-visitor': 'Visitor Management',
+        'dashboard-asset': 'Asset Management',
+    };
+
 
     const renderContent = () => {
         switch (selectedItem) {
@@ -219,145 +252,149 @@ const Homepage = () => {
     };
     const handleMenuSelect = (menu) => {
         setSelectedItem(menu);
-        // handleToggle(); 
     };
 
 
     return (
         <div className='master-container'>
             <div className='home-section'>
-                <div className='home-item'>
-                    <div className='carousel-section'>
-                        <div className='carousel-background'>
-                            {/* <Carousels image1={Carousel1} image2={Carousel2} image3={Carousel3} /> */}
-                            <img src='src="https://via.placeholder.com/800x400"' />
+                <div className="home-page-container">
+                    <div className="background-div">
+                        <motion.div
+                            key={currentSlide}
+                            variants={fadeVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            transition={{ duration: 2 }} // Control transition speed
+                            className="background-image-container"
+                        >
+                            <img
+                                src={images[currentSlide]}
+                                alt={`Slide ${currentSlide + 1}`}
+                                className="background-image"
+                            />
+                        </motion.div>
+                        <div className="black-overlay"></div>
+                    </div>
+                    <div className="first-section-grid-item-1">
+                        <h2 className='home-main-title'>
+                            <span className='w'> W</span><span className='O'>O</span>RLDS<br />
+                            <span className='n'>N</span><span className='O'>O</span>MAD<br />
+                            <span className='c'>C</span><span className='O'>O</span>MMUNITY<br />
+                        </h2>
+                        <span className='home-desc'>
+                            The World’s only Nomad Community which is a curation of the best of platforms
+                            for Living & Working from Aspiring Destinations across the world.
+                        </span>
+                        <div className='home-section-buttons'>
+                            <div style={{borderRight:'1px solid white'}}>
+                        <button  onClick={handleLogin} className='login-button'>LOGIN</button>
+                            </div>
+                        <button className='register-button' onClick={handleRegister}>REGISTER</button>
                         </div>
                     </div>
-                    <div className='overlay-container'>
-                        <div className='text-overlay'>
-                            <h2 className='main-title'>
-                                W<span className='O'>O</span>RLDS
-                                N<span className='O'>O</span>MAD
-                                C<span className='O'>O</span>MMUNITY
-                            </h2>
-                            <span className='home-desc'>The World’s only Nomad Community which is a curation of the best of platforms for Living & Working from Aspiring Destinations across the world.</span>
-                            <div className='login-registration' style={{ marginTop: "20px" }}>
-                                <Link to='/login' className='login-button'>LOGIN</Link>
-                                <button className='register-button' onClick={handleRegister}>REGISTER</button>
-                            </div>
+                    <div className="first-section-grid-item-2">
+                        <h2>Connect with us!</h2>
+                        <div className="container form-card">
+                            <form onSubmit={handleSubmit} className='needs-validation' noValidate>
 
+                                {/* First Row */}
+                                <div className="col-md-12">
+                                    <div className="col-md-12 mb-3">
 
-                        </div>
-                        <div className='form-card'>
-                            <div className='form-section '>
-                                <div className="container mt-4">
-                                    <form onSubmit={handleSubmit} className='needs-validation' noValidate>
+                                        <input
+                                            type="text"
+                                            className={`form-control ${isNameInvalid ? 'is-invalid' : ''}`}
+                                            placeholder="Name"
+                                            aria-label="name"
+                                            id="validationCustom05"
+                                            value={name}
+                                            required
+                                            onChange={(e) => setname(e.target.value)}
 
-                                        {/* First Row */}
-                                        <div className="col-md-12">
-                                            <div className="col-md-12 mb-3">
-
-                                                <input
-                                                    type="text"
-                                                    className={`form-control ${isNameInvalid ? 'is-invalid' : ''}`}
-                                                    placeholder="Name"
-                                                    aria-label="name"
-                                                    id="validationCustom05"
-                                                    value={name}
-                                                    required
-                                                    onChange={(e) => setname(e.target.value)}
-
-                                                />
-                                                <div className="invalid-feedback">
-                                                    Please provide a name
-                                                </div>
-
-                                            </div>
-                                            <div className="col-md-12 mb-3">
-                                                <input
-                                                    type="text"
-                                                    className={`form-control ${isEmailInvalid ? 'is-invalid' : ''}`}
-                                                    placeholder="Email"
-                                                    aria-label="email"
-                                                    id="validationCustom01"
-                                                    value={email}
-                                                    required
-                                                    onChange={(e) => setEmail(
-                                                        e.target.value
-                                                    )}
-                                                />
-                                                <div className="invalid-feedback">
-                                                    Please provide an email
-                                                </div>
-
-                                            </div>
-                                            <div className="col-md-12 mb-3">
-                                                <input
-                                                    type="text"
-                                                    className={`form-control ${isMobileInvalid ? 'is-invalid' : ''}`}
-                                                    placeholder="Mobile-number"
-                                                    aria-label="mobile-number"
-                                                    value={number}
-                                                    required
-                                                    onChange={(e) => setNumber(e.target.value)}
-                                                />
-                                                <div className="invalid-feedback">
-                                                    Please provide a mobile number
-                                                </div>
-
-                                            </div>
-                                            <div className="col-md-12 mb-3">
-                                                <div className="dropdown">
-                                                    <button
-                                                        className="btn  dropdown-toggle w-100"
-                                                        type="button"
-                                                        id="dropdownMenuButton"
-                                                        data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                        style={{ border: "1px solid #e0e0e0", margin: "0", textAlign: "left" }}
-
-                                                        required
-
-                                                    >
-                                                        {selectedOption}
-                                                    </button>
-                                                    <div className="invalid-feedback">
-                                                        Please select one option
-                                                    </div>
-                                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: 'white' }}>
-                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2B Saas Technology Licensing')}>B2B Saas Technology Licensing</Link></li>
-                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2C Workation/Co-Working Booking')}>B2C Workation/Co-Working Booking</Link></li>
-                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Landlord Partnership')}>Landlord Partnership</Link></li>
-                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Investment Related')}>Investment Related</Link></li>
-                                                        <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Coffee Meeting to know us better')}>Coffee Meeting to know us better</Link></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                        />
+                                        <div className="invalid-feedback">
+                                            Please provide a name
                                         </div>
 
-                                        {/* Submit Button */}
-                                        <div className="button_space">
-                                            <button type="submit" className="submit-button">
-                                                Connect
+                                    </div>
+                                    <div className="col-md-12 mb-3">
+                                        <input
+                                            type="text"
+                                            className={`form-control ${isEmailInvalid ? 'is-invalid' : ''}`}
+                                            placeholder="Email"
+                                            aria-label="email"
+                                            id="validationCustom01"
+                                            value={email}
+                                            required
+                                            onChange={(e) => setEmail(
+                                                e.target.value
+                                            )}
+                                        />
+                                        <div className="invalid-feedback">
+                                            Please provide an email
+                                        </div>
+
+                                    </div>
+                                    <div className="col-md-12 mb-3">
+                                        <input
+                                            type="text"
+                                            className={`form-control ${isMobileInvalid ? 'is-invalid' : ''}`}
+                                            placeholder="Mobile-number"
+                                            aria-label="mobile-number"
+                                            value={number}
+                                            required
+                                            onChange={(e) => setNumber(e.target.value)}
+                                        />
+                                        <div className="invalid-feedback">
+                                            Please provide a mobile number
+                                        </div>
+
+                                    </div>
+                                    <div className="col-md-12 mb-3">
+                                        <div className="dropdown">
+                                            <button
+                                                className="btn  dropdown-toggle w-100"
+                                                type="button"
+                                                id="dropdownMenuButton"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                                style={{ border: "1px solid #e0e0e0", margin: "0", textAlign: "left" }}
+
+                                                required
+
+                                            >
+                                                {selectedOption}
                                             </button>
+                                            <div className="invalid-feedback">
+                                                Please select one option
+                                            </div>
+                                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" style={{ backgroundColor: 'white' }}>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2B Saas Technology Licensing')}>B2B Saas Technology Licensing</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('B2C Workation/Co-Working Booking')}>B2C Workation/Co-Working Booking</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Landlord Partnership')}>Landlord Partnership</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Investment Related')}>Investment Related</Link></li>
+                                                <li><Link className="dropdown-item custom-dropdown-item" to="/" onClick={() => handleSelect('Coffee Meeting to know us better')}>Coffee Meeting to know us better</Link></li>
+                                            </ul>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+
+                                {/* Submit Button */}
+                                <div className="button_space">
+                                    <button type="submit" className="submit-button">
+                                        Connect
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-
-                    <Toasts
-                        position="top-end"
-                        toastMessage={toastMessage}
-                        show={showToast}
-                        onClose={() => setShowToast(false)}
-                    />
-
                 </div>
+
             </div>
 
-            <div className='Globe-N-Commerce' style={{ display: 'flex', backgroundColor: 'black', padding: '20px' }}>
+            <div className='Globe-N-Commerce'>
                 <div className='Globe' style={{ textAlign: 'left' }}>
                     {/* <GlobeWithMarkers/> */}
                     <img alt="Shopify Globe" src="https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png?width=636&amp;height=636, https://cdn.shopify.com/b/shopify-brochure2-assets/9a8a27ff99bce89686730d3bc42b9bf4.png x2"
@@ -371,65 +408,65 @@ const Homepage = () => {
                     </div>
                 </div>
             </div>
-            <div className="backend-panel-container">
-                <div className="backend-panel">
 
-                    <div className="backend-panel-sidebar">
-                        <div className="backend-sidebar-header">
-                            <div className="backend-sidebar-logo">
-                                <img src={WonoLogo} alt='' />
+            <div className="backend-container-master" style={{ backgroundColor: 'white' }}>
+                <div className="backend-panel-container">
+                    <h2>Admin Dashboard</h2>
+                    <div className="backend-panel">
+                        <div className="backend-panel-sidebar">
+                            <div className="backend-sidebar-header">
+                                <div className="backend-sidebar-logo">
+                                    <img src={WonoLogoBlack} alt='' />
+                                </div>
+                            </div>
+                            {!collapsed && (
+                                <Nav id="backend-sidebar" className="flex-column p-0 backend-sidebar">
+                                    {Object.keys(menuTitles).map((key) => (
+                                        <Nav.Link key={key} onClick={() => handleMenuSelect(key)}>
+                                            {menuTitles[key]}
+                                        </Nav.Link>
+                                    ))}
+                                </Nav>
+                            )}
+                        </div>
+                        <div className="backend-panel-right">
+                            <div className="backend-panel-header">
+                                <h3>{menuTitles[selectedItem]}</h3>
+                            </div>
+                            <div className="backend-panel-content">
+
+                                <AnimatePresence>
+                                    <motion.div
+                                        key={selectedItem}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+
+                                        {renderContent()}
+                                    </motion.div>
+                                </AnimatePresence>
                             </div>
                         </div>
-                        {!collapsed && (
-                            <Nav id="backend-sidebar" className="flex-column p-0 backend-sidebar">
-                                <Nav.Link onClick={() => handleMenuSelect('dashboard-booking')}>
-                                    Booking engine
-                                </Nav.Link>
-                                <Nav.Link onClick={() => handleMenuSelect('dashboard-tickets')}>
-                                    Ticket Management
-                                </Nav.Link>
-                                <Nav.Link onClick={() => handleMenuSelect('dashboard-hr')}>
-                                    HR Management
-                                </Nav.Link>
-                                <Nav.Link onClick={() => handleMenuSelect('dashboard-asset')}>
-                                    Asset Management
-                                </Nav.Link>
-                                <Nav.Link onClick={() => handleMenuSelect('dashboard-products')}>
-                                    Products
-                                </Nav.Link>
-                                <Nav.Link onClick={() => handleMenuSelect('dashboard-visitor')}>
-                                    Visitor Management
-                                </Nav.Link>
-                            </Nav>
-                        )}
-                    </div>
-                    <div className="backend-panel-content">
-                        <AnimatePresence>
-                            <motion.div
-                                key={selectedItem}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                {renderContent()}
-                            </motion.div>
-                        </AnimatePresence>
                     </div>
 
                 </div>
-
             </div>
 
             <div className="website-builder">
+
                 <div className="website-builder-grid-1">
+                    <div className="website-builder-title">
+                        <h2>Website Templates</h2>
+                        <span>Check-out our templates</span>
+                    </div>
                     <Container className='template-container'>
                         <Slider {...templateSliderSettings}>
                             {templates.map((template, index) => (
-                                <div className="template-slide" key={index}>
+                                <div className="template-slide" key={index} onClick={() => handleTemplateClick(template)}>
                                     <div
-                                        className="template-card"
-                                        onClick={() => handleTemplateClick(template)}
+                                        className={`template-card`}
                                     >
                                         <img src={template.images[0]} alt={template.name} />
                                     </div>
@@ -438,59 +475,23 @@ const Homepage = () => {
                         </Slider>
                     </Container>
                 </div>
-                <div className="website-builder-grid-2">
-                    {selectedTemplate && selectedTemplate.images.map((image, index) => (
-                        <img
-                            key={index}
-                            src={image}
-                            alt={`${selectedTemplate.name} Image ${index + 1}`}
-                            style={{ width: '100%', marginBottom: '10px' }}
-                            className='template-content-image'
-                        />
-                    ))}
-                </div>
+                {/* React-Bootstrap Modal */}
+                <Modal show={showWebsiteModal} onHide={handleClose} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{selectedTemplate?.name}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {selectedTemplate && (
+                            <img
+                                src={selectedTemplate.images[0]}
+                                alt={selectedTemplate.name}
+                                className="img-fluid"
+                            />
+                        )}
+                    </Modal.Body>
+                </Modal>
             </div>
 
-            {/* <div className="type-parent">
-                <div className="type-grid-2">
-                    <h2 style={{ textAlign: 'center' }}>FOR BUSINESSES</h2>
-                    <hr></hr>
-                    <div style={{ borderBottom: '1px solid black', padding: '1rem 0 1rem' }}>
-                        <span>
-                            Our Business2Business (B2B) Software As A Service (SaaS) Licensed tools are being developed post discussions with 100's of businesses who are trying to develop and evolve the Nomads & Remote Working Ecosystem via their own niche concepts in the most aspiring destinations of the world. We are currently in our BETA stage and are partnering and listening to everyone who wants to partner with us and we are provide them with our SaaS Tools FREE of Cost in our Testing Phase.
-                        </span>
-                    </div>
-                    <div className="nomad-features">
-                        <div className="nomad-1">
-                            <img src={GlobalNomad} alt='nomad' /><br />
-                            <span>Global nomadship</span>
-                        </div>
-                        <div className="nomad-2"><img src={GlobalNomad} alt='nomad' /><br /><span>Global nomadship</span></div>
-                        <div className="nomad-3"><img src={GlobalNomad} alt='nomad' /><br /><span>Global nomadship</span></div>
-                        <div className="nomad-4"><img src={GlobalNomad} alt='nomad' /><br /> <span>Global nomadship</span></div>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div className='view-all-underline'>
-                            <span className='view-all'>VIEW ALL</span>
-                            <hr style={{
-                                margin: 0,
-                                border: '4px solid #0875e2',
-                                opacity: 1,
-                                padding: 0
-                            }}></hr>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-
-            {/* <div className='world-map'>
-                <div className="world-title">
-                    <h2 style={{width:'100%',backgroundColor:"#000",color:"#fff"}}>FEATURES</h2>
-                </div>
-                <div className='image-space' >
-                    <Homefeatures />
-                </div>
-            </div> */}
 
         </div>
     )

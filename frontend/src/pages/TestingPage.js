@@ -1,50 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Slider from 'react-slick';
 import '../styles/steppersStyle.css';
-
-const images = [
-  'https://via.placeholder.com/800x400?text=Slide+1',
-  'https://via.placeholder.com/800x400?text=Slide+2',
-  'https://via.placeholder.com/800x400?text=Slide+3',
-];
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const TestingPage = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
+  // Slider settings
+  const settings = {
+    centerMode: true,
+    centerPadding: '100px', // Adjust padding as needed
+    slidesToShow: 3, // Number of slides to show
+    infinite: true,
+    speed: 500,
+    arrows: true, // Show next/prev arrows
+    dots: true, // Show dots for navigation
   };
 
   return (
-    <div className="grid-container">
-      <div className="carousel">
-        <button className="carousel-button prev" onClick={prevSlide}>
-          &lt;
-        </button>
-        <div className="carousel-slides">
-          <img
-            src={images[currentIndex]}
-            alt="carousel slide"
-            className="carousel-image"
-          />
+    <div className="slider-container">
+      <Slider {...settings}>
+        <div className="slider-item">
+          <h3>Slide 1</h3>
         </div>
-        <button className="carousel-button next" onClick={nextSlide}>
-          &gt;
-        </button>
-      </div>
-      <div className="test-grid-1">
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, expedita? Placeat labore accusamus numquam earum, sunt ducimus voluptate. Explicabo quod tempora ullam perspiciatis, qui quidem! Qui accusantium consequatur possimus commodi.</h1>
-      </div>
-      <div className="test-grid-2">
-        <div className="test-form">
-          <h2>World</h2>
+        <div className="slider-item">
+          <h3>Slide 2</h3>
         </div>
-      </div>
+        <div className="slider-item">
+          <h3>Slide 3</h3>
+        </div>
+        <div className="slider-item">
+          <h3>Slide 4</h3>
+        </div>
+        <div className="slider-item">
+          <h3>Slide 5</h3>
+        </div>
+      </Slider>
     </div>
   );
 };

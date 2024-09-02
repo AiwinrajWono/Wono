@@ -48,12 +48,15 @@
   align-items: center;
 }
 
+
 .custom-navbar-menu a {
-  margin: 0 15px;
+  display: flex;
+  padding: 10px 20px;
   color: #fff;
   text-decoration: none;
   transition: color 0.3s ease, font-family 0.3s ease;
   position: relative;
+  gap: 20px;
   /* Smooth transition for color and text-decoration */
 }
 /* Changes */
@@ -164,7 +167,7 @@
 }
 
 /* Media Queries */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .custom-navbar-menu {
     display: none;
     /* Hide menu on small screens */
